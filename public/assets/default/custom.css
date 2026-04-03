@@ -1,0 +1,20 @@
+.dashboard-banner {
+    margin-top: -30px;
+}
+
+.dashboard-banner img {
+    width: 100%; /* Allow it to be responsive */
+    max-width: 150px; /* Cap the maximum size */
+    height: auto; /* Maintain aspect ratio */
+    aspect-ratio: 1 / 1; /* Ensure a square shape */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure it fills the space */
+    object-position: center; /* Center the image */
+    border: 2px solid #fff; /* Optional: add a border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow */
+}
+
+.dashboard-banner-container {
+    display:flex;
+    justify-content: space-between;
+}
