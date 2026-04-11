@@ -87,10 +87,10 @@ class DashboardController extends Controller
         }
 
         $data['giftModal'] = $this->showGiftModal($user);
-        
+
         if($user->hasExams()){
-            return redirect('/panel/webinars/purchases'); 
-            
+            return redirect('/panel/webinars/purchases');
+
         }
 
         return view(getTemplate() . '.panel.dashboard.index', $data);

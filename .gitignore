@@ -17,6 +17,7 @@ public/uploads
 /public/hot
 /public/mix-manifest.json
 /public/vendor
+/public/assets
 
 # Logs & debug
 *.log

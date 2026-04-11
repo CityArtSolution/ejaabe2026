@@ -158,7 +158,7 @@ class RegisterController extends Controller
                 $roleId = Role::getOrganizationRoleId();
             }
         }
-    
+
         $user = User::create([
             'role_name' => $roleName,
             'role_id' => $roleId,
@@ -173,7 +173,7 @@ class RegisterController extends Controller
             'branch_id' => $data['branch_id'], // <<< هاي المهمة
             'created_at' => time()
         ]);
-    
+
         if (!empty($data['certificate_additional'])) {
             UserMeta::updateOrCreate([
                 'user_id' => $user->id,
@@ -205,8 +205,8 @@ class RegisterController extends Controller
                     }
                 }
             }
-
-            throw new ValidationException($validate);
+            return back()->withErrors($errors)->withInput($request->all());
+//            throw new ValidationException($validate);
         } else {
             $form = $this->getFormFieldsByType($request->get('account_type'));
             $errors = [];
@@ -243,7 +243,7 @@ class RegisterController extends Controller
             }
         }
        $data = $request->all();
-       
+
         $data['branch_id'] = $request->branch_id; // تحويله لنص
 
         $user = $this->create($data);

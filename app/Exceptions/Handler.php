@@ -54,15 +54,36 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
+//    public function render($request, Throwable $exception)
+//    {
+//        if ($request->is('api/*')) {
+//
+//            return $this->renderApi($request, $exception);
+//        }
+//    // return response()->view('errors.500', [], 500);
+//    }
     public function render($request, Throwable $exception)
     {
-        if ($request->is('api/*')) {
+        // Handle validation exceptions explicitly
+        if ($exception instanceof ValidationException) {
+            if ($request->expectsJson() || $request->is('api/*')) {
+                // API / AJAX: return JSON errors
+                return $this->renderApi($request, $exception);
+//                return response()->json([
+//                    'message' => 'The given data was invalid.',
+//                    'errors'  => $exception->errors(),
+//                ], 422);
+            }
 
-            return $this->renderApi($request, $exception);
+            // Web: flash errors to session and redirect back
+            return redirect()
+                ->back()
+                ->withErrors($exception->errors())
+                ->withInput($request->except('password', 'password_confirmation'));
         }
-    // return response()->view('errors.500', [], 500);
-    }
 
+        return parent::render($request, $exception);
+    }
     public function renderApi($request, Throwable $e)
     {
         if ($e instanceof MethodNotAllowedHttpException) {

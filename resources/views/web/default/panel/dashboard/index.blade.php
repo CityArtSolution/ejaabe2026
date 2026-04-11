@@ -52,7 +52,7 @@
                     <span class="d-block">{{ trans('panel.hi') }} {{ $authUser->full_name }},</span>
                     <span class="font-16 text-secondary font-weight-bold">{{ trans('panel.have_event',['count' => !empty($unReadNotifications) ? count($unReadNotifications) : 0]) }}</span>
                 </h2>
-    
+
                 <!--<ul class="mt-15 unread-notification-lists">-->
                     @if(!empty($unReadNotifications) and !$unReadNotifications->isEmpty())
                         @foreach($unReadNotifications->take(5) as $unReadNotification)
@@ -60,7 +60,7 @@
                         @endforeach
                     @endif
                 <!--</ul>-->
-    
+
                 <a href="/panel/notifications" class="font-weight-500 text-dark-blue d-inline-block">{{ trans('panel.view_all_events') }}</a>
             </div>
 
@@ -108,7 +108,7 @@
                         <span class="font-16 text-gray font-weight-500">{{ $authUser->isUser() ? trans('panel.purchased_courses') : trans('panel.pending_appointments') }}</span>
                     </div>
                 </a>
-                
+
                 <a href="@if($authUser->isUser()) /panel/webinars/my-comments @else /panel/webinars/comments @endif" class="dashboard-stats rounded-sm panel-shadow p-10 p-md-20 d-flex align-items-center mt-15 mt-md-30">
                     <div class="stat-icon comments">
                         <img src="/assets/default/img/icons/comment.svg" alt="">
@@ -130,7 +130,7 @@
                         <span class="font-16 text-gray font-weight-500">{{ trans('panel.support_messages') }}</span>
                     </div>
                 </a>
-                
+
                 <!--<a href="@if($authUser->isUser()) /panel/meetings/reservation @else /panel/financial/sales @endif" class="dashboard-stats rounded-sm panel-shadow p-10 p-md-20 d-flex align-items-center mt-15 mt-md-30">
                     <div class="stat-icon monthly-sales">
                         <img src="@if($authUser->isUser()) /assets/default/img/icons/meeting.svg @else /assets/default/img/icons/monay.svg @endif" alt="">

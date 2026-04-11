@@ -196,7 +196,7 @@
                                 <div class="text-right">
                                     <a href="{{ getAdminPanelUrl() }}/quizzes/create" class="btn btn-primary ml-2">{{ trans('quiz.new_quiz') }}</a>
                                 </div>
-                                                            
+
                             @endcan
                         </div>
 
@@ -223,7 +223,7 @@
                                                 @endif
                                             </td>
 
-                                            <td class="text-left">{{ $quiz->teacher->full_name }}</td>
+                                            <td class="text-left">{{ $quiz->teacher?->full_name }}</td>
 
                                             <td class="text-center">
                                                 {{ $quiz->quizQuestions->count() }}
@@ -258,10 +258,10 @@
                                             <td>
 
                                                 @can('admin_quizzes_results')
-                                               
+
                                                    <!-- Import Button -->
 <button type="button" class="btn-transparent btn-sm text-primary" data-toggle="modal" data-target="#importModal" data-quiz-id="{{ $quiz->id }}" title="استيراد اسئلة">
-    <i class="fas fa-upload"></i> 
+    <i class="fas fa-upload"></i>
 </button>
                                                 </a>
                                             @endcan
@@ -334,7 +334,7 @@
         $('#importModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
             var quizId = button.data('quiz-id'); // Extract info from data-* attributes
-            
+
             // Update the modal's content
             var modal = $(this);
             modal.find('#quiz_id').val(quizId); // Set the quiz_id input value
