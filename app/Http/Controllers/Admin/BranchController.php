@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Branch;
 use App\Models\Translation\BranchTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BranchController extends Controller
 {
@@ -17,8 +18,8 @@ class BranchController extends Controller
 
         $this->authorize('admin_categories_list');
 
-        $branches = Branch::orderBy('id', 'desc')->paginate(10);      
-            
+        $branches = Branch::orderBy('id', 'desc')->paginate(10);
+
 
         $data = [
             'pageTitle' => trans('admin/pages/branches.branches_list_page_title'),
@@ -44,7 +45,7 @@ class BranchController extends Controller
         $this->authorize('admin_categories_edit');
 
         $branch = Branch::findOrFail($id);
-       
+
 
         $locale = $request->get('locale', app()->getLocale());
         storeContentLocale($locale, $branch->getTable(), $branch->id);
@@ -57,9 +58,14 @@ class BranchController extends Controller
         return view('admin.branches.create', $data);
     }
 
-    
+
     public function store(Request $request)
     {
+        // Check for observers
+//        dd(\DB::select('SHOW COLUMNS FROM branch_translations'));
+//        dd(\Event::getListeners('eloquent.creating: App\Models\Branch'));
+//        dd(\DB::select('SHOW COLUMNS FROM branches'));
+//        dd($request->all());
         $this->authorize('admin_categories_create');
 
         $this->validate($request, [
@@ -72,10 +78,13 @@ class BranchController extends Controller
 
         $data = $request->all();
 
-       
+//        dd($data,$request,$data['name']);
+
 //dd( $data);
+
         $branch = Branch::create([
-            'name' => $data['name'],
+
+            'slug' => Str::slug($data['name']),
             'address' => $data['address'],
             'subdomain' => $data['subdomain'],
             'phone_number' => $data['phone_number'],
@@ -86,10 +95,28 @@ class BranchController extends Controller
             'status' => $data['status'] ??  0,
 
 
-            
+
         ]);
 
-
+//        $branch = new Branch();
+// Force these into the main table attributes
+//        $branch->fill([
+//            'slug' => Str::slug($data['name']),
+//            'address' => $data['address'],
+//            'subdomain' => $data['subdomain'],
+//            'phone_number' => $data['phone_number'],
+//            'email' => $data['email'],
+//            'currency' => $data['currency'] ?? "",
+//            'location' => $data['location'] ?? "",
+//            'home_page' => $data['home_page'] ?? "",
+//            'status' => $data['status'] ??  0,
+//            $data['locale'] => [          // ← Astrotomic way to save translations
+//                'name'    => $data['name'],
+//                'address' => $data['address'],
+//            ],
+//        ]);
+//        $branch->save();
+//
 
         BranchTranslation::updateOrCreate([
             'branch_id' => $branch->id,
@@ -100,7 +127,7 @@ class BranchController extends Controller
 
         ]);
 
-    
+
         cache()->forget(branch::$cacheKey);
 
         removeContentLocale();
@@ -108,7 +135,7 @@ class BranchController extends Controller
         return redirect(getAdminPanelUrl() . '/branches');
     }
 
-    
+
     public function update(Request $request, $id)
     {
         $this->authorize('admin_categories_edit');
@@ -190,7 +217,7 @@ class BranchController extends Controller
 
         if (!empty($branch)) {
             $branch->delete();
-           
+
         }
 
         cache()->forget(Branch::$cacheKey);

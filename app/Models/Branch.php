@@ -15,7 +15,7 @@ use App\User;
 
 class Branch extends Model
 {
-    
+
     use Translatable;
     use CascadeDeletes;
     public $timestamps = false;
@@ -24,9 +24,20 @@ class Branch extends Model
 
     static $cacheKey = 'branches';
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
     ];
-     
+    protected $fillable = [
+
+        'slug',
+        'address',
+        'subdomain',
+        'phone_number',
+        'email',
+        'currency',
+        'location',
+        'home_page',
+        'status',
+    ];
 
        public $translatedAttributes = ['name', 'address'];
 
@@ -48,6 +59,13 @@ class Branch extends Model
     {
         return $this->hasMany(User::class);
     }
+   
+    public function isTranslationDirty($translation): bool
+    {
+        return false;
+    }
+
+
     /*
      public function courses()
     {
@@ -57,7 +75,7 @@ class Branch extends Model
     {
         return $this->belongsToMany(Course::class);
     }
-    
+
         public function benfits() :float
     {
     //dd($this->courseEnrolled()->get()->sum('reveune'));
@@ -69,17 +87,17 @@ class Branch extends Model
     {
         return $this->hasMany(User::class)->where('role_id',3);
     }
-    
+
     public function courseEnrolled()
     {
         return $this->hasMany(CourseEnrolled::class);
     }
-    
+
         public function currency()
     {
         return $this->belongsTo(Currency::class);
     }
 
     */
-    
+
 }
