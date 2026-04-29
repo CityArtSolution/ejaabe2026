@@ -1057,17 +1057,17 @@ class CartController extends Controller
 
         return redirect('/cart');
     }
-    
+
     public function payment_canada()
     {
         return view('web.default.cart.payment_canada');
-        
+
     }
-    
+
     public function payment_tamara()
     {
         return view('web.default.cart.payment_tamara');
-        
+
     }
     public function depositSelectOption(Request $request)
     {
@@ -1124,14 +1124,14 @@ class CartController extends Controller
         $entityId = '8ac9a4cc73900e190173940e3eba26a0';
         $currency = 'SAR';
         $url      = "https://eu-prod.oppwa.com/v1/checkouts";
-    
+
         $data = http_build_query([
             'entityId'    => $entityId,
             'amount'      => $amount,
             'currency'    => $currency,
             'paymentType' => 'DB',
         ]);
-    
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -1140,22 +1140,22 @@ class CartController extends Controller
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
+
         $responseData = curl_exec($ch);
-    
+
         if (curl_errno($ch)) {
             throw new \Exception(curl_error($ch));
         }
-    
+
         curl_close($ch);
-    
+
         $responseArray = json_decode($responseData, true);
         $checkoutId    = $responseArray['id'] ?? null;
-    
+
         if (!$checkoutId) {
             throw new \Exception("فشل إنشاء Checkout ID: " . $responseData);
         }
-    
+
         // نرجع الـ checkoutId فقط وليس رابط JS
         return $checkoutId;
     }
@@ -1295,10 +1295,10 @@ class CartController extends Controller
             if (!empty($ticket) and !$ticket->isValid()) {
                 $ticket = null;
             }
- 
+
    if ($cart->webinar_id) {
     $sessionDetails = session()->get('course_price_' . $cart->webinar_id);
-    
+
     // Prepare the details array
     $details = null;
     if (!empty($sessionDetails)) {
@@ -1534,7 +1534,7 @@ class CartController extends Controller
         }
         //amany
         elseif(!empty($cart->event_id))
-        {    
+        {
             $price =  $cart->event->price;
             $subTotal += $price;
         }

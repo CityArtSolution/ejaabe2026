@@ -779,7 +779,6 @@ class HomeController extends Controller
 
     public function canada(){
            App::setLocale('en');
-
         $homeSections = HomeSection::orderBy('order', 'asc')->where('branch_id' , 1)->get();
         $selectedSectionsName = $homeSections->pluck('name')->toArray();
 

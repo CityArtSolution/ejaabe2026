@@ -1031,7 +1031,8 @@
                                             @if($index == 1)
                                                 <div style="height:4px;width:60px;background:#0d6efd;margin:10px 0;"></div>
                                                 <div style="color:#0d6efd;font-weight:600;margin-bottom:10px;">
-                                                    تطوير المحتوى المعرفي الاحترافي
+
+                                                    {{__('home.Developing_professional')}}
                                                 </div>
                                             @endif
 
@@ -1051,11 +1052,12 @@
                                             <div class="hero-info-row">
                                                 <div class="hero-info-item">
                                                     <i class="bi bi-book"></i>
-                                                    برامج متخصصة في مجالات مختلفة
+                                                    {{__('home.Specialized_programs')}}
                                                 </div>
                                                 <div class="hero-info-item">
                                                     <i class="bi bi-people"></i>
-                                                    أكثر من 100 خبير بمجالات مختلفة
+
+                                                    {{__('home.various_fields')}}
                                                 </div>
                                             </div>
                                         </div>
@@ -1287,17 +1289,18 @@
             </section>
         @endif
 
+
         {{-- Latest Classes (Tracks Grid) --}}
         @if ($homeSection->name == \App\Models\HomeSection::$latest_classes && !empty($latestWebinars) && !$latestWebinars->isEmpty())
             <section class="home-sections container-fluid py-60">
                 <div class="text-center mb-40">
-                    <h2 class="section-title mb-10">مسارات تعليمية متخصصة</h2>
-                    <p class="section-hint">اختر المسار الذي يتناسب مع تطلعاتك المهنية من بين مجموعة واسعة من البرامج المعتمدة</p>
+                    <h2 class="section-title mb-10">{{__('home.Specialized_educational')}}</h2>
+                    <p class="section-hint">{{__('home.Choose_path')}}</p>
                     <div class="tracks-filter">
-                        <button class="filter-btn active">الكل</button>
-                        <button class="filter-btn">القيادة والإدارة</button>
-                        <button class="filter-btn">التقنية والبيانات</button>
-                        <button class="filter-btn">التصميم التعليمي</button>
+                        <button class="filter-btn active">{{__("home.all")}}</button>
+                        <button class="filter-btn">{{__("home.Leadership_Management")}}</button>
+                        <button class="filter-btn">{{__("home.Technology_Data")}}</button>
+                        <button class="filter-btn">{{__("home.Instructional_design")}}</button>
                     </div>
                 </div>
                 <div class="tracks-grid">
@@ -1305,21 +1308,21 @@
                         <div class="track-card">
                             <div class="track-top">
                                 <div class="track-icon"><i class="bi bi-book"></i></div>
-                                <span class="track-badge">عن بعد</span>
+                                <span class="track-badge">{{__('home.remote')}}</span>
                             </div>
                             <h3 class="track-title">{{ $latestWebinar->title }}</h3>
                             <p class="track-desc">{{ Str::limit(strip_tags($latestWebinar->description), 120) }}</p>
                             <div class="track-divider"></div>
                             <div class="track-footer">
-                                <a href="{{ $latestWebinar->getUrl() }}" class="track-details">التفاصيل</a>
+                                <a href="{{ $latestWebinar->getUrl() }}" class="track-details">{{__('home.details')}}</a>
                                 <span class="track-date">{{ date('Y d M', $latestWebinar->created_at) }}</span>
                             </div>
                         </div>
                     @endforeach
                     <div class="track-card discover-card">
                         <div class="discover-icon">+</div>
-                        <h3 class="discover-title">اكتشف المزيد</h3>
-                        <p class="discover-text">تصفح كافة البرامج المتاحة</p>
+                        <h3 class="discover-title">{{__("home.Discover_more")}}</h3>
+                        <p class="discover-text">{{__("home.Browse_programs")}}</p>
                     </div>
                 </div>
             </section>
@@ -1453,23 +1456,23 @@
                     <div class="solutions-box">
                         <div class="solutions-items">
                             <div class="solution-item">
-                                <h4>تحليل الاحتياج</h4>
-                                <p>دراسة الفجوة المهارية وبناء خطط التطوير</p>
+                                <h4>{{__("home.Needs_analysis")}}</h4>
+                                <p>{{__("home.Skills_gap")}}</p>
                             </div>
                             <div class="solution-item">
-                                <h4>بناء المسارات</h4>
-                                <p>تصميم حقائب تدريبية مخصصة ومحكمة</p>
+                                <h4>{{__('home.Building_paths')}}</h4>
+                                <p>{{__("home.Designing_customized")}}</p>
                             </div>
                             <div class="solution-item">
-                                <h4>قياس الأثر</h4>
-                                <p>تقارير تفصيلية عن العائد من الاستثمار</p>
+                                <h4>{{__("home.Impact_measurement")}}</h4>
+                                <p>{{__("home.Detailed_reports")}}</p>
                             </div>
                         </div>
                         <div class="solutions-content">
-                            <span class="solutions-badge">حلول للمنظمات</span>
-                            <h2>برامج مخصصة لجهتك</h2>
-                            <p>نصمم برامج تدريبية خاصة تتواءم مع استراتيجية مؤسستك واحتياجات فريق عملك.</p>
-                            <a href="#">طلب استشارة مجانية</a>
+                            <span class="solutions-badge">{{__("home.Solutions_organizations")}}</span>
+                            <h2>{{__("home.Programs_organization")}}</h2>
+                            <p>{{__("home.design_customized_training")}}</p>
+                            <a href="#">{{__("home.Request_consultation")}}</a>
                         </div>
                     </div>
                 </div>
@@ -1482,9 +1485,9 @@
                         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="services">
                     </div>
                     <div class="services-big-content">
-                        <h2>خدمات تطوير المحتوى للجامعات</h2>
-                        <p>حلول متكاملة للجامعات والجهات التدريبية تشمل تحليل الاحتياج، تصميم البرامج، إنتاج المحتوى، وضمان الجودة.</p>
-                        <a href="#" class="btn-outline">اطلب الخدمة الآن</a>
+                        <h2>{{__('home.Content_development')}}</h2>
+                        <p>{{__("home.Integrated_solutions")}}</p>
+                        <a href="#" class="btn-outline">{{__("home.Request_now")}}</a>
                     </div>
                 </div>
             </section>
@@ -1493,12 +1496,12 @@
             <section class="services-cta-section">
                 <div class="services-cta-box">
                     <div class="services-cta-text">
-                        <h3>هل لديك احتياج تدريبي خاص؟</h3>
-                        <p>فريقنا جاهز لتصميم حلول تعليمية مخصصة تناسب متطلبات منظمتك</p>
+                        <h3>{{__('home.have_specific_training')}}</h3>
+                        <p>{{__('home.team_is_ready')}}</p>
                     </div>
                     <div class="services-cta-actions">
-                        <a href="#" class="btn-outline-custom">طلب عرض سعر</a>
-                        <a href="#" class="btn-primary-custom">تواصل معنا</a>
+                        <a href="#" class="btn-outline-custom">{{__("home.Request_quotation")}}</a>
+                        <a href="#" class="btn-primary-custom">{{__("home.Contact_us")}}</a>
                     </div>
                 </div>
             </section>

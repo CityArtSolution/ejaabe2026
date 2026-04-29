@@ -78,47 +78,188 @@
         background-color: #084298;
     }
 </style>
-@endpush 
+<style>
+    .cards-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 16px;
+    }
+    .info-card {
+        background: #fff;
+        border: 0.5px solid rgba(0,0,0,0.12);
+        border-radius: 12px;
+        padding: 1.25rem;
+    }
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    }
+    .card-header-icon {
+        width: 36px; height: 36px;
+        border-radius: 8px;
+        background: #E6F1FB;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .card-title { font-size: 13px; font-weight: 500; margin: 0; }
+    .card-subtitle { font-size: 11px; color: #6b7280; margin: 0; margin-top: 2px; }
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 0.5px solid rgba(0,0,0,0.08);
+    }
+    .info-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .item-icon {
+        width: 28px; height: 28px;
+        border-radius: 6px;
+        background: #f5f5f5;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .item-label { font-size: 11px; color: #6b7280; margin: 0; }
+    .item-value { font-size: 13px; font-weight: 500; margin: 0; margin-top: 2px; }
+</style>
+@endpush
 @php
     app()->setLocale('en');
 @endphp
 
 @section('content')
-                            <br> <br> <br> 
+                            <br> <br> <br>
 
 <div class="contact-area default-padding-top bottom-half">
     <div class="container">
 
-        <!-- أيقونات التواصل -->
-        <div class="contact-info-icons">
-            <div class="item">
-                <div class="icon"><i class="flaticon-location"></i></div>
-                <h4>{{ trans('app.contact_1') }}</h4>
-                <span>{{ trans('app.contact_2') }}</span>
+
+
+        <div class="cards-row mb-3">
+
+            <!-- Card 1: Contact Info -->
+            <div class="info-card">
+                <div class="card-header">
+                    <div class="card-header-icon">
+                        <!-- your icon here -->
+                    </div>
+                    <div>
+                        <p class="card-title">Contact Information</p>
+                        <p class="card-subtitle">Positive Interaction for training and consulting inc.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-icon"><i class="flaticon-location"></i></div>
+                    <div>
+                        <p class="item-label">Registered Office Address</p>
+                        <p class="item-value">Mississauga – Canada</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-icon"><i class="flaticon-call-center"></i></div>
+                    <div>
+                        <p class="item-label">Phone</p>
+                        <p class="item-value">+1 647 821 969</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-icon"><i class="flaticon-email"></i></div>
+                    <div>
+                        <p class="item-label">Email</p>
+                        <p class="item-value">Jawaher@ejaabi.com</p>
+                    </div>
+                </div>
             </div>
-            <div class="item">
-                <div class="icon"><i class="flaticon-call-center"></i></div>
-                <h4>{{ trans('app.contact_3') }}</h4>
-                <span>+1 (226) 700-3361</span>
+
+            <!-- Card 2: Federal Info -->
+            <div class="info-card">
+                <div class="card-header">
+                    <div class="card-header-icon">
+                        <!-- your icon here -->
+                    </div>
+                    <div>
+                        <p class="card-title">Federal Corporation Information</p>
+                        <p class="card-subtitle">Canada Business Corporations Act</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-icon"><i class="flaticon-location"></i></div>
+                    <div>
+                        <p class="item-label">Federal Corporation Information</p>
+                        <p class="item-value">1492753-2</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-icon"><i class="flaticon-call-center"></i></div>
+                    <div>
+                        <p class="item-label">Corporation Number</p>
+                        <p class="item-value">1492753-2</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="item-icon"><i class="flaticon-email"></i></div>
+                    <div>
+                        <p class="item-label">Business Number (BN)</p>
+                        <p class="item-value">721509347RC0001</p>
+                    </div>
+                </div>
             </div>
-            <div class="item">
-                <div class="icon"><i class="flaticon-email"></i></div>
-                <h4>{{ trans('app.contact_4') }}</h4>
-                <span>info-canada@ejaabi.com</span>
-            </div>
+
         </div>
+
+{{--        <!-- أيقونات التواصل -->--}}
+{{--        <div class="contact-info-icons">--}}
+{{--            <div class="item">--}}
+{{--                <div class="icon"><i class="flaticon-location"></i></div>--}}
+{{--                <h4>Registered Office Address </h4>--}}
+{{--                <span> Mississauga –Canada </span>--}}
+{{--            </div>--}}
+{{--            <div class="item">--}}
+{{--                <div class="icon"><i class="flaticon-call-center"></i></div>--}}
+{{--                <h4>{{ trans('app.contact_3') }}</h4>--}}
+{{--                <span>+ 1 647 821 969</span>--}}
+{{--            </div>--}}
+{{--            <div class="item">--}}
+{{--                <div class="icon"><i class="flaticon-email"></i></div>--}}
+{{--                <h4>{{ trans('app.contact_4') }}</h4>--}}
+{{--                <span>Jawaher@ejaabi.com</span>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+
+{{--        <div class="contact-info-icons">--}}
+{{--            <div class="item">--}}
+{{--                <div class="icon"><i class="flaticon-location"></i></div>--}}
+{{--                <h4>Federal Corporation Information  </h4>--}}
+{{--                <span> 1492753-2 </span>--}}
+{{--            </div>--}}
+{{--            <div class="item">--}}
+{{--                <div class="icon"><i class="flaticon-call-center"></i></div>--}}
+{{--                <h4>Corporation Number </h4>--}}
+{{--                <span>1492753-2</span>--}}
+{{--            </div>--}}
+{{--            <div class="item">--}}
+{{--                <div class="icon"><i class="flaticon-email"></i></div>--}}
+{{--                <h4>Business Number (BN)</h4>--}}
+{{--                <span>721509347RC0001</span>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
 
         <!-- الخريطة والفورم -->
         <div class="row g-4">
             <div class="col-lg-6 col-md-7">
         <div class="google-maps shadow-lg rounded-4 overflow-hidden" style="height: 600px;">
-            <iframe 
+            <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.7212878034243!2d-79.7195929!3d43.5498514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b438c771704d3%3A0x6d2b4ea2e4d20c7!2zMzEzNSBCb3hmb3JkIENyZXMsIE1pc3Npc3NhdWdhLCBPTiBMNU0gMFgx2Iwg2YPZhtiv2Kc!5e0!3m2!1sar!2ssa!4v1716409918814!5m2!1sar!2ssa"
-                width="100%" 
-                height="100%" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>

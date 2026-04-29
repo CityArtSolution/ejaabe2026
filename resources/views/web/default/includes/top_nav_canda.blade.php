@@ -33,16 +33,16 @@
 
                 {{-- Currency --}}
                 @include('web.default.includes.top_nav.currency')
-                
+
                 <!-- تم إزالة زر تغيير اللغة -->
 
                 <!-- إضافة الرقم والبريد الجديد هنا -->
                <ul class="navbar-nav mr-auto d-flex align-items-center flex-row">
     <li class="d-flex align-items-center text-dark-blue font-14 mr-15">
-        <i class="fa fa-phone mr-5" aria-hidden="true"></i> +1 (226) 700-3361
+        <i class="fa fa-phone mr-5" aria-hidden="true"></i> + 1 647 821 969
     </li>
     <li class="d-flex align-items-center text-dark-blue font-14">
-        <i class="fa fa-envelope mr-5" aria-hidden="true"></i> info-canada@ejaabi.com
+        <i class="fa fa-envelope mr-5" aria-hidden="true"></i> Jawaher@ejaabi.com
     </li>
 </ul>
 
@@ -140,16 +140,16 @@
         <img src="/flags/sa.svg.webp"  alt="SA"> {{ __('navbar.saudi') }}
       </a>
     </li>
-    <li>
-      <a href="/egy">
-        <img  src="/flags/eg.svg.webp" alt="EG"> {{ __('navbar.egypt') }}
-      </a>
-    </li>
-    <li>
-      <a href="/uae">
-        <img src="/flags/ae.png" alt="AE"> {{ __('navbar.uae') }}
-      </a>
-    </li>
+{{--    <li>--}}
+{{--      <a href="/egy">--}}
+{{--        <img  src="/flags/eg.svg.webp" alt="EG"> {{ __('navbar.egypt') }}--}}
+{{--      </a>--}}
+{{--    </li>--}}
+{{--    <li>--}}
+{{--      <a href="/uae">--}}
+{{--        <img src="/flags/ae.png" alt="AE"> {{ __('navbar.uae') }}--}}
+{{--      </a>--}}
+{{--    </li>--}}
   </ul>
 </div>
 
