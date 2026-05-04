@@ -54,10 +54,10 @@ class WebinarController extends Controller
     public function toggleHomepage(Request $request, $id)
     {
         $webinar = Webinar::findOrFail($id);
-    
+
         $webinar->show_on_homepage = $request->input('show_on_homepage') ? 1 : 0;
         $webinar->save();
-    
+
         return response()->json(['success' => true]);
 }
 
@@ -239,7 +239,7 @@ public function duplicate($id)
         $newChapter = $chapter->replicate();
         $newChapter->webinar_id = $webinar->id;
         $newChapter->created_at = time();
-        
+
         $newChapter->save();
 
         // نسخ ترجمة الفصل
@@ -248,7 +248,7 @@ public function duplicate($id)
                 'webinar_chapter_id'  => $newChapter->id,
                 'locale'      => $chTr->locale,
                 'title'       => $chTr->title,
-                
+
             ]);
         }
 
@@ -437,7 +437,7 @@ foreach ($originalEvalCategories as $cat) {
 
         return view('admin.webinars.lists', $data);
     }
-    
+
     public function create_scorm(Request $request)
     {
 
@@ -528,7 +528,7 @@ foreach ($originalEvalCategories as $cat) {
 
         return  view('admin.webinars.create_scorm' , $data);
     }
-    
+
     public function update_scorm(Request $request, $id)
     {
     $this->authorize('admin_webinars_edit');
@@ -635,7 +635,7 @@ foreach ($originalEvalCategories as $cat) {
     if ($data['type'] != Webinar::$webinar) {
         $data['start_date'] = null;
     }
-    
+
     if (!empty($data['start_date']) and $data['type'] == Webinar::$webinar) {
         if (empty($data['timezone'])) {
             $data['timezone'] = getTimezone();
@@ -648,11 +648,11 @@ foreach ($originalEvalCategories as $cat) {
     }
 
     $data = $this->handleVideoDemoData($request, $data, "course_demo_" . time());
-    
+
     $newCreatorId = !empty($data['organ_id']) ? $data['organ_id'] : $data['teacher_id'];
     $changedCreator = ($webinar->creator_id != $newCreatorId);
     $webinar->branches()->sync($data['branch_id']);
-        
+
     $data['price'] = !empty($data['price']) ? convertPriceToDefaultCurrency($data['price']) : null;
     $data['organization_price'] = !empty($data['organization_price']) ? convertPriceToDefaultCurrency($data['organization_price']) : null;
 
@@ -716,7 +716,7 @@ foreach ($originalEvalCategories as $cat) {
         'sections' => $sectionsJson,
         'approval_name' => $data['approval_name'] ?? "",
     ]);
-    
+
     $webinar->branches()->sync($data['branch_id']);
 
     // تحديث الفلاتر
@@ -936,7 +936,7 @@ $query=$query->byBranch();
 
         return view('admin.webinars.create', $data);
     }
-    
+
     public function store(Request $request)
     {
         $this->authorize('admin_webinars_create');
@@ -958,7 +958,7 @@ $query=$query->byBranch();
              'branch_id' => 'required|numeric',
         ]);
 
-        
+
         $data = $request->all();
         //exam
         if ($data['type'] === 'exam') {
@@ -994,7 +994,7 @@ $query=$query->byBranch();
                 ]
             ]);
         }
-        
+
 
 
         if ($data['type'] != Webinar::$webinar) {
@@ -1020,7 +1020,7 @@ $query=$query->byBranch();
         $data['price'] = !empty($data['price']) ? convertPriceToDefaultCurrency($data['price']) : null;
         $data['organization_price'] = !empty($data['organization_price']) ? convertPriceToDefaultCurrency($data['organization_price']) : null;
         if(empty($data['image_cover'])){
-            
+
              $data['image_cover']=$data['thumbnail'];
         }
         $webinar = Webinar::create([
@@ -1064,7 +1064,7 @@ $query=$query->byBranch();
         // Prepare sections data
             $sections = [];
                  if (in_array($data['type'] ?? null, ['text_lesson', 'course']) && !empty($data['section_title'] ?? '')) {
-        
+
                 foreach ($data['section_title'] as $index => $title) {
                     $sections[] = [
                         'title' => $title,
@@ -1072,10 +1072,10 @@ $query=$query->byBranch();
                     ];
                 }
             }
-        
+
             // Encode sections data as JSON
             $sectionsJson = json_encode($sections);
-            
+
               $details = [];
             if(!empty($request->dates)){
             foreach ($request->dates as $key => $date) {
@@ -1105,19 +1105,19 @@ $query=$query->byBranch();
                     ]);
                     $webinar->branches()->attach($data['branch_id']);
                 }
-        
+
          if($webinar->type=='exam' || $webinar->type=='eval'){
                 //add exam
-        
+
                 $Quizdata = $request->get('ajax')['new'];
                 $locale = $data['locale'] ?? getDefaultLocale();
-        
-        
+
+
                 if (!empty($webinar)) {
                     $chapter = null;
-        
+
                  if($webinar->type=='exam' || $webinar->type=='eval')
-        
+
                     $quiz = Quiz::create([
                         'webinar_id' => $webinar->id,
                         'chapter_id' => !empty($chapter) ? $chapter->id : null,
@@ -1131,9 +1131,9 @@ $query=$query->byBranch();
                         'expiry_days' => (!empty($Quizdata['expiry_days']) and $Quizdata['expiry_days'] > 0) ? $Quizdata['expiry_days'] : null,
                         'created_at' => time(),
                     ]);
-        
-                    
-                    
+
+
+
                     if($quiz)
                 {
                     QuizTranslation::updateOrCreate([
@@ -1142,13 +1142,13 @@ $query=$query->byBranch();
                     ], [
                         'title' => $data['title'],
                     ]);
-        
+
                 }
-        
+
                 }
          }
-        
-        
+
+
                 $filters = $request->get('filters', null);
                 if (!empty($filters) and is_array($filters)) {
                     WebinarFilterOption::where('webinar_id', $webinar->id)->delete();
@@ -1159,11 +1159,11 @@ $query=$query->byBranch();
                         ]);
                     }
                 }
-        
+
                 if (!empty($request->get('tags'))) {
                     $tags = explode(',', $request->get('tags'));
                     Tag::where('webinar_id', $webinar->id)->delete();
-        
+
                     foreach ($tags as $tag) {
                         Tag::create([
                             'webinar_id' => $webinar->id,
@@ -1171,10 +1171,10 @@ $query=$query->byBranch();
                         ]);
                     }
                 }
-        
+
                 if (!empty($request->get('partner_instructor')) and !empty($request->get('partners'))) {
                     WebinarPartnerTeacher::where('webinar_id', $webinar->id)->delete();
-        
+
                     foreach ($request->get('partners') as $partnerId) {
                         WebinarPartnerTeacher::create([
                             'webinar_id' => $webinar->id,
@@ -1186,7 +1186,7 @@ $query=$query->byBranch();
 
         return redirect(getAdminPanelUrl() . '/webinars/' . $webinar->id . '/edit?locale=' . $data['locale']);
     }
-    
+
     public function store_scorm(Request $request)
     {
         $this->authorize('admin_webinars_create');
@@ -1208,9 +1208,9 @@ $query=$query->byBranch();
             'branch_id' => 'required|numeric',
         ]);
 
-        
+
         $data = $request->all();
-        
+
         $uploadedFile = $request->file('scorm');
         $originalName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $timestamp = now()->format('Ymd_His');
@@ -1219,14 +1219,14 @@ $query=$query->byBranch();
 
         $disk = Storage::disk('local');
         $storedArchivePath = $disk->putFileAs('scorm_uploads', $uploadedFile, $archiveName);
-        
+
         $extractFolder = 'scorm/' . $safeBaseName . '_' . $timestamp;
         $absoluteExtractPath = $disk->path($extractFolder);
-        
+
         if (!is_dir($absoluteExtractPath)) {
             mkdir($absoluteExtractPath, 0755, true);
         }
-        
+
         $zip = new ZipArchive();
         $absoluteArchivePath = $disk->path($storedArchivePath);
         $realArchivePath = realpath($absoluteArchivePath) ?: $absoluteArchivePath;
@@ -1246,7 +1246,7 @@ $query=$query->byBranch();
             return back()->withErrors(['scorm' => 'تعذّر استخراج محتويات الملف.']);
         }
         $zip->close();
-        
+
         $manifestAbsolutePath = $this->findManifest($absoluteExtractPath);
 
         $manifestItems = [];
@@ -1299,7 +1299,7 @@ $query=$query->byBranch();
             } catch (\Throwable $e) {
                 // Ignore parsing errors; we'll just not show manifest items
             }
-        } 
+        }
         // Build a flat list of files relative to the extract root
         $relativeFiles = $this->listFilesRecursively($absoluteExtractPath, $absoluteExtractPath);
 
@@ -1319,7 +1319,7 @@ $query=$query->byBranch();
             }
         }
 
-        
+
         if (!empty($data['capacity']) and !empty($data['sales_count_number']) and $data['sales_count_number'] > $data['capacity']) {
             return back()->withErrors([
                 'sales_count_number' => [
@@ -1331,7 +1331,7 @@ $query=$query->byBranch();
                 ]
             ]);
         }
-        
+
 
 
         if ($data['type'] != Webinar::$webinar) {
@@ -1355,14 +1355,14 @@ $query=$query->byBranch();
         $data = $this->handleVideoDemoData($request, $data, "course_demo_" . time());
 
         $data['price'] = !empty($data['price']) ? convertPriceToDefaultCurrency($data['price']) : null;
-        
+
         $data['organization_price'] = !empty($data['organization_price']) ? convertPriceToDefaultCurrency($data['organization_price']) : null;
-        
+
         if(empty($data['image_cover'])){
-            
+
              $data['image_cover']=$data['thumbnail'];
         }
-        
+
         $webinar = Webinar::create([
             'type' => $data['type'],
             'slug' => $data['slug'],
@@ -1416,7 +1416,7 @@ $query=$query->byBranch();
 
         // Encode sections data as JSON
         $sectionsJson = json_encode($sections);
-    
+
          $details = [];
         if(!empty($request->dates)){
             foreach ($request->dates as $key => $date) {
@@ -1484,7 +1484,7 @@ $query=$query->byBranch();
 
         return redirect(getAdminPanelUrl() . '/webinars/' . $webinar->id . '/edit?locale=' . $data['locale']);
     }
-    
+
     private function describeZipError(int $code): string
     {
         $map = [
@@ -1639,7 +1639,7 @@ $query=$query->byBranch();
 
     public function edit(Request $request, $id)
     {
-        
+
        $this->authorize('admin_webinars_edit');
 
         $webinar = Webinar::where('id', $id)
@@ -1769,7 +1769,7 @@ if($webinar->type=='eval'){
      }
         return view('admin.webinars.create', $data);
     }
-    
+
     public function update(Request $request, $id)
     {
         $this->authorize('admin_webinars_edit');
@@ -1796,7 +1796,7 @@ if($webinar->type=='eval'){
             'branch_id' => 'required|numeric',
         ];
 
-       
+
 
         if ($webinar->isWebinar()) {
             $rules['start_date'] = 'required|date';
@@ -1934,9 +1934,9 @@ if($webinar->type=='eval'){
 
         $data['price'] = !empty($data['price']) ? convertPriceToDefaultCurrency($data['price']) : null;
         $data['organization_price'] = !empty($data['organization_price']) ? convertPriceToDefaultCurrency($data['organization_price']) : null;
-        
+
         if(empty($data['image_cover'])){
-            
+
             $data['image_cover']= $data['thumbnail'];
         }
         $webinar->update([
@@ -1990,7 +1990,7 @@ if($webinar->type=='eval'){
 
     // Encode sections data as JSON
     $sectionsJson = json_encode($sections);
-    
+
     $details = [];
     if(!empty($request->dates)){
     foreach ($request->dates as $key => $date) {
@@ -2018,7 +2018,7 @@ if($webinar->type=='eval'){
                    'details'=> $details,
                    'approval_name' => $data['approval_name'] ??  "",
             ]);
-            
+
             $webinar->branches()->sync($data['branch_id']);
 
           // update  exam
@@ -2030,9 +2030,9 @@ if($webinar->type=='eval'){
             $id=$data['quiz_id'];
             $quizData = $request->get('ajax')[$id];
             $locale = $data['locale'] ?? getDefaultLocale();
-    
-              
-    
+
+
+
               if($quiz)
             {
             $quiz->update([
@@ -2050,7 +2050,7 @@ if($webinar->type=='eval'){
                 'updated_at' => time(),
             ]);
         }
-    
+
             if (!empty($quiz)) {
                 QuizTranslation::updateOrCreate([
                     'quiz_id' => $quiz->id,
@@ -2058,10 +2058,10 @@ if($webinar->type=='eval'){
                 ], [
                     'title' => $data['title'],
                 ]);
-    
-               
+
+
             }
-              
+
             }
 
 
@@ -2087,7 +2087,7 @@ if($webinar->type=='eval'){
         if ($changedCreator) {
             $this->webinarChangedCreator($webinar);
         }
-        
+
 
         removeContentLocale();
 
@@ -2121,10 +2121,10 @@ if($webinar->type=='eval'){
             'status' => 'success'
         ];
         if($webinar->type!=''){
-            
-     return redirect(getAdminPanelUrl() . '/webinars?type='.$webinar->type)->with(['toast' => $toastData]); 
+
+     return redirect(getAdminPanelUrl() . '/webinars?type='.$webinar->type)->with(['toast' => $toastData]);
         }
-       
+
         return redirect(getAdminPanelUrl() . '/webinars')->with(['toast' => $toastData]);
     }
 
@@ -2144,8 +2144,8 @@ if($webinar->type=='eval'){
             'status' => 'success'
         ];
   if($webinar->type!=''){
-            
-     return redirect(getAdminPanelUrl() . '/webinars?type='.$webinar->type)->with(['toast' => $toastData]); 
+
+     return redirect(getAdminPanelUrl() . '/webinars?type='.$webinar->type)->with(['toast' => $toastData]);
         }
         return redirect(getAdminPanelUrl() . '/webinars')->with(['toast' => $toastData]);
     }
@@ -2166,8 +2166,8 @@ if($webinar->type=='eval'){
             'status' => 'success'
         ];
   if($webinar->type!=''){
-            
-     return redirect(getAdminPanelUrl() . '/webinars?type='.$webinar->type)->with(['toast' => $toastData]); 
+
+     return redirect(getAdminPanelUrl() . '/webinars?type='.$webinar->type)->with(['toast' => $toastData]);
         }
         return redirect(getAdminPanelUrl() . '/webinars')->with(['toast' => $toastData]);
     }
@@ -2610,7 +2610,7 @@ if($webinar->type=='eval'){
 
         abort(403);
     }
-    
+
 public function copyCourse($id)
 {
     $webinar = Webinar::with([

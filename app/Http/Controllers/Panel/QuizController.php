@@ -443,24 +443,19 @@ class QuizController extends Controller
         return response()->json([], 422);
     }
     //eval
- public function eval(Request $request, $id)
+    public function eval(Request $request, $id)
     {
-        
-                    $userCarts = auth()->check() ? Cart::where('creator_id', auth()->id())->get() : collect();
+        $userCarts = auth()->check() ? Cart::where('creator_id', auth()->id())->get() : collect();
 
         $quiz = Quiz::where('id', $id)->first();
-      // dd($quiz);
-      
-       // $user = auth()->user();
 
-        if ($quiz) {
+        if (!$quiz) {
+            abort(404);
+        }
 
-            if (!empty($quiz->webinar_id)) {
-                $webinar = $quiz->webinar;
-$webinarTitle = $quiz->title; // fallback in case not found in translation
+        $webinarTitle = $quiz->title;
 
         if (!empty($quiz->webinar_id)) {
-            // جلب عنوان الويبينار من جدول الترجمة باللغة العربية
             $webinarTranslation = DB::table('webinar_translations')
                 ->where('locale', 'ar')
                 ->where('webinar_id', $quiz->webinar_id)
@@ -470,61 +465,90 @@ $webinarTitle = $quiz->title; // fallback in case not found in translation
                 $webinarTitle = $webinarTranslation->title;
             }
         }
-       
-              
-            }
-           
 
-            
-           
-                $newQuizStart = QuizzesResult::create([
-                    'quiz_id' => $quiz->id,
-                    'user_id' => '1',
-                    'results' => '',
-                    'user_grade' => 0,
-                    'status' => 'waiting',
-                    'created_at' => time()
-                ]);
-                $quizCatQuestionsQuery=EvalCategory::query()
-                ->where('quiz_id',$quiz->id)
-                ->with('QuestionsCategories.quizzesQuestionsAnswers');
-               /* dd($quizCatQuestionsQuery);
-                $quizQuestionsQuery = QuizzesQuestion::query()
-                    ->where('quiz_id', $quiz->id)
-                    ->with('quizzesQuestionsAnswers');
+        $newQuizStart = QuizzesResult::create([
+            'quiz_id'    => $quiz->id,
+            'user_id'    => '1',
+            'results'    => '',
+            'user_grade' => 0,
+            'status'     => 'waiting',
+            'created_at' => time()
+        ]);
 
+        // Build query with ordering
+        $quizCatQuestionsQuery = EvalCategory::query()
+            ->where('quiz_id', $quiz->id)
+            ->with(['QuestionsCategories' => function ($query) use ($quiz) {
                 if ($quiz->display_questions_randomly) {
-                    $quizQuestionsQuery->inRandomOrder();
+                    $query->inRandomOrder();
                 } else {
-                    $quizQuestionsQuery->orderBy('order', 'asc');
-                }*/
-
-                if (($quiz->display_limited_questions and !empty($quiz->display_number_of_questions))) {
-                    $totalQuestionsCount = $quiz->display_number_of_questions;
-
-                    $quizQuestions = $quizQuestionsQuery->take($totalQuestionsCount)->get();
-                } else {
-                    $quizQuestions = $quizCatQuestionsQuery->get();
-                    $totalQuestionsCount = $quizQuestions->count();
+                    $query->orderBy('id', 'asc');
                 }
-                
-// return $webinarTitle;
-                $data = [
-                    'pageTitle' => $webinarTitle,
-                    'quiz' => $quiz,
-                    'quizQuestions' => $quizQuestions,
-                    'attempt_count' =>  1,
-                    'newQuizStart' => $newQuizStart,
-                    'totalQuestionsCount' => $totalQuestionsCount,
-                    'userCarts' => $userCarts,
-                ];
-                // return $data;
-                // return $quizQuestions;
+            }, 'QuestionsCategories.quizzesQuestionsAnswers'])
+            ->orderBy('id', 'asc');
 
-                return view(getTemplate() . '.panel.quizzes.eval', $data);
-           
+        // ✅ ONE get() only
+        $quizQuestions = $quizCatQuestionsQuery->get();
+
+        // ✅ Deduplicate questions by title in PHP (avoids translation table SQL issue)
+        $quizQuestions->each(function ($cat) {
+            $seen   = [];
+            $unique = $cat->QuestionsCategories->filter(function ($question) use (&$seen) {
+                // Try to get title via translation, fallback to accessor
+                try {
+                    $title = $question->getTranslation('title', 'ar')
+                        ?? $question->getTranslation('title', 'en')
+                        ?? $question->title;
+                } catch (\Exception $e) {
+                    $title = $question->title;
+                }
+
+                if (in_array($title, $seen)) {
+                    return false; // skip duplicate
+                }
+
+                $seen[] = $title;
+                return true;
+            })->values();
+
+            $cat->setRelation('QuestionsCategories', $unique);
+        });
+
+        // ✅ Count actual questions (not categories) after dedup
+        $totalQuestionsCount = $quizQuestions->sum(fn($cat) => $cat->QuestionsCategories->count());
+
+        // ✅ Apply question limit at question level if needed
+        if ($quiz->display_limited_questions && !empty($quiz->display_number_of_questions)) {
+            $totalQuestionsCount = $quiz->display_number_of_questions;
+
+            $flatLimited = $quizQuestions
+                ->flatMap(fn($cat) => $cat->QuestionsCategories->map(fn($q) => [
+                    'category' => $cat,
+                    'question' => $q,
+                ]))
+                ->take($totalQuestionsCount);
+
+            $quizQuestions = $flatLimited
+                ->groupBy(fn($item) => $item['category']->id)
+                ->map(function ($items) {
+                    $cat = $items->first()['category'];
+                    $cat->setRelation('QuestionsCategories', $items->pluck('question'));
+                    return $cat;
+                })
+                ->values();
         }
-        abort(404);
+
+        $data = [
+            'pageTitle'           => $webinarTitle,
+            'quiz'                => $quiz,
+            'quizQuestions'       => $quizQuestions,
+            'attempt_count'       => 1,
+            'newQuizStart'        => $newQuizStart,
+            'totalQuestionsCount' => $totalQuestionsCount,
+            'userCarts'           => $userCarts,
+        ];
+
+        return view(getTemplate() . '.panel.quizzes.eval', $data);
     }
     public function start(Request $request, $id)
     {
@@ -750,7 +774,7 @@ $webinarTitle = $quiz->title; // fallback in case not found in translation
 
     public function quizzesStoreResult(Request $request, $id)
     {
-        
+
         $user = auth()->user();
         $quiz = Quiz::where('id', $id)->first();
 
@@ -782,7 +806,7 @@ $webinarTitle = $quiz->title; // fallback in case not found in translation
                                     ->where('quiz_id', $quiz->id)
                                     ->first();
 
-                                
+
                                 if ($question and !empty($result['answer'])) {
                                    /* $answer = QuizzesQuestionsAnswer::where('id', $result['answer'])
                                         ->where('question_id', $question->id)
@@ -857,27 +881,27 @@ if ($totalCorrectAnswers > 1) {
     // For multiple correct answers scenario
     $allStudentAnswersCorrect = true;
     $selectedIncorrectAnswers = false;
-    
+
     // Check if student selected any incorrect answers
     foreach ($selectedAnswers as $answerId) {
         $answer = QuizzesQuestionsAnswer::where('id', $answerId)
             ->where('question_id', $question->id)
             ->where('creator_id', $quiz->creator_id)
             ->first();
-            
+
         if (!$answer || !$answer->correct) {
             $selectedIncorrectAnswers = true;
             break;
         }
     }
-    
+
     // Check if student selected all correct answers
     $selectedCorrectCount = QuizzesQuestionsAnswer::whereIn('id', $selectedAnswers)
         ->where('question_id', $question->id)
         ->where('creator_id', $quiz->creator_id)
         ->where('correct', 1)
         ->count();
-    
+
     // Student gets full grade only if they selected all correct answers and no incorrect ones
     if ($selectedCorrectCount == $totalCorrectAnswers && !$selectedIncorrectAnswers) {
         $results[$questionId]['grade'] = $question->grade;
@@ -921,10 +945,10 @@ if ($totalCorrectAnswers > 1) {
                         'status' => $status,
                         'created_at' => time()
                     ]);
-                    
+
                     //attempt  verb for xapi
-                    
-                     
+
+
              $agent = $_SERVER['HTTP_USER_AGENT'];
 
               $browserInfo = $this->xapiService->getBrowserInfo($agent);
@@ -933,7 +957,7 @@ if ($totalCorrectAnswers > 1) {
                     $isSuccess=true;
                 }
                 $isCompleted=true;
-                
+
                 $params = [
                     'name' => $user->full_name,
                     'email' => $user->email,
@@ -950,13 +974,13 @@ if ($totalCorrectAnswers > 1) {
                     'attempt_id'=>$results["attempt_number"],
                     'quiz_total_mark'=>$quiz->total_mark
                 ];
-        
-     
-        
+
+
+
                 $this->xapiService->createAttemptedStatement($params,$totalMark,$isSuccess,$isCompleted);
-                    
+
                     //end attempt
-                    
+
 
                     if ($quizResult->status == QuizzesResult::$waiting) {
                         $notifyOptions = [
@@ -989,10 +1013,10 @@ if ($totalCorrectAnswers > 1) {
     {
         //$user = auth()->user();
         $quiz = Quiz::where('id', $id)->first();
-       
+
 
         if ($quiz) {
-             
+
             $results = $request->get('question');
             $quizResultId = $request->get('quiz_result_id');
 
@@ -1020,7 +1044,7 @@ if ($totalCorrectAnswers > 1) {
                                     ->where('quiz_id', $quiz->id)
                                     ->first();
 
-                                
+
                                 if ($question and !empty($result['answer'])) {
                                    /* $answer = QuizzesQuestionsAnswer::where('id', $result['answer'])
                                         ->where('question_id', $question->id)
@@ -1095,27 +1119,27 @@ if ($totalCorrectAnswers > 1) {
     // For multiple correct answers scenario
     $allStudentAnswersCorrect = true;
     $selectedIncorrectAnswers = false;
-    
+
     // Check if student selected any incorrect answers
     foreach ($selectedAnswers as $answerId) {
         $answer = QuizzesQuestionsAnswer::where('id', $answerId)
             ->where('question_id', $question->id)
             ->where('creator_id', $quiz->creator_id)
             ->first();
-            
+
         if (!$answer || !$answer->correct) {
             $selectedIncorrectAnswers = true;
             break;
         }
     }
-    
+
     // Check if student selected all correct answers
     $selectedCorrectCount = QuizzesQuestionsAnswer::whereIn('id', $selectedAnswers)
         ->where('question_id', $question->id)
         ->where('creator_id', $quiz->creator_id)
         ->where('correct', 1)
         ->count();
-    
+
     // Student gets full grade only if they selected all correct answers and no incorrect ones
     if ($selectedCorrectCount == $totalCorrectAnswers && !$selectedIncorrectAnswers) {
         $results[$questionId]['grade'] = $question->grade;
@@ -1157,10 +1181,10 @@ if ($totalCorrectAnswers > 1) {
                     $results["info"]["email"]=$request->get('email');
                     $results["info"]["phone"]=$request->get('phone');
                     $results["info"]["notes"]=$request->get('notes');
-                  
+
                     $quizResult->update([
                         'results' => json_encode($results),
-                    
+
                         'user_grade' => $totalMark,
                         'status' => $status,
                         'created_at' => time()
@@ -1184,7 +1208,7 @@ if ($totalCorrectAnswers > 1) {
                             RewardAccounting::makeRewardAccounting($quizResult->user_id, $certificateReward, Reward::CERTIFICATE, $quiz->id, true);
                         }
                     }
-                
+
                     return redirect()->route('thankseval');
                 }
             }
@@ -1196,7 +1220,7 @@ if ($totalCorrectAnswers > 1) {
          $form = Form::query()->where('url', 'teacher_form')->first();
          $data = [
                                 'pageTitle' => 'تم ارسال تقييمك بنجاح',
-                                'form' =>  $form 
+                                'form' =>  $form
                             ];
         return view('web.default.panel.quizzes.tanks', $data);
     }

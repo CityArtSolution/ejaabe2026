@@ -48,7 +48,7 @@
         @include(getTemplate() . '.includes.webinar.rate',['rate' => $webinar->getRate()])
         <div class="d-flex justify-content-between mt-auto">
             <div class="d-flex align-items-center">
-                <div class="d-flex align-items-center">                    
+                <div class="d-flex align-items-center">
                      @if(in_array($webinar->type,['text_lesson','course']))
                                          <i data-feather="clock" width="20" height="20" class="webinar-icon"></i>
 
@@ -76,7 +76,7 @@
                         <span class="real">{{ handlePrice($webinar->price, false, true, false, null, true) }} {{getBranchCurrency(3)}}</span>
                     @endif
                 @else
-                  @if($webinar->type!='text_lesson')
+                  @if($webinar->type!='text_lesson' && $webinar->type!='course')
                     <span class="real font-14">{{ trans('public.free') }}</span>
                     @endif
                 @endif

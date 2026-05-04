@@ -14,7 +14,9 @@
     </form>
     <ul class="navbar-nav navbar-right">
 
-        @include('admin.includes.navbar.language')
+        @if(!Auth::user()->isCanadaBranch())
+            @include('admin.includes.navbar.language')
+        @endif
 
         @include('admin.includes.navbar.currency')
 

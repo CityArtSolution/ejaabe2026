@@ -2,7 +2,7 @@
 
 @push('styles_top')
     <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
-    
+
     <link rel="stylesheet" href="/assets/default/vendors/daterangepicker/daterangepicker.min.css">
     <link rel="stylesheet" href="/assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.css">
 
@@ -23,7 +23,7 @@
             font-weight:800;
         }
         select#type{
-            
+
                 background: #e4f7e6;
         }
                 .container {
@@ -217,7 +217,7 @@
                 text-align: center;
             }
         }
-    
+
     </style>
 @endpush
 
@@ -283,7 +283,7 @@
                         @if(!empty($webinar))
                              <div class="form-group mb-0 d-flex align-items-center">
                             <label class="input-label mb-0 mr-2">عرض في الصفحة الرئيسية</label>
-                    
+
                             <label class="custom-switch mb-0 ml-2">
                                 <input type="checkbox" id="showOnHomepageToggle"
                                        {{ $webinar->show_on_homepage ? 'checked' : '' }}
@@ -298,11 +298,11 @@
                                 width: 40px;
                                 height: 24px;
                                 }
-                                
+
                                 .custom-switch input {
                                 display: none;
                                 }
-                                
+
                                 .custom-switch-slider {
                                 position: absolute;
                                 cursor: pointer;
@@ -314,7 +314,7 @@
                                 transition: .4s;
                                 border-radius: 24px;
                                 }
-                                
+
                                 .custom-switch-slider:before {
                                 position: absolute;
                                 content: "";
@@ -326,15 +326,15 @@
                                 transition: .4s;
                                 border-radius: 50%;
                                 }
-                                
+
                                 .custom-switch input:checked + .custom-switch-slider {
                                 background-color: #28a745;
                                 }
-                                
+
                                 .custom-switch input:checked + .custom-switch-slider:before {
                                 transform: translateX(26px);
                                 }
-                                
+
                                                         </style>
                         @endif
                     </section>
@@ -358,7 +358,7 @@
                             @else
                                 <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
                             @endif
-                            
+
                             @if(!empty($webinar->scorm_file))
                             <div class="form-group mt-15">
                                 <label class="input-label d-none choose_type">{{ trans('panel.course_type') }}*</label>
@@ -372,7 +372,7 @@
                             <select name="type" id="type" class="custom-select @error('type') is-invalid @enderror" required>
                                 <option value="" disabled selected>{{ trans('admin/main.select_course_type') }}</option> <!-- Default option -->
                                 <option value="text_lesson" @if((!empty($webinar) and $webinar->isTextCourse()) or old('type') == \App\Models\Webinar::$textLesson) selected @endif>{{ trans('webinars.text_course') }}</option>
-                                <option value="course" @if((!empty($webinar) and $webinar->isCourse()) or old('type') == \App\Models\Webinar::$course) selected @endif>{{ trans('product.video_course') }}</option>
+                                <option value="course" @if((!empty($webinar) and $webinar->isCourse()) or old('type') == \App\Models\Webinar::$course) selected @endif>{{  trans('admin/main.face to face') }}</option>
                                 <option value="offline" @if((!empty($webinar) and $webinar->isOffline()) or old('type') == \App\Models\Webinar::$offline) selected @endif>{{ trans('webinars.offline') }}</option>
                                 <option value="webinar" @if((!empty($webinar) and $webinar->isWebinar()) or old('type') == \App\Models\Webinar::$webinar) selected @endif>{{ trans('webinars.webinar') }}</option>
                             </select>
@@ -427,7 +427,7 @@
 
                                              @php
                                             $adminSelectedBranch = session('admin_selected_branch', 1);
-                                        
+
                                             if (!isset($selectedBranchIds)) {
                                                 $selectedBranchIds = [$adminSelectedBranch];
                                             }
@@ -441,7 +441,7 @@
                                                 @endforeach
                                             </select>
 
-                                        
+
                                         </div>
                                     </div>
                                     <div class="row">
@@ -456,8 +456,8 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        
-                                        
+
+
                                     </div>
                             @if(empty($webinar->scorm_file))
                             <div class="row">
@@ -466,8 +466,8 @@
                                         <!-- add sections -->
                             <div id="sections-container" style="display: {{ (!empty($webinar) && ($webinar->type === 'text_lesson' || $webinar->type === 'course' || $webinar->type === 'offline')) || (old('type') === 'text_lesson' || old('type') === 'course' || old('type') === 'offline') ? 'block' : 'none' }}">
                                             <label class="input-label d-block" style="background: #b8c3ed;color: #fff; padding: 5px;
-                            color: #000;font-weight: 700;font-size: 15px;">{{ trans('public.sections') }}</label> 
-                            
+                            color: #000;font-weight: 700;font-size: 15px;">{{ trans('public.sections') }}</label>
+
                                             <div id="sections">  <!-- Added this container div -->
                                                 @if(!empty($webinar) && !is_null($webinar->sections) && $webinar->sections)
                                                     @foreach (json_decode($webinar->sections, true) as $section)
@@ -490,7 +490,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                            
+
                             <button type="button" class="btn btn-primary" id="add-section" style="display: {{ (!empty($webinar) && ($webinar->type === 'text_lesson' || $webinar->type === 'course' || $webinar->type === 'offline')) || (old('type') === 'text_lesson' || old('type') === 'course' || old('type') === 'offline') ? 'block' : 'none' }}">
                                 {{ __('public.Add Section') }}
                             </button>
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('type').addEventListener('change', function() {
         const sectionsContainer = document.getElementById('sections-container');
         const coursedetailscontainer = document.getElementById('course-details-container');
-        
+
         if (this.value !='webinar') {
             sectionsContainer.style.display = 'block';
             $('#add-section').show();
@@ -520,9 +520,9 @@ document.addEventListener('DOMContentLoaded', function() {
            else{
                 coursedetailscontainer.style.display = 'none';
             $('.add').hide();
-               
+
            }
-         
+
         } else {
             sectionsContainer.style.display = 'none';
             $('#add-section').hide();
@@ -542,10 +542,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 <button type="button" class="btn btn-danger remove-section">{{__('public.Remove')}}</button>
             </div>
         `;
-        
+
         const sectionsContainer = document.getElementById('sections');
         sectionsContainer.insertAdjacentHTML('beforeend', sectionTemplate);
-        
+
         // Initialize Summernote for the newly added section
         const newSection = sectionsContainer.lastElementChild;
         const newSummernote = newSection.querySelector('.summernote');
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('sections-container').addEventListener('click', function(e) {
         if (e.target.classList.contains('remove-section')) {
             const sectionsCount = document.querySelectorAll('.section').length;
-            
+
             if (sectionsCount > 1) {
                 e.target.closest('.section').remove();
             } else {
@@ -602,13 +602,13 @@ document.addEventListener('DOMContentLoaded', function() {
     margin-top: 15px;
 }
 </style>
-    
-                                        
+
+
 
                                     <div class="row">
                                         <div class="col-12 col-md-5">
 
-                                   
+
 <div class="form-group mt-15">
     <label class="input-label d-block">{{ trans('admin/main.select_a_instructor') }}</label>
 
@@ -696,7 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 </div>
                                                 @enderror
                                             </div>
-                                            
+
                                             <div class="form-group mt-15">
                                                 <label class="input-label">{{ trans('public.approval_logo') }}</label>
                                                 <div class="input-group">
@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
                                     <div class="row">
-                                     
+
 
                                     <!----dates and locations and prices--->
                                      <div class="col-12">
@@ -843,7 +843,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <option data-display="{{ __('public.Select Lang') }}" value="">{{ __('public.Select Lang') }}</option>
 
         {{-- Bilingual option --}}
-    
+
 
         @foreach ($userLanguages as $lang => $language)
             @if (in_array(strtolower($lang), ['ar', 'en']))
@@ -923,23 +923,23 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </div>
                                         @endif
                                     </div>
-                                    
+
                                     <button type="button" class="btn btn-primary  add add-more-detail">{{ __('public.Add More') }}</button>
-                                    
+
                                     <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         // Initialize datepicker for existing fields
                                         initializeDatepickers();
-                                    
+
                                         // Add new detail
                                         document.querySelector('.add-more-detail').addEventListener('click', function() {
-                                          
+
                                             const template = document.querySelector('.course-detail').cloneNode(true);
-                                            
+
                                             // Clear all input values
                                             template.querySelectorAll('input').forEach(input => input.value = '');
                                             template.querySelectorAll('select').forEach(select => select.selectedIndex = 0);
-                                            
+
                                             // Reinitialize datepicker for new row
                                             template.querySelectorAll('.date1').forEach(element => {
                                                 $(element).datepicker({
@@ -947,15 +947,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     format: 'yyyy-mm-dd'
                                                 });
                                             });
-                                            
+
                                             document.getElementById('course-details-container').appendChild(template);
                                         });
-                                    
+
                                         // Remove detail
                                         document.getElementById('course-details-container').addEventListener('click', function(e) {
                                             if (e.target.closest('.remove-detail')) {
                                                 const detailsCount = document.querySelectorAll('.course-detail').length;
-                                                
+
                                                 if (detailsCount > 1) {
                                                     e.target.closest('.course-detail').remove();
                                                 } else {
@@ -963,7 +963,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 }
                                             }
                                         });
-                                    
+
                                         function initializeDatepickers() {
                                             $('.date1').datepicker({
                                                 autoclose: true,
@@ -1158,10 +1158,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 @enderror
                                                 <p class="mt-1">- {{ trans('update.access_days_input_hint') }}</p>
                                             </div>
-                                            
-                                            
-                                            
-                                           
+
+
+
+
 
                                             <div class="form-group mt-15">
                                                 <label class="input-label">{{ trans('public.price') }}{{trans('public.sr')}}</label>
@@ -1172,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 </div>
                                                 @enderror
                                             </div>
-                                            
+
                                                  <div class="form-group mt-15">
                                                 <label class="input-label">{{ trans('public.Discount Rate') }} %</label>
                                                 <input type="text" name="discount_rate" value="{{ (!empty($webinar) and !empty($webinar->discount_rate)) ? $webinar->discount_rate : old('discount_rate') }}" class="form-control @error('discount_rate')  is-invalid @enderror" placeholder="%"/>
@@ -1240,22 +1240,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     @endphp
-    
+
     <option disabled>{{ trans('public.choose_category') }}</option>
     @foreach($categories as $category)
         @if(!empty($category->subCategories) && count($category->subCategories))
             <optgroup label="{{  $category->title }}">
                 @foreach($category->subCategories as $subCategory)
-                    <option value="{{ $subCategory->id }}" 
-                        {{ (!empty($webinar) && $webinar->category_id == $subCategory->id) ? 'selected' : 
+                    <option value="{{ $subCategory->id }}"
+                        {{ (!empty($webinar) && $webinar->category_id == $subCategory->id) ? 'selected' :
                            (empty($webinar) && $firstCategory && $firstCategory->id == $subCategory->id ? 'selected' : '') }}>
                         {{ $subCategory->title }}
                     </option>
                 @endforeach
             </optgroup>
         @else
-            <option value="{{ $category->id }}" 
-                {{ (!empty($webinar) && $webinar->category_id == $category->id) ? 'selected' : 
+            <option value="{{ $category->id }}"
+                {{ (!empty($webinar) && $webinar->category_id == $category->id) ? 'selected' :
                    (empty($webinar) && $firstCategory && $firstCategory->id == $category->id ? 'selected' : '') }}>
                 {{ $category->title }}
             </option>
@@ -1269,7 +1269,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 @enderror
 
-                                             
+
                                             </div>
 
                                         </div>
@@ -1365,13 +1365,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     <h2 class="section-title after-line">{{ trans('public.prerequisites') }}</h2>
                                                     <button id="webinarAddPrerequisites" type="button" class="btn btn-primary btn-sm mt-3">{{ trans('public.add_prerequisites') }}</button>
                                                 </div>
-        
+
                                                 <div class="row mt-10">
                                                     <div class="col-12">
                                                         @if(!empty($prerequisites) and !$prerequisites->isEmpty())
                                                             <div class="table-responsive">
                                                                 <table class="table table-striped text-center font-14">
-        
+
                                                                     <tr>
                                                                         <th>{{ trans('public.title') }}</th>
                                                                         <th class="text-left">{{ trans('public.instructor') }}</th>
@@ -1380,7 +1380,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                                         <th>{{ trans('public.forced') }}</th>
                                                                         <th></th>
                                                                     </tr>
-        
+
                                                                     @foreach($prerequisites as $prerequisite)
                                                                         @if(!empty($prerequisite->prerequisiteWebinar->title))
                                                                             <tr>
@@ -1389,18 +1389,18 @@ document.addEventListener('DOMContentLoaded', function() {
                                                                                 <td>{{  handlePrice($prerequisite->prerequisiteWebinar->price) }}</td>
                                                                                 <td>{{ dateTimeFormat($prerequisite->prerequisiteWebinar->created_at,'j F Y | H:i') }}</td>
                                                                                 <td>{{ $prerequisite->required ? trans('public.yes') : trans('public.no') }}</td>
-        
+
                                                                                 <td>
                                                                                     <button type="button" data-prerequisite-id="{{ $prerequisite->id }}" data-webinar-id="{{ !empty($webinar) ? $webinar->id : '' }}" class="edit-prerequisite btn-transparent text-primary mt-1" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                                                                         <i class="fa fa-edit"></i>
                                                                                     </button>
-        
+
                                                                                     @include('admin.includes.delete_button',['url' => getAdminPanelUrl().'/prerequisites/'. $prerequisite->id .'/delete', 'btnClass' => ' mt-1'])
                                                                                 </td>
                                                                             </tr>
                                                                         @endif
                                                                     @endforeach
-        
+
                                                                 </table>
                                                             </div>
                                                         @else
@@ -1419,25 +1419,25 @@ document.addEventListener('DOMContentLoaded', function() {
                                                      'relatedCourseItemType' => 'webinar',
                                                      'relatedCourses' => $webinar->relatedCourses
                                                 ])
-        
+
                                             <section class="mt-30">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h2 class="section-title after-line">{{ trans('public.faq') }}</h2>
                                                     <button id="webinarAddFAQ" type="button" class="btn btn-primary btn-sm mt-3">{{ trans('public.add_faq') }}</button>
                                                 </div>
-        
+
                                                 <div class="row mt-10">
                                                     <div class="col-12">
                                                         @if(!empty($faqs) and !$faqs->isEmpty())
                                                             <div class="table-responsive">
                                                                 <table class="table table-striped text-center font-14">
-        
+
                                                                     <tr>
                                                                         <th>{{ trans('public.title') }}</th>
                                                                         <th>{{ trans('public.answer') }}</th>
                                                                         <th></th>
                                                                     </tr>
-        
+
                                                                     @foreach($faqs as $faq)
                                                                         <tr>
                                                                             <th>{{ $faq->title }}</th>
@@ -1445,17 +1445,17 @@ document.addEventListener('DOMContentLoaded', function() {
                                                                                 <button type="button" class="js-get-faq-description btn btn-sm btn-gray200">{{ trans('public.view') }}</button>
                                                                                 <input type="hidden" value="{{ $faq->answer }}"/>
                                                                             </td>
-        
+
                                                                             <td class="text-right">
                                                                                 <button type="button" data-faq-id="{{ $faq->id }}" data-webinar-id="{{ !empty($webinar) ? $webinar->id : '' }}" class="edit-faq btn-transparent text-primary mt-1" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                                                                     <i class="fa fa-edit"></i>
                                                                                 </button>
-        
+
                                                                                 @include('admin.includes.delete_button',['url' => getAdminPanelUrl().'/faqs/'. $faq->id .'/delete', 'btnClass' => ' mt-1'])
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
-        
+
                                                                 </table>
                                                             </div>
                                                         @else
@@ -1476,47 +1476,47 @@ document.addEventListener('DOMContentLoaded', function() {
                                                         <button id="add_new_{{ $webinarExtraDescriptionType }}" type="button" class="btn btn-primary btn-sm mt-3">{{ trans('update.add_'.$webinarExtraDescriptionType) }}</button>
                                                     </div>
                                                     @endif
-        
+
                                                     @php
                                                         $webinarExtraDescriptionValues = $webinar->webinarExtraDescription->where('type',$webinarExtraDescriptionType);
                                                     @endphp
-        
+
                                                     <div class="row mt-10">
                                                         <div class="col-12">
                                                             @if(!empty($webinarExtraDescriptionValues) and count($webinarExtraDescriptionValues))
                                                               @if($webinarExtraDescriptionType!='company_logos')
                                                                 <div class="table-responsive">
                                                                     <table class="table table-striped text-center font-14">
-        
+
                                                                       <tr>
-                                                                          
+
                                                                                 <th>{{ trans('public.title') }}</th>
-                                                                    
+
                                                                             <th></th>
                                                                         </tr>
-        
+
                                                                         @foreach($webinarExtraDescriptionValues as $extraDescription)
                                                                             <tr>
-                                                                               
+
                                                                                     <td>{{ $extraDescription->value }}
                                                                                     <br>
                                                                                     @if($extraDescription->attached)
                                                                                     <a href="/{{$extraDescription->attached}}" target=_blank>{{ __('public.showfile')}}  </a>
                                                                                     @endif
-                                                                                    
+
                                                                                     </td>
-                                                                                
-        
+
+
                                                                                 <td class="text-right">
                                                                                     <button type="button" data-item-id="{{ $extraDescription->id }}" data-webinar-id="{{ !empty($webinar) ? $webinar->id : '' }}" class="edit-extraDescription btn-transparent text-primary mt-1" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                                                                         <i class="fa fa-edit"></i>
                                                                                     </button>
-        
+
                                                                                     @include('admin.includes.delete_button',['url' => getAdminPanelUrl().'/webinar-extra-description/'. $extraDescription->id .'/delete', 'btnClass' => ' mt-1'])
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach
-        
+
                                                                     </table>
                                                                 </div>
                                                                 @endif
@@ -1531,7 +1531,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                     </div>
                                         </section>
                                             @endforeach
-        
+
                                             <section class="mt-30">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h2 class="section-title after-line">{{ trans('public.quiz_certificate') }}</h2>
@@ -1542,7 +1542,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                         @if(!empty($webinarQuizzes) and !$webinarQuizzes->isEmpty())
                                                             <div class="table-responsive">
                                                                 <table class="table table-striped text-center font-14">
-        
+
                                                                     <tr>
                                                                         <th>{{ trans('public.title') }}</th>
                                                                         <th>{{ trans('public.questions') }}</th>
@@ -1551,7 +1551,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                                         <th>{{ trans('public.certificate') }}</th>
                                                                         <th></th>
                                                                     </tr>
-        
+
                                                                     @foreach($webinarQuizzes as $webinarQuiz)
                                                                         <tr>
                                                                             <th>{{ $webinarQuiz->title }}</th>
@@ -1563,12 +1563,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                                                                 <button type="button" data-webinar-quiz-id="{{ $webinarQuiz->id }}" data-webinar-id="{{ !empty($webinar) ? $webinar->id : '' }}" class="edit-webinar-quiz btn-transparent text-primary mt-1" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                                                                     <i class="fa fa-edit"></i>
                                                                                 </button>
-        
+
                                                                                 @include('admin.includes.delete_button',['url' => getAdminPanelUrl().'/webinar-quiz/'. $webinarQuiz->id .'/delete', 'btnClass' => ' mt-1'])
                                                                             </td>
                                                                             @endforeach
                                                                         </tr>
-        
+
                                                                 </table>
                                                             </div>
                                                         @else
@@ -1679,7 +1679,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
    <script>
-  
+
 
   "use strict";
 
@@ -1706,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return text;
   }
 
- 
+
   $('body').on('click', '.close-swl', function (e) {
     e.preventDefault();
     Swal.close();
@@ -1768,7 +1768,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  
+
   $('body').on('click', '#webinarAddTicket', function (e) {
     e.preventDefault();
     var add_ticket_modal = '<div id="addTicketModal">';
@@ -2005,7 +2005,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   window.handleWebinarItemForm = function (form, $this) {
     var data = serializeObjectByTag(form);
     var action = form.attr('data-action');
@@ -2030,7 +2030,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: currentUrl,
                 method: 'GET',
                 cache: false,
-               
+
                 success: function(response) {
                     // Extract the chapter accordion content from the response
                     var newContent = $(response).find('#chapterAccordion').html();
@@ -2063,7 +2063,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }).fail(function (err) {
         $this.removeClass('loadingbar primary').prop('disabled', false);
         var errors = err.responseJSON;
-        
+
         if (errors && errors.status === 'zoom_token_invalid') {
             Swal.fire({
                 icon: 'error',
@@ -2073,7 +2073,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 timer: 2000
             });
         }
-        
+
         if (errors && errors.errors) {
             Object.keys(errors.errors).forEach(function (key) {
                 var error = errors.errors[key];
@@ -2092,12 +2092,12 @@ document.addEventListener('DOMContentLoaded', function() {
 window.handleWebinarItemForm1 = function (form, $this) {
     // Create FormData object manually since we're using a div instead of form
     var formData = new FormData();
-    
+
     // Add all input values to FormData
     form.find('input, textarea, select').each(function() {
         var input = $(this);
         var name = input.attr('name');
-        
+
         if (input.attr('type') === 'file') {
             // Handle file inputs
             var files = input[0].files;
@@ -2111,7 +2111,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     });
 
     var action = form.attr('data-action');
-    
+
     $this.addClass('loadingbar primary').prop('disabled', true);
     form.find('input').removeClass('is-invalid');
     form.find('textarea').removeClass('is-invalid');
@@ -2576,7 +2576,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     $(this).closest('.js-ajax-attachments').remove();
   });
 
- 
+
 
   $('body').on('click', '.cancel-accordion', function (e) {
     e.preventDefault();
@@ -2611,7 +2611,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     handleWebinarItemForm(form, $this);
   });
 
- 
+
   $('body').on('click', '#webinarAddFAQ', function (e) {
     e.preventDefault();
     var add_faq_modal = '<div id="addFAQsModal">';
@@ -2634,7 +2634,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     handleWebinarItemForm(form, $this);
   });
 
- 
+
   $('body').on('click', '#add_new_learning_materials', function (e) {
     e.preventDefault();
     var key = randomString();
@@ -2764,7 +2764,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     });
   }
 
-  
+
   $('body').on('click', '#webinarAddQuiz', function (e) {
     var _this = this;
     e.preventDefault();
@@ -2796,7 +2796,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     handleWebinarItemForm(form, $this);
   });
 
- 
+
   function editTicket($this) {
     var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
     var ticket_id = $this.attr('data-ticket-id');
@@ -2859,7 +2859,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     editTicket($this, locale);
   });
 
-  
+
 
   function editChapter($this) {
     var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -2923,7 +2923,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     editChapter($this, locale);
   });
 
-  
+
 
   function editSession($this) {
     var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -3166,7 +3166,7 @@ window.handleWebinarItemForm1 = function (form, $this) {
     });
   });
 
-  
+
   $('body').on('click', '.edit-webinar-quiz', function (e) {
     e.preventDefault();
     var $this = $(this);

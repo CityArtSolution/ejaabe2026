@@ -4,6 +4,22 @@
     <link rel="stylesheet" href="/assets/default/vendors/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="/assets/default/vendors/owl-carousel2/owl.carousel.min.css">
     <style>
+        .btn-view-all {
+            font-size: 14px;
+            font-weight: 500;
+            color: #185FA5;
+            padding: 9px 18px;
+            border-radius: 8px;
+            border: 1.5px solid #185FA5;
+            text-decoration: none;
+            transition: background 0.15s, color 0.15s;
+            white-space: nowrap;
+        }
+
+        .btn-view-all:hover {
+            background: #185FA5;
+            color: #fff;
+        }
         .hero-slider .flickity-page-dots .dot {
             width: 30px;
             height: 4px;
@@ -585,6 +601,7 @@
                 </div>
             </section>
         @endif
+
         @if($homeSection->name == \App\Models\HomeSection::$latest_bundles and !empty($latestBundles) and !$latestBundles->isEmpty())
             <section class="home-sections home-sections-swiper container">
                 <div class="d-flex justify-content-between ">
@@ -655,7 +672,13 @@
                     </div>
 
                     <a href="/en/canada/classes?sort=newest"
-                       class="btn btn-border-white">{{ trans('home.view_all') }}</a>
+                       class="btn-view-all d-inline-flex align-items-center gap-2">
+                        {{ trans('home.view_all') }}
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                                  stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                 </div>
 
                 <div class="mt-10 position-relative">
