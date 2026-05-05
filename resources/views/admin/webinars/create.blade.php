@@ -447,7 +447,7 @@
                                     <div class="row">
                                            <div class="col-12">
                                             <div class="form-group mt-15">
-                                                <label class="input-label">{{ trans('webinars.description') }}<span style="color:red">*</span></label>
+                                                <label class="input-label">{{ trans('webinars.description') }}</label>
                                                 <textarea id="summernote" name="description" class="form-control @error('description')  is-invalid @enderror" placeholder="{{ trans('forms.webinar_description_placeholder') }}">{!! !empty($webinar) ? $webinar->description : old('description')  !!}</textarea>
                                                 @error('description')
                                                 <div class="invalid-feedback">

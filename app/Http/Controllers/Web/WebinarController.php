@@ -44,7 +44,7 @@ class WebinarController extends Controller
     {
         $this->xapiService = $xapiService;
     }
-    
+
     public function saveProgress(Request $request)
     {
     $data = json_decode($request->getContent(), true);
@@ -132,9 +132,9 @@ class WebinarController extends Controller
         if (!file_exists($filePath)) {
             abort(404, 'File not found');
         }
-    
+
         $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-    
+
         $mimeTypes = [
             'css'  => 'text/css',
             'js'   => 'application/javascript',
@@ -148,9 +148,9 @@ class WebinarController extends Controller
             'gif'  => 'image/gif',
             'svg'  => 'image/svg+xml',
         ];
-    
+
         $mimeType = $mimeTypes[$extension] ?? \Illuminate\Support\Facades\File::mimeType($filePath);
-    
+
         return response()->file($filePath, [
             'Content-Type' => $mimeType
         ]);
@@ -160,7 +160,7 @@ class WebinarController extends Controller
     {
     $user = $request->user();
     $webinarId = $request->input('webinar_id');
-        
+
         $quiz = Quiz::where('webinar_id', $webinarId)->first();
 
         if (!$quiz) {
@@ -179,7 +179,7 @@ class WebinarController extends Controller
                 'branch_id' => $user->branch_id ?? null,
             ]);
         }
-        
+
         $newQuizStart = QuizzesResult::create([
             'quiz_id' => $quiz->id,
             'user_id' => $user->id,
@@ -188,7 +188,7 @@ class WebinarController extends Controller
             'status' => 'waiting',
             'created_at' => time()
         ]);
-        
+
         $session = ScormSession::create([
             'user_id' => $user->id,
             'webinar_id' => $webinarId ,
@@ -197,10 +197,10 @@ class WebinarController extends Controller
             'initialized_at' => now(),
             'quiz_result_id' => $newQuizStart->id,
             'branch_id' => auth()->user()->branch_id,
-            
+
         ]);
 
-        
+
     return response()->json(['result' => 'true', 'session_id' => $session->session_id]);
     }
 
@@ -269,9 +269,9 @@ class WebinarController extends Controller
 
         $session->last_interaction_at = now();
         $session->save();
-        
+
         $quizResult = QuizzesResult::where('id', $session->quiz_result_id)->where('user_id', $session->user_id)->first();
-        
+
         $quizResult->update([
             'results' => json_encode($session->data),
             'user_grade' => $score,
@@ -288,7 +288,7 @@ class WebinarController extends Controller
     {
         return response()->json(['error' => 0]);
     }
-    
+
     public function course($slug, $justReturnData = false)
     {
         $user = null;
@@ -296,8 +296,8 @@ class WebinarController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
         }
-        
-    
+
+
 
 
         if (!$justReturnData) {
@@ -306,7 +306,7 @@ class WebinarController extends Controller
                 return $contentLimitation;
             }
         }
-        
+
 
                 $course = Webinar::where('slug', $slug)
                 ->with([
@@ -605,7 +605,7 @@ class WebinarController extends Controller
 
         return view('web.default.course.index', $data);
     }
-    
+
     public function course_canada($slug, $justReturnData = false)
     {
         $user = null;
@@ -613,14 +613,14 @@ class WebinarController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
         }
-        
+
         if (!$justReturnData) {
             $contentLimitation = $this->checkContentLimitation($user, true);
             if ($contentLimitation != "ok") {
                 return $contentLimitation;
             }
         }
-        
+
 
                 $course = Webinar::where('slug', $slug)
                 ->with([
@@ -926,14 +926,14 @@ class WebinarController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
         }
-        
+
         if (!$justReturnData) {
             $contentLimitation = $this->checkContentLimitation($user, true);
             if ($contentLimitation != "ok") {
                 return $contentLimitation;
             }
         }
-        
+
 
                 $course = Webinar::where('slug', $slug)
                 ->with([
@@ -1239,14 +1239,14 @@ class WebinarController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
         }
-        
+
         if (!$justReturnData) {
             $contentLimitation = $this->checkContentLimitation($user, true);
             if ($contentLimitation != "ok") {
                 return $contentLimitation;
             }
         }
-        
+
 
                 $course = Webinar::where('slug', $slug)
                 ->with([
@@ -1851,7 +1851,7 @@ class WebinarController extends Controller
         if ($justReturnData) {
             return $data;
         }
-      
+
 
             return view('web.default.course.textcourse', $data);
     }
@@ -2162,7 +2162,7 @@ class WebinarController extends Controller
         if ($justReturnData) {
             return $data;
         }
-      
+
 
             return view('web.default.course.textcourseCanada', $data);
     }
@@ -2472,7 +2472,7 @@ class WebinarController extends Controller
         if ($justReturnData) {
             return $data;
         }
-      
+
 
             return view('web.default.course.textcourseegy', $data);
     }
@@ -2782,7 +2782,7 @@ class WebinarController extends Controller
         if ($justReturnData) {
             return $data;
         }
-      
+
 
             return view('web.default.course.textcourseuae', $data);
     }
@@ -2912,24 +2912,24 @@ class WebinarController extends Controller
     public function showHtmlFile($slug, $file_id)
     {
         $webinar = Webinar::where('slug', $slug)->where('status', 'active')->first();
-    
+
         if (!empty($webinar) && $this->checkCanAccessToPrivateCourse($webinar)) {
             $file = File::where('webinar_id', $webinar->id)->where('id', $file_id)->first();
-    
+
             if (!empty($file)) {
                 $canAccess = $file->accessibility !== 'paid' || $webinar->checkUserHasBought();
-    
+
                 if ($canAccess) {
                     $filePath = $file->interactive_file_path;
-    
+
                     if (LaravelFile::exists(public_path($filePath))) {
                         $progressData = null;
                         $progressFile = "scorm_progress/user_" . auth()->id() . "_file_" . $file_id . ".json";
-                        
+
                         if (Storage::exists($progressFile)) {
                             $progressData = json_decode(Storage::get($progressFile), true);
                         }
-    
+
                         return view('web.default.course.learningPage.interactive_file', [
                             'pageTitle' => $file->title,
                             'path' => url($filePath),
@@ -2938,7 +2938,7 @@ class WebinarController extends Controller
                             'progressData' => $progressData
                         ]);
                     }
-    
+
                     abort(404);
                 } else {
                     return back()->with(['toast' => [
@@ -2949,7 +2949,7 @@ class WebinarController extends Controller
                 }
             }
         }
-    
+
         abort(403);
 }
 
@@ -3031,7 +3031,7 @@ class WebinarController extends Controller
                     if ($file->interactive_type === 'custom' && !empty($file->interactive_file_path)) {
                         $progressData = null;
                         $progressFile = "scorm_progress/user_" . auth()->id() . "_file_" . $file_id . ".json";
-                        
+
                         if (Storage::exists($progressFile)) {
                             $progressData = json_decode(Storage::get($progressFile), true);
                         }
@@ -3290,7 +3290,7 @@ class WebinarController extends Controller
             'code' => 401
         ], 200);
     }
-    
+
     public function learningStatus(Request $request, $id)
     {
         if (auth()->check()) {
@@ -3299,7 +3299,7 @@ class WebinarController extends Controller
             $course = Webinar::where('id', $id)->first();
             if (!empty($course) and $course->checkUserHasBought($user)) {
                 $data = $request->all();
-                
+
                 $item = $data['item'];
                 $item_id = $data['item_id'];
                 $status = $data['status'];
@@ -3308,12 +3308,12 @@ class WebinarController extends Controller
 
 /*if($item=='text_lesson_id'){
       $textLesson = TextLesson::where('webinar_id', $course->id)->where('id', $item_id)->first();
-      
+
       dd($textLesson);
-    
+
 }*/
 
-              
+
 $agent = $_SERVER['HTTP_USER_AGENT'];
 
               $browserInfo = $this->xapiService->getBrowserInfo($agent);
@@ -3335,7 +3335,7 @@ $agent = $_SERVER['HTTP_USER_AGENT'];
                          $fileData = \App\Models\File::where('webinar_id', $course->id)->where('id', $item_id)->first();
 
                 if($percent>=100){
-                
+
              $params = [
      'name' => $user->full_name,
     'email' => $user->email,
@@ -3352,15 +3352,15 @@ $agent = $_SERVER['HTTP_USER_AGENT'];
       'course_nameAr' => $course->title,
      'course_nameEn' =>$course->getTranslation('title','en')->title ?? $course->title,
      'type' => 'https://w3id.org/xapi/cmi5/activitytype/course',
-     
+
 ];
 
 
 }
 
 else{
-                
-   
+
+
                 $params = [
      'name' => $user->full_name,
     'email' => $user->email,
@@ -3377,7 +3377,7 @@ else{
       'course_nameAr' => $course->title,
      'course_nameEn' =>$course->getTranslation('title','en')->title ?? $course->title,
      'type' => 'https://w3id.org/xapi/cmi5/activitytype/course',
-     
+
 ];
 
 }
@@ -3402,8 +3402,8 @@ $this->xapiService->createCompletedStatement($params);
 
 $isCompleted = false;
 if($percent>=100){
-    
-    $isCompleted=true; 
+
+    $isCompleted=true;
 }
 
  $percent = round($percent /100,2);
@@ -3411,10 +3411,10 @@ $this->xapiService->createProgressStatement($params, $percent, $isCompleted);
 
 
 
-                
-                }          
-                
-                
+
+                }
+
+
 
                 return response()->json([], 200);
             }
@@ -3431,22 +3431,22 @@ $this->xapiService->createProgressStatement($params, $percent, $isCompleted);
             $course = Webinar::where('id', $id)->first();
             if (!empty($course) and $course->checkUserHasBought($user)) {
                 $data = $request->all();
-                
+
                 $item = $data['item'];
                 $item_id = $data['item_id'];
                 $status = $data['status'];
 //dd($course->getProgress(true));
 if($item=='file_id'){
-    
+
      $fileData = \App\Models\File::where('webinar_id', $course->id)->where('id', $item_id)->first();
-      
-      //dd($fileData);  
+
+      //dd($fileData);
 }
 if($item=='text_lesson_id'){
       $textLesson = TextLesson::where('webinar_id', $course->id)->where('id', $item_id)->first();
-      
+
       dd($textLesson);
-    
+
 }
 
                 $item = $data['item'];
@@ -3467,8 +3467,8 @@ if($item=='text_lesson_id'){
 
                 // check for certificate
                 $course->makeCertificateForUser($user);
-                
-                
+
+
                 $params = [
     'name' => 'John Doe',
     'email' => 'john.doe@example.com',
@@ -3501,7 +3501,7 @@ if($item=='text_lesson_id'){
                     'instractor_name' =>$course->teacher->full_name,
                     'instractor_email' => $quiz->webinar->teacher->email,
                     'parent_url' => $course->getUrl(),
-                   
+
                 ];
 
 $params = [
@@ -3536,13 +3536,13 @@ $params = [
                     'instractor_name' =>$course->teacher->full_name,
                     'instractor_email' => $quiz->webinar->teacher->email,
                     'parent_url' => $course->getUrl(),
-                   
+
                 ];
 //$this->xapiService->createCompletedStatement($params);
-                
-                
-                
-                
+
+
+
+
 
                 return response()->json([], 200);
             }
@@ -3660,7 +3660,7 @@ $params = [
 
         abort(404);
     }
-    
+
      //الخطة السنوية للبرامج التدريبية
     public function cet_courses(Request $request)
     {
@@ -3679,7 +3679,7 @@ if (isset($request->categoryID) && !empty($request->categoryID)) {
 if ($request->has('ndays') && $request->ndays) {
     $webinarsQuery->whereHas('translations', function($query) use ($request) {
        // $query->whereRaw('JSON_EXTRACT(details, "$.ndays") = ?', [$request->ndays]);
-        
+
         $query->where('details', 'LIKE', '%ndays":"' . $request->ndays . '"%');
     });
 }
@@ -3696,7 +3696,7 @@ if ($request->has('course_title') && $request->course_title) {
 
 
 
-     
+
         $webinars = $webinarsQuery->paginate(10);
 
         $seoSettings = getSeoMetas('courses');
@@ -3704,7 +3704,7 @@ if ($request->has('course_title') && $request->course_title) {
         $pageDescription = $seoSettings['description'] ?? '';
         $pageRobot = getPageRobot('classes');
   // Get ALL possible ndays values (separate query)
-  
+
    $allNdaysValues =Webinar::where('status', 'active')
     ->where('private', false)
     ->where('type', 'text_lesson')->get();
@@ -3713,7 +3713,7 @@ if ($request->has('course_title') && $request->course_title) {
         return is_array($details) ? array_column($details, 'ndays') : [];
     });
 
-   
+
     $uniqueNdDays = $ndaysValues->unique()->sort()->values();
         $data = [
             'pageTitle' => $pageTitle,
@@ -3723,13 +3723,13 @@ if ($request->has('course_title') && $request->course_title) {
             'coursesCount' => $webinars->total(),
             'uniqueNdDays'=>$uniqueNdDays
         ];
-        
-        
+
+
 
         return view(getTemplate() . '.pages.cet_courses', $data);
 
 
-    
+
     }
      //الخطة السنوية للبرامج التدريبية كندا
     public function cet_courses_canada(Request $request)
@@ -3760,7 +3760,7 @@ if ($request->has('course_title') && $request->course_title) {
 
         // Get the results
         $webinars = $webinarsQuery->paginate(10)->withQueryString();
-     
+
         $webinars = $webinarsQuery->paginate(10);
 
         $seoSettings = getSeoMetas('courses');
@@ -3768,14 +3768,14 @@ if ($request->has('course_title') && $request->course_title) {
         $pageDescription = $seoSettings['description'] ?? '';
         $pageRobot = getPageRobot('classes');
         // Get ALL possible ndays values (separate query)
-          
+
         $allNdaysValues =Webinar::where('status', 'active')->where('private', false)->where('branch_id', 3)->where('type', 'text_lesson')->get();
-           
+
         $ndaysValues = $allNdaysValues->flatMap(function ($course) {
             $details = json_decode($course->details, true);
             return is_array($details) ? array_column($details, 'ndays') : [];
         });
-   
+
         $uniqueNdDays = $ndaysValues->unique()->sort()->values();
         $data = [
             'pageTitle' => $pageTitle,
@@ -3785,7 +3785,7 @@ if ($request->has('course_title') && $request->course_title) {
             'coursesCount' => $webinars->total(),
             'uniqueNdDays'=>$uniqueNdDays
         ];
-        
+
         return view(getTemplate() . '.pages.canada.cet_courses', $data);
     }
     public function cet_courses_egy(Request $request)
@@ -3816,7 +3816,7 @@ if ($request->has('course_title') && $request->course_title) {
 
         // Get the results
         $webinars = $webinarsQuery->paginate(10)->withQueryString();
-     
+
         $webinars = $webinarsQuery->paginate(10);
 
         $seoSettings = getSeoMetas('courses');
@@ -3824,14 +3824,14 @@ if ($request->has('course_title') && $request->course_title) {
         $pageDescription = $seoSettings['description'] ?? '';
         $pageRobot = getPageRobot('classes');
         // Get ALL possible ndays values (separate query)
-          
+
         $allNdaysValues =Webinar::where('status', 'active')->where('private', false)->where('branch_id', 4)->where('type', 'text_lesson')->get();
-           
+
         $ndaysValues = $allNdaysValues->flatMap(function ($course) {
             $details = json_decode($course->details, true);
             return is_array($details) ? array_column($details, 'ndays') : [];
         });
-   
+
         $uniqueNdDays = $ndaysValues->unique()->sort()->values();
         $data = [
             'pageTitle' => $pageTitle,
@@ -3841,7 +3841,7 @@ if ($request->has('course_title') && $request->course_title) {
             'coursesCount' => $webinars->total(),
             'uniqueNdDays'=>$uniqueNdDays
         ];
-        
+
         return view(getTemplate() . '.pages.egypt.cet_courses', $data);
     }
     public function cet_courses_uae(Request $request)
@@ -3872,7 +3872,7 @@ if ($request->has('course_title') && $request->course_title) {
 
         // Get the results
         $webinars = $webinarsQuery->paginate(10)->withQueryString();
-     
+
         $webinars = $webinarsQuery->paginate(10);
 
         $seoSettings = getSeoMetas('courses');
@@ -3880,14 +3880,14 @@ if ($request->has('course_title') && $request->course_title) {
         $pageDescription = $seoSettings['description'] ?? '';
         $pageRobot = getPageRobot('classes');
         // Get ALL possible ndays values (separate query)
-          
+
         $allNdaysValues =Webinar::where('status', 'active')->where('private', false)->where('branch_id', 2)->where('type', 'text_lesson')->get();
-           
+
         $ndaysValues = $allNdaysValues->flatMap(function ($course) {
             $details = json_decode($course->details, true);
             return is_array($details) ? array_column($details, 'ndays') : [];
         });
-   
+
         $uniqueNdDays = $ndaysValues->unique()->sort()->values();
         $data = [
             'pageTitle' => $pageTitle,
@@ -3897,12 +3897,12 @@ if ($request->has('course_title') && $request->course_title) {
             'coursesCount' => $webinars->total(),
             'uniqueNdDays'=>$uniqueNdDays
         ];
-        
+
         return view(getTemplate() . '.pages.uae.cet_courses', $data);
     }
-    
+
     public function requestCourse(Request $request){
-        
+
           $course= Webinar::where('status', 'active')
     ->where('private', false)
     ->where('type','course')->where('slug',$request->slug)->first();
@@ -3919,27 +3919,27 @@ if ($request->has('course_title') && $request->course_title) {
         ];
             return view(getTemplate() . '.pages.request_course', $data);
 
-        
-        
+
+
     }
-    
+
     public function requestConsulting(Request $request)
     {
-        
-       
+
+
         $pageTitle = trans('public.Request Consulting');
         $pageDescription ='Request Consulting';
-       
+
         $data = [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
-           
-            
+
+
         ];
             return view(getTemplate() . '.pages.request_consulting', $data);
 
     }
-    
+
     public function storeRequestCourse(Request $request)
     {
         // Validation rules
@@ -3984,14 +3984,14 @@ if ($request->has('course_title') && $request->course_title) {
         } catch (\Exception $e) {
             // Log the error
             \Log::error('Course Request Error: ' . $e->getMessage());
-            
+
             // Flash error message
             return redirect()->back()
                            ->with('error', __('public.Something went wrong. Please try again later'))
                            ->withInput();
         }
     }
-    
+
     public function storeRequestConsulting(Request $request)
     {
         // Validation rules
@@ -4000,7 +4000,7 @@ if ($request->has('course_title') && $request->course_title) {
             'email' => 'required|email|max:255',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'type' => 'required|in:consulting',
-             
+
 
             'description' => 'nullable',
         ], [
@@ -4025,7 +4025,7 @@ if ($request->has('course_title') && $request->course_title) {
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'type' => $request->type,
-               
+
 
                 'description' => $request->description,
             ]);
@@ -4036,7 +4036,7 @@ if ($request->has('course_title') && $request->course_title) {
         } catch (\Exception $e) {
             // Log the error
             \Log::error('consulting Request Error: ' . $e->getMessage());
-            
+
             // Flash error message
             return redirect()->back()
                            ->with('error', __('public.Something went wrong. Please try again later'))

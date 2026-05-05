@@ -95,21 +95,10 @@
         </div>
     </div>
 @else
-@php
-    $isRtl = app()->getLocale() === 'ar';
-@endphp
-
-@if($isRtl)
-<ul style="width:225px">
-    <li style="float: left;">
-@else
-<ul style="width:149px">
-    <li style="float: right;">
-@endif
         <style>
             .btn-custom-link {
                 display: inline-block;
-                padding: 10px 20px;
+                padding: 9px 16px;
                 font-size: 14px;
                 font-weight: 600;
                 color: #0d3b66; /* أزرق غامق */
@@ -118,6 +107,8 @@
                 border-radius: 8px;
                 text-decoration: none;
                 transition: all 0.3s ease;
+                text-align: center;
+                white-space: nowrap;
                 margin: 0 5px; /* مسافة أفقية بين الأزرار */
             }
         
@@ -128,17 +119,44 @@
                 transform: translateY(-2px);
             }
         
-            .auth-buttons {
+            .auth-buttons-canada {
                 display: flex;
                 gap: 10px; /* مسافة بين الزرارين */
                 align-items: center;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+
+            .auth-buttons-canada .btn-custom-link {
+                margin: 0;
+            }
+
+            @media (max-width: 575.98px) {
+                .auth-buttons-canada {
+                    width: 100%;
+                    justify-content: center;
+                    gap: 6px;
+                }
+
+                .auth-buttons-canada .btn-custom-link {
+                    flex: 1 1 calc(50% - 6px);
+                    max-width: 150px;
+                    min-width: 0;
+                    padding: 8px 10px;
+                    font-size: 13px;
+                }
+            }
+
+            @media (max-width: 360px) {
+                .auth-buttons-canada .btn-custom-link {
+                    padding: 7px 8px;
+                    font-size: 12px;
+                }
             }
         </style>
         
-        <div class="auth-buttons">
+        <div class="auth-buttons-canada">
             <a href="/canada/login" class="btn-custom-link">{{ trans('auth.login') }}</a>
             <a href="/canada/register" class="btn-custom-link">{{ trans('auth.register') }}</a>
         </div>
-    </li>
-</ul>
 @endif

@@ -539,9 +539,10 @@ foreach ($originalEvalCategories as $cat) {
         'type' => 'required|in:webinar,course,text_lesson,exam,eval,offline',
         'title' => 'required|max:255',
         'slug' => 'max:255|unique:webinars,slug,' . $webinar->id,
-        'thumbnail' => 'required_unless:type,exam,eval',
+        'thumbnail' => 'nullable',
         'scorm' => ['nullable', 'file', 'mimes:zip'],
-        'description' => 'required_unless:type,exam,eval',
+        'description' => 'nullable',
+        'approval_logo' => 'nullable',
         'teacher_id' => 'required|exists:users,id',
         'category_id' => 'required',
         'duration' => 'required_unless:type,exam,eval|numeric',
@@ -553,6 +554,9 @@ foreach ($originalEvalCategories as $cat) {
     ]);
 
     $data = $request->all();
+    $data['thumbnail'] = $data['thumbnail'] ?? null;
+    $data['description'] = $data['description'] ?? null;
+    $data['approval_logo'] = !empty($data['approval_logo']) ? $data['approval_logo'] : null;
 
     // ---------- لو فيه SCORM جديد ----------
     if ($request->hasFile('scorm')) {
@@ -657,7 +661,7 @@ foreach ($originalEvalCategories as $cat) {
     $data['organization_price'] = !empty($data['organization_price']) ? convertPriceToDefaultCurrency($data['organization_price']) : null;
 
     if (empty($data['image_cover'])) {
-        $data['image_cover'] = $data['thumbnail'];
+        $data['image_cover'] = $data['thumbnail'] ?? null;
     }
 
     $webinar->update([
@@ -945,9 +949,10 @@ $query=$query->byBranch();
             'type' => 'required|in:webinar,course,text_lesson,exam,eval,offline',
             'title' => 'required|max:255',
             'slug' => 'max:255|unique:webinars,slug',
-            'thumbnail' => 'required_unless:type,exam,eval',
+            'thumbnail' => 'nullable',
           //  'image_cover' => 'required_unless:type,exam,eval',
-            'description' => 'required_unless:type,exam,eval',
+            'description' => 'nullable',
+            'approval_logo' => 'nullable',
             'teacher_id' => 'required|exists:users,id',
             'category_id' => 'required',
             'duration' => 'required_unless:type,exam,eval|numeric',
@@ -960,6 +965,10 @@ $query=$query->byBranch();
 
 
         $data = $request->all();
+        $data['thumbnail'] = $data['thumbnail'] ?? null;
+        $data['description'] = $data['description'] ?? null;
+        $data['approval_logo'] = !empty($data['approval_logo']) ? $data['approval_logo'] : null;
+
         //exam
         if ($data['type'] === 'exam') {
             $data['thumbnail'] = $data['thumbnail'] ?? 'default_thumbnail.jpg';
@@ -1021,7 +1030,7 @@ $query=$query->byBranch();
         $data['organization_price'] = !empty($data['organization_price']) ? convertPriceToDefaultCurrency($data['organization_price']) : null;
         if(empty($data['image_cover'])){
 
-             $data['image_cover']=$data['thumbnail'];
+             $data['image_cover']=$data['thumbnail'] ?? null;
         }
         $webinar = Webinar::create([
             'type' => $data['type'],
@@ -1195,9 +1204,10 @@ $query=$query->byBranch();
             'type' => 'required|in:webinar,course,text_lesson,exam,eval,offline',
             'title' => 'required|max:255',
             'slug' => 'max:255|unique:webinars,slug',
-            'thumbnail' => 'required_unless:type,exam,eval',
+            'thumbnail' => 'nullable',
             'scorm' => ['required', 'file', 'mimes:zip'],
-            'description' => 'required_unless:type,exam,eval',
+            'description' => 'nullable',
+            'approval_logo' => 'nullable',
             'teacher_id' => 'required|exists:users,id',
             'category_id' => 'required',
             'duration' => 'required_unless:type,exam,eval|numeric',
@@ -1210,6 +1220,9 @@ $query=$query->byBranch();
 
 
         $data = $request->all();
+        $data['thumbnail'] = $data['thumbnail'] ?? null;
+        $data['description'] = $data['description'] ?? null;
+        $data['approval_logo'] = !empty($data['approval_logo']) ? $data['approval_logo'] : null;
 
         $uploadedFile = $request->file('scorm');
         $originalName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -1360,7 +1373,7 @@ $query=$query->byBranch();
 
         if(empty($data['image_cover'])){
 
-             $data['image_cover']=$data['thumbnail'];
+             $data['image_cover']=$data['thumbnail'] ?? null;
         }
 
         $webinar = Webinar::create([
@@ -1780,15 +1793,15 @@ if($webinar->type=='eval'){
         $reject = (!empty($data['draft']) and $data['draft'] == 'reject');
         $publish = (!empty($data['draft']) and $data['draft'] == 'publish');
 
-
         $rules = [
         'type' => 'required|in:webinar,course,text_lesson,exam,eval,offline',
 
             'title' => 'required|max:255',
             'slug' => 'max:255|unique:webinars,slug,' . $webinar->id,
-            'thumbnail' => 'required_unless:type,exam',
+            'thumbnail' => 'nullable',
            // 'image_cover' => 'required_unless:type,exam',
-            'description' => 'required_unless:type,exam',
+            'description' => 'nullable',
+            'approval_logo' => 'nullable',
             'teacher_id' => 'required|exists:users,id',
             'category_id' => 'required',
             'price' => 'nullable|numeric|min:0',
@@ -1805,6 +1818,9 @@ if($webinar->type=='eval'){
         }
 
         $this->validate($request, $rules);
+        $data['thumbnail'] = $data['thumbnail'] ?? null;
+        $data['description'] = $data['description'] ?? null;
+        $data['approval_logo'] = !empty($data['approval_logo']) ? $data['approval_logo'] : null;
 
         if ($webinar->isExam()) {
             $data['description'] = $data['description'] ?? 'No description provided.';
@@ -1937,7 +1953,7 @@ if($webinar->type=='eval'){
 
         if(empty($data['image_cover'])){
 
-            $data['image_cover']= $data['thumbnail'];
+            $data['image_cover']= $data['thumbnail'] ?? null;
         }
         $webinar->update([
             'slug' => $data['slug'],
@@ -1948,7 +1964,7 @@ if($webinar->type=='eval'){
             'image_cover' => $data['image_cover'] ?? $data['thumbnail'],
 
             'video_demo' => $data['video_demo'] ?? $webinar->video_demo,
-            'approval_logo' => $data['approval_logo'] ?? $webinar->approval_logo,
+            'approval_logo' => $data['approval_logo'],
             'video_demo_source' => isset($data['video_demo']) && $data['video_demo']  ? (isset($data['video_demo_source']) ? $data['video_demo_source'] : null) : null,
             'capacity' => $data['capacity'] ?? null,
             'sales_count_number' => $data['sales_count_number'] ?? null,
