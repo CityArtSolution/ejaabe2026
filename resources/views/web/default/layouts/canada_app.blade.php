@@ -5,7 +5,7 @@
     @include('web.default.includes.metas')
     <meta name="robots" content="noindex, nofollow">
 
-    <title>{{ $pageTitle ?? '' }}{{ !empty($generalSettings['site_name']) ? (' - '.$generalSettings['site_name']) : '' }}</title>
+    <title>Positive Interaction for Training and Consulting Inc - {{ $pageTitle ?? '' }}</title>
 
     <!-- General CSS File -->
     <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">

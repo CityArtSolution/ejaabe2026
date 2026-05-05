@@ -17,7 +17,29 @@
             $navBtnText = $navbarButton->title;
         }
     }
-    
+
+    $canadaCertificateCategory = \App\Models\Category::withoutGlobalScopes()
+        ->where('branch_id', 3)
+        ->where('slug', 'International professional certificates')
+        ->first();
+
+    $canadaCertificateSubCategories = collect();
+
+    if (!empty($canadaCertificateCategory)) {
+        $canadaCertificateSubCategories = $canadaCertificateCategory->subCategories;
+    }
+
+    if ($canadaCertificateSubCategories->isEmpty()) {
+        $sharedCertificateParent = \App\Models\Category::withoutGlobalScopes()
+            ->where('branch_id', 1)
+            ->where('slug', 'الشهادات-المهنية-الدولية')
+            ->first();
+
+        if (!empty($sharedCertificateParent)) {
+            $canadaCertificateSubCategories = $sharedCertificateParent->subCategories;
+        }
+    }
+
 @endphp
 <style>
  #navbarContent .navbar-nav {
@@ -54,7 +76,7 @@
 
 .navbar-nav .nav-link:hover::after {
     width: 100%;
-    background-color: #faaa4b !important; 
+    background-color: #faaa4b !important;
 }
 
 </style>
@@ -140,7 +162,7 @@
                       <li class="nav-item">
                         <a class="nav-link" style="text-decoration-line: none !important;"href="{{ url('/en/aboutUs/canada') }}">{{ trans('navigation.about_us') }}</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <lable class="nav-link">{{ __('navigation.servicse') }}</lable>
                         <div>
@@ -149,7 +171,16 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="text-decoration-line: none !important;"href="{{ url('/en/canada') }}">{{ trans('navigation.international_certificates') }}</a>
+                        <lable class="nav-link">{{ trans('navigation.international_certificates') }}</lable>
+                        @if(!empty($canadaCertificateCategory) and $canadaCertificateSubCategories->isNotEmpty())
+                            <div>
+                                @foreach($canadaCertificateSubCategories as $subCategory)
+                                    <a class="nav-link" style="text-decoration-line: none !important;" href="{{ url('/en/canada/classes') }}?categories%5B%5D={{ $subCategory->id }}">
+                                        {{ $subCategory->title }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
                     </li>
                   <li class="nav-item">
                         <a class="nav-link" style="text-decoration-line: none !important;"href="{{ url('/en/contactus') }}">{{ trans('navigation.contact_us') }}</a>

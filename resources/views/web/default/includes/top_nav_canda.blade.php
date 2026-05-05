@@ -42,7 +42,7 @@
         <i class="fa fa-phone mr-5" aria-hidden="true"></i> + 1 647 821 969
     </li>
     <li class="d-flex align-items-center text-dark-blue font-14">
-        <i class="fa fa-envelope mr-5" aria-hidden="true"></i> Jawaher@ejaabi.com
+        <i class="fa fa-envelope mr-5" aria-hidden="true"></i> info@ejaabi.com
     </li>
 </ul>
 
