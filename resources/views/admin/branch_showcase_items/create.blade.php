@@ -20,11 +20,17 @@
 
                                 <div class="form-group">
                                     <label class="input-label">{{ trans('branches.branch') }}</label>
-                                    <select name="branch_id" class="form-control @error('branch_id') is-invalid @enderror">
-                                        @foreach($branches as $branch)
-                                            <option value="{{ $branch->id }}" {{ old('branch_id', $item->branch_id ?? session('admin_selected_branch', 1)) == $branch->id ? 'selected' : '' }}>{{ $branch->name ?: ('Branch #' . $branch->id) }}</option>
-                                        @endforeach
-                                    </select>
+                                    @if(!empty($restrictedBranchId))
+                                        @php $restrictedBranch = $branches->first(); @endphp
+                                        <input type="hidden" name="branch_id" value="{{ $restrictedBranchId }}">
+                                        <input type="text" class="form-control" value="{{ optional($restrictedBranch)->name ?: ('Branch #' . $restrictedBranchId) }}" disabled>
+                                    @else
+                                        <select name="branch_id" class="form-control @error('branch_id') is-invalid @enderror">
+                                            @foreach($branches as $branch)
+                                                <option value="{{ $branch->id }}" {{ old('branch_id', $item->branch_id ?? session('admin_selected_branch', 1)) == $branch->id ? 'selected' : '' }}>{{ $branch->name ?: ('Branch #' . $branch->id) }}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                     @error('branch_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
 

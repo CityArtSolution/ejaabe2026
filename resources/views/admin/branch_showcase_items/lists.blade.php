@@ -14,12 +14,14 @@
             <div class="card">
                 <div class="card-header justify-content-between">
                     <form action="{{ getAdminPanelUrl('/branch-showcase-items') }}" method="get" class="d-flex align-items-center">
-                        <select name="branch_id" class="form-control mr-2">
-                            <option value="">{{ trans('admin/main.all_branches') }}</option>
-                            @foreach($branches as $branch)
-                                <option value="{{ $branch->id }}" {{ request('branch_id') == $branch->id ? 'selected' : '' }}>{{ $branch->name ?: ('Branch #' . $branch->id) }}</option>
-                            @endforeach
-                        </select>
+                        @if(empty($restrictedBranchId))
+                            <select name="branch_id" class="form-control mr-2">
+                                <option value="">{{ trans('admin/main.all_branches') }}</option>
+                                @foreach($branches as $branch)
+                                    <option value="{{ $branch->id }}" {{ request('branch_id') == $branch->id ? 'selected' : '' }}>{{ $branch->name ?: ('Branch #' . $branch->id) }}</option>
+                                @endforeach
+                            </select>
+                        @endif
                         <select name="section" class="form-control mr-2">
                             <option value="">{{ trans('admin/main.all_sections') }}</option>
                             @foreach($sections as $key => $label)

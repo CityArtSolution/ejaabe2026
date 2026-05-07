@@ -14,11 +14,12 @@ class BranchShowcaseItemController extends Controller
         $this->authorize('admin_settings');
 
         $query = BranchShowcaseItem::query()->with('branch')->orderBy('branch_id')->orderBy('section')->orderBy('order');
+        $restrictedBranchId = $this->restrictedBranchId();
 
-        if ($request->filled('branch_id')) {
+        if (!empty($restrictedBranchId)) {
+            $query->where('branch_id', $restrictedBranchId);
+        } elseif ($request->filled('branch_id')) {
             $query->where('branch_id', $request->get('branch_id'));
-        } elseif (session()->has('admin_selected_branch')) {
-            $query->where('branch_id', session()->get('admin_selected_branch'));
         }
 
         if ($request->filled('section')) {
@@ -28,9 +29,10 @@ class BranchShowcaseItemController extends Controller
         $data = [
             'pageTitle' => trans('admin/main.showcase_slides'),
             'items' => $query->paginate(20),
-            'branches' => Branch::withoutGlobalScopes()->orderBy('id')->get(),
+            'branches' => $this->availableBranches(),
             'sections' => BranchShowcaseItem::sections(),
             'pages' => BranchShowcaseItem::pages(),
+            'restrictedBranchId' => $restrictedBranchId,
         ];
 
         return view('admin.branch_showcase_items.lists', $data);
@@ -57,7 +59,7 @@ class BranchShowcaseItemController extends Controller
         $this->authorize('admin_settings');
 
         $data = $this->formData();
-        $data['item'] = BranchShowcaseItem::findOrFail($id);
+        $data['item'] = $this->findItemForAccess($id);
 
         return view('admin.branch_showcase_items.create', $data);
     }
@@ -66,7 +68,7 @@ class BranchShowcaseItemController extends Controller
     {
         $this->authorize('admin_settings');
 
-        $item = BranchShowcaseItem::findOrFail($id);
+        $item = $this->findItemForAccess($id);
         $item->update($this->validatedData($request));
 
         return redirect(getAdminPanelUrl('/branch-showcase-items'));
@@ -76,7 +78,7 @@ class BranchShowcaseItemController extends Controller
     {
         $this->authorize('admin_settings');
 
-        BranchShowcaseItem::findOrFail($id)->delete();
+        $this->findItemForAccess($id)->delete();
 
         return redirect(getAdminPanelUrl('/branch-showcase-items'));
     }
@@ -85,9 +87,10 @@ class BranchShowcaseItemController extends Controller
     {
         return [
             'pageTitle' => trans('admin/main.showcase_slides'),
-            'branches' => Branch::withoutGlobalScopes()->orderBy('id')->get(),
+            'branches' => $this->availableBranches(),
             'sections' => BranchShowcaseItem::sections(),
             'pages' => BranchShowcaseItem::pages(),
+            'restrictedBranchId' => $this->restrictedBranchId(),
         ];
     }
 
@@ -104,9 +107,49 @@ class BranchShowcaseItemController extends Controller
             'status' => 'nullable',
         ]);
 
+        $restrictedBranchId = $this->restrictedBranchId();
+        if (!empty($restrictedBranchId)) {
+            $data['branch_id'] = $restrictedBranchId;
+        }
+
         $data['order'] = $data['order'] ?? 0;
         $data['status'] = $request->has('status') ? 1 : 0;
 
         return $data;
+    }
+
+    private function restrictedBranchId()
+    {
+        $user = auth()->user();
+
+        if (!empty($user) and method_exists($user, 'isCanadaBranch') and $user->isCanadaBranch()) {
+            return Branch::withoutGlobalScopes()->where('subdomain', 'canada')->value('id') ?? $user->branch_id ?? 3;
+        }
+
+        return null;
+    }
+
+    private function availableBranches()
+    {
+        $query = Branch::withoutGlobalScopes()->orderBy('id');
+        $restrictedBranchId = $this->restrictedBranchId();
+
+        if (!empty($restrictedBranchId)) {
+            $query->where('id', $restrictedBranchId);
+        }
+
+        return $query->get();
+    }
+
+    private function findItemForAccess($id)
+    {
+        $query = BranchShowcaseItem::query();
+        $restrictedBranchId = $this->restrictedBranchId();
+
+        if (!empty($restrictedBranchId)) {
+            $query->where('branch_id', $restrictedBranchId);
+        }
+
+        return $query->findOrFail($id);
     }
 }
