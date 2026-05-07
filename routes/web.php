@@ -216,7 +216,12 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
         });
 
         Route::get('/aboutUs/canada', function () {
-            return view('web.default.includes.about_us_canada');
+            $canadaBranchId = \App\Models\Branch::withoutGlobalScopes()->where('subdomain', 'canada')->value('id') ?? 3;
+
+            return view('web.default.includes.about_us_canada', [
+                'showcasePartners' => \App\Models\BranchShowcaseItem::visibleFor($canadaBranchId, \App\Models\BranchShowcaseItem::SECTION_PARTNERS, \App\Models\BranchShowcaseItem::PAGE_ABOUT)->get(),
+                'showcaseClients' => \App\Models\BranchShowcaseItem::visibleFor($canadaBranchId, \App\Models\BranchShowcaseItem::SECTION_FEATURED_CLIENTS, \App\Models\BranchShowcaseItem::PAGE_ABOUT)->get(),
+            ]);
         });
 
         Route::get('/aboutUs/egy', function () {
@@ -316,7 +321,12 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
         });
 
         Route::get('/aboutUs/canada', function () {
-            return view('web.default.includes.about_us_canada');
+            $canadaBranchId = \App\Models\Branch::withoutGlobalScopes()->where('subdomain', 'canada')->value('id') ?? 3;
+
+            return view('web.default.includes.about_us_canada', [
+                'showcasePartners' => \App\Models\BranchShowcaseItem::visibleFor($canadaBranchId, \App\Models\BranchShowcaseItem::SECTION_PARTNERS, \App\Models\BranchShowcaseItem::PAGE_ABOUT)->get(),
+                'showcaseClients' => \App\Models\BranchShowcaseItem::visibleFor($canadaBranchId, \App\Models\BranchShowcaseItem::SECTION_FEATURED_CLIENTS, \App\Models\BranchShowcaseItem::PAGE_ABOUT)->get(),
+            ]);
         });
 
         Route::get('/aboutUs/egy', function () {

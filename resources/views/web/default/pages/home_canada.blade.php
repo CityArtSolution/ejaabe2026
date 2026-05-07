@@ -838,7 +838,7 @@
 
 
 
-        @if($homeSection->name == \App\Models\HomeSection::$testimonials and !empty($testimonials) and !$testimonials->isEmpty())
+        @if($homeSection->name == \App\Models\HomeSection::$testimonials and !empty($showcaseClients) and !$showcaseClients->isEmpty())
             <div class="position-relative home-sections testimonials-container">
 
                 <div id="parallax1" class="ltr">
@@ -852,87 +852,7 @@
                     </div>
 
                     <div class="position-relative mt-20">
-                        <div class="swiper-container organization-swiper-container px-12">
-                            <div class="swiper-wrapper py-20">
-
-
-                                <div class="swiper-slide">
-
-                                    <div
-                                        class="home-organizations-card d-flex flex-column align-items-center justify-content-center">
-                                        <div class="home-organizations-avatar">
-                                            <img
-                                                src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfec472cf2d.png"
-                                                class="img-cover " alt="">
-                                        </div>
-
-
-                                        <div class="bottom-gradient"></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-
-                                    <div
-                                        class="home-organizations-card d-flex flex-column align-items-center justify-content-center">
-                                        <div class="home-organizations-avatar">
-                                            <img
-                                                src="https://ejaabi.com/public/uploads/main/images/09-09-2024/66df29d33d845.jpeg"
-                                                class="img-cover" alt=""
-                                                style="object-fit: contain; width: 100%; height: 100%;"/>
-                                        </div>
-
-
-                                        <div class="bottom-gradient"></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-
-                                    <div
-                                        class="home-organizations-card d-flex flex-column align-items-center justify-content-center">
-                                        <div class="home-organizations-avatar">
-                                            <img
-                                                src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfec5251fe1.png"
-                                                class="img-cover"
-                                                style="object-fit: contain; width: 100%; height: 100%;" alt="">
-                                        </div>
-
-
-                                        <div class="bottom-gradient"></div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-
-                                    <div
-                                        class="home-organizations-card d-flex flex-column align-items-center justify-content-center">
-                                        <div class="home-organizations-avatar">
-                                            <img
-                                                src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfec66afcda.png"
-                                                class="img-cover"
-                                                style="object-fit: contain; width: 100%; height: 100%;" alt="">
-                                        </div>
-
-
-                                        <div class="bottom-gradient"></div>
-                                    </div>
-                                </div>
-                                <!--<div class="swiper-slide">-->
-
-                                <!--    <div class="home-organizations-card d-flex flex-column align-items-center justify-content-center">-->
-                                <!--        <div class="home-organizations-avatar">-->
-                                <!--            <img src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeb708b082.png" class="img-cover" alt="">-->
-                                <!--        </div>-->
-
-
-                                <!--        <div class="bottom-gradient"></div>-->
-                                <!--    </div>-->
-                                <!--</div>-->
-                            </div>
-
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            <div class="swiper-pagination organization-swiper-pagination"></div>
-                        </div>
+                        @include('web.default.includes.branch_showcase_swiper', ['items' => $showcaseClients])
                     </div>
                 </section>
 
@@ -1262,7 +1182,7 @@
             </section>
         @endif
 
-        @if($homeSection->name == \App\Models\HomeSection::$instructors and !empty($instructors) and !$instructors->isEmpty())
+        @if($homeSection->name == \App\Models\HomeSection::$instructors and !empty($showcasePartners) and !$showcasePartners->isEmpty())
             <section class="home-sections container">
                 <div class="text-center my-40">
                     <div>
@@ -1274,133 +1194,7 @@
                 </div>
 
                 <div class="position-relative mt-20 ltr">
-                    <div class="owl-carousel customers-testimonials instructors-swiper-container">
-
-
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/22-05-2024/664d96b0442a6.jpeg"
-                                            alt="" class="img-cover">
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/22-05-2024/664d96d1d67c1.png"
-                                            alt="" style="object-fit: contain; width: 100%; height: 100%;"/>
-                                        >
-
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/22-05-2024/664d96deb01c4.png"
-                                            alt="" style="object-fit: contain; width: 100%; height: 100%;"/>
-                                        >
-
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae1e67060d.jpeg"
-                                            alt="" class=" img-cover">
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/04-12-2023/656e2faf5e7a3.jpeg"
-                                            alt="" class=" img-cover">
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/19-05-2024/6649ba3691866.jpg"
-                                            alt="" class=" img-cover">
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="shadow-effect">
-                                <div
-                                    class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                    <div class="instructors-card-avatar">
-                                        <img
-                                            src="https://ejaabi.com/public/uploads/main/images/27-12-2023/658c10b1e31d2.png"
-                                            alt=""
-                                            style="object-fit: contain; width: 100%; height: 100%;"/>
-                                    </div>
-                                    <div class="instructors-card-info mt-10 text-center">
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
+                    @include('web.default.includes.branch_showcase_carousel', ['items' => $showcasePartners])
                 </div>
             </section>
         @endif

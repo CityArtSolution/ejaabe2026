@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Mixins\Installment\InstallmentPlans;
 use App\Models\AdvertisingBanner;
 use App\Models\Blog;
+use App\Models\Branch;
+use App\Models\BranchShowcaseItem;
 use App\Models\Bundle;
 use App\Models\FeatureWebinar;
 use App\Models\HomePageStatistic;
@@ -363,6 +365,8 @@ class HomeController extends Controller
         }
 
         $sliders=Slider::where('status',1)->where('branch_id',1)->get();
+        $showcasePartners = BranchShowcaseItem::visibleFor(1, BranchShowcaseItem::SECTION_PARTNERS, BranchShowcaseItem::PAGE_HOME)->get();
+        $showcaseClients = BranchShowcaseItem::visibleFor(1, BranchShowcaseItem::SECTION_FEATURED_CLIENTS, BranchShowcaseItem::PAGE_HOME)->get();
 
         $data = [
             'pageTitle' => $pageTitle,
@@ -398,6 +402,8 @@ class HomeController extends Controller
             'becomeInstructorSection' => $becomeInstructorSection ?? null,
             'forumSection' => $forumSection ?? null,
             'sliders'=>$sliders,
+            'showcasePartners' => $showcasePartners,
+            'showcaseClients' => $showcaseClients,
         ];
 
         return view(getTemplate() . '.pages.newPage', $data);
@@ -736,6 +742,8 @@ class HomeController extends Controller
         }
 
         $sliders=Slider::where('status',1)->where('branch_id',1)->get();
+        $showcasePartners = BranchShowcaseItem::visibleFor(1, BranchShowcaseItem::SECTION_PARTNERS, BranchShowcaseItem::PAGE_HOME)->get();
+        $showcaseClients = BranchShowcaseItem::visibleFor(1, BranchShowcaseItem::SECTION_FEATURED_CLIENTS, BranchShowcaseItem::PAGE_HOME)->get();
 
         $data = [
             'pageTitle' => $pageTitle,
@@ -771,6 +779,8 @@ class HomeController extends Controller
             'becomeInstructorSection' => $becomeInstructorSection ?? null,
             'forumSection' => $forumSection ?? null,
             'sliders'=>$sliders,
+            'showcasePartners' => $showcasePartners,
+            'showcaseClients' => $showcaseClients,
         ];
 
         // old home view is pages.home
@@ -1101,7 +1111,10 @@ class HomeController extends Controller
             }
         }
 
+        $canadaBranchId = Branch::withoutGlobalScopes()->where('subdomain', 'canada')->value('id') ?? 3;
         $sliders=Slider::where('branch_id',2)->get();
+        $showcasePartners = BranchShowcaseItem::visibleFor($canadaBranchId, BranchShowcaseItem::SECTION_PARTNERS, BranchShowcaseItem::PAGE_HOME)->get();
+        $showcaseClients = BranchShowcaseItem::visibleFor($canadaBranchId, BranchShowcaseItem::SECTION_FEATURED_CLIENTS, BranchShowcaseItem::PAGE_HOME)->get();
         // return $sliders;
         $data = [
             'pageTitle' => $pageTitle,
@@ -1135,6 +1148,8 @@ class HomeController extends Controller
             'becomeInstructorSection' => $becomeInstructorSection ?? null,
             'forumSection' => $forumSection ?? null,
             'sliders'=>$sliders,
+            'showcasePartners' => $showcasePartners,
+            'showcaseClients' => $showcaseClients,
         ];
 
         return view(getTemplate() . '.pages.home_canada', $data);
@@ -1709,8 +1724,13 @@ $data = [
     }
 
     public function about(){
+        $showcasePartners = BranchShowcaseItem::visibleFor(1, BranchShowcaseItem::SECTION_PARTNERS, BranchShowcaseItem::PAGE_ABOUT)->get();
+        $showcaseClients = BranchShowcaseItem::visibleFor(1, BranchShowcaseItem::SECTION_FEATURED_CLIENTS, BranchShowcaseItem::PAGE_ABOUT)->get();
+
          $data = [
                     'pageTitle' => trans('app.menu_2'),
+                    'showcasePartners' => $showcasePartners,
+                    'showcaseClients' => $showcaseClients,
 
                 ];
 

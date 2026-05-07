@@ -1313,13 +1313,22 @@
                 </li>
             @endcan
             @if($authUser->can('admin_settings'))
-            <li class="{{ (request()->is(getAdminPanelUrl('/assignments', false))) ? 'active' : '' }}">
-                    <a href="{{ getAdminPanelUrl() }}/slider" class="nav-link">
-                        <i class="fas fa-pen"></i>
-                        <span> 
-                    {{ trans('public.slider') }} 
-                         </span>
+                <li class="nav-item dropdown {{ (request()->is(getAdminPanelUrl('/slider*', false)) or request()->is(getAdminPanelUrl('/branch-showcase-items*', false))) ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fas fa-images"></i>
+                        <span>{{ trans('admin/main.slides_management') }}</span>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ (request()->is(getAdminPanelUrl('/slider*', false))) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ getAdminPanelUrl() }}/slider">{{ trans('admin/main.main_slides') }}</a>
+                        </li>
+                        <li class="{{ (request()->is(getAdminPanelUrl('/branch-showcase-items*', false)) and request('section') == \App\Models\BranchShowcaseItem::SECTION_FEATURED_CLIENTS) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ getAdminPanelUrl() }}/branch-showcase-items?section={{ \App\Models\BranchShowcaseItem::SECTION_FEATURED_CLIENTS }}">{{ trans('admin/main.client_slides') }}</a>
+                        </li>
+                        <li class="{{ (request()->is(getAdminPanelUrl('/branch-showcase-items*', false)) and request('section') == \App\Models\BranchShowcaseItem::SECTION_PARTNERS) ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ getAdminPanelUrl() }}/branch-showcase-items?section={{ \App\Models\BranchShowcaseItem::SECTION_PARTNERS }}">{{ trans('admin/main.partner_slides') }}</a>
+                        </li>
+                    </ul>
                 </li>
              @endif
             @if($authUser->can('admin_settings'))

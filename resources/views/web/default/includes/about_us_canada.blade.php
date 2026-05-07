@@ -589,6 +589,7 @@
     @endif
 
     {{-- ── TEAM CAROUSEL ── --}}
+    @if(!empty($showcasePartners) and !$showcasePartners->isEmpty())
     <section class="home-sections" style="margin-top: 100px !important">
         <div class="container">
             <div class="section-title-wrapper">
@@ -597,32 +598,15 @@
             </div>
             <div class="carousel-section-bg">
                 <div class="position-relative ltr">
-                    <div class="owl-carousel customers-testimonials instructors-swiper-container">
-                        @foreach([
-                            'https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae01bdedbe.jpeg',
-                            'https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae4cda1168.png',
-                            'https://ejaabi.com/public/uploads/main/images/27-12-2023/658c10b1e31d2.png',
-                            'https://ejaabi.com/public/uploads/main/images/04-12-2023/656e2faf5e7a3.jpeg',
-                            'https://ejaabi.com/public/uploads/main/images/19-05-2024/6649ba3691866.jpg',
-                            'https://ejaabi.com/public/uploads/main/images/19-05-2024/6649bdb36f0cd.png',
-                        ] as $img)
-                            <div class="item">
-                                <div class="shadow-effect">
-                                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                        <div class="instructors-card-avatar">
-                                            <img src="{{ $img }}" alt="" class="img-cover">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    @include('web.default.includes.branch_showcase_carousel', ['items' => $showcasePartners])
                 </div>
             </div>
         </div>
     </section>
+    @endif
 
     {{-- ── CLIENTS CAROUSEL ── --}}
+    @if(!empty($showcaseClients) and !$showcaseClients->isEmpty())
     <div class="position-relative home-sections testimonials-container">
         <section class="home-sections container">
             <div class="section-title-wrapper">
@@ -632,25 +616,7 @@
 
             <div class="carousel-section-bg">
                 <div class="position-relative ltr">
-                    <div class="owl-carousel customers-testimonials instructors-swiper-container">
-                        @foreach([
-                            'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeaca39a58.jpeg',
-                            'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfefa364dfb.jpeg',
-                            'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfea64e8494.jpeg',
-                            'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeac220c6e.jpeg',
-                            'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeb708b082.png',
-                        ] as $img)
-                            <div class="item">
-                                <div class="shadow-effect">
-                                    <div class="instructors-card client-logo-card d-flex flex-column align-items-center justify-content-center">
-                                        <div class="instructors-card-avatar">
-                                            <img src="{{ $img }}" alt="" class="img-cover">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    @include('web.default.includes.branch_showcase_carousel', ['items' => $showcaseClients, 'cardClass' => 'client-logo-card'])
                 </div>
             </div>
         </section>
@@ -662,6 +628,7 @@
             <div data-depth="0.8" class="gradient-box bottom-gradient-box"></div>
         </div>
     </div>
+    @endif
 
 @endsection
 

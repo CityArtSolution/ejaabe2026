@@ -383,6 +383,15 @@ Route::delete('/file-library/delete/{id}', [FileLibraryController::class, 'destr
             Route::post('/{id}/update', 'SliderController@update')->name('updateslide');
             Route::get('/{id}/delete', 'SliderController@delete')->name('deleteslide');;
         });
+
+        Route::group(['prefix' => 'branch-showcase-items'], function () {
+            Route::get('/', 'BranchShowcaseItemController@index');
+            Route::get('/create', 'BranchShowcaseItemController@create');
+            Route::post('/store', 'BranchShowcaseItemController@store');
+            Route::get('/{id}/edit', 'BranchShowcaseItemController@edit');
+            Route::post('/{id}/update', 'BranchShowcaseItemController@update');
+            Route::get('/{id}/delete', 'BranchShowcaseItemController@delete');
+        });
          //branches
         Route::group(['prefix' => 'branches'], function () {
        Route::get('/', 'BranchController@index')->name('branches.index');

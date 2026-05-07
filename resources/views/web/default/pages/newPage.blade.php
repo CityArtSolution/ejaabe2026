@@ -1508,7 +1508,7 @@
         @endonce
 
         {{-- Testimonials (Clients) --}}
-        @if ($homeSection->name == \App\Models\HomeSection::$testimonials && !empty($testimonials) && !$testimonials->isEmpty())
+        @if ($homeSection->name == \App\Models\HomeSection::$testimonials && !empty($showcaseClients) && !$showcaseClients->isEmpty())
             <section class="home-sections">
                 <div class="container">
                     <div class="text-center my-40">
@@ -1516,26 +1516,7 @@
                         <p class="section-hint"></p>
                     </div>
                     <div class="position-relative mt-20 ltr">
-                        <div class="owl-carousel customers-testimonials instructors-swiper-container">
-                            @foreach([
-                                'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeaca39a58.jpeg',
-                                'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfefa364dfb.jpeg',
-                                'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfea64e8494.jpeg',
-                                'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeac220c6e.jpeg',
-                                'https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeb708b082.png',
-                            ] as $img)
-                                <div class="item">
-                                    <div class="shadow-effect">
-                                        <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                            <div class="instructors-card-avatar">
-                                                <img src="{{ $img }}" alt="" class="img-cover">
-                                            </div>
-                                            <div class="instructors-card-info mt-10 text-center"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                        @include('web.default.includes.branch_showcase_carousel', ['items' => $showcaseClients])
                     </div>
                 </div>
             </section>
@@ -1759,7 +1740,7 @@
         @endif
 
         {{-- Instructors (Partners) --}}
-        @if ($homeSection->name == \App\Models\HomeSection::$instructors && !empty($instructors) && !$instructors->isEmpty())
+        @if ($homeSection->name == \App\Models\HomeSection::$instructors && !empty($showcasePartners) && !$showcasePartners->isEmpty())
             <section class="home-sections">
                 <div class="container">
                     <div class="text-center my-40">
@@ -1767,27 +1748,7 @@
                         <p class="section-hint"></p>
                     </div>
                     <div class="position-relative mt-20 ltr">
-                        <div class="owl-carousel customers-testimonials instructors-swiper-container">
-                            @foreach([
-                                'https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae01bdedbe.jpeg',
-                                'https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae4cda1168.png',
-                                'https://ejaabi.com/public/uploads/main/images/27-12-2023/658c10b1e31d2.png',
-                                'https://ejaabi.com/public/uploads/main/images/04-12-2023/656e2faf5e7a3.jpeg',
-                                'https://ejaabi.com/public/uploads/main/images/19-05-2024/6649ba3691866.jpg',
-                                'https://ejaabi.com/public/uploads/main/images/19-05-2024/6649bdb36f0cd.png',
-                            ] as $img)
-                                <div class="item">
-                                    <div class="shadow-effect">
-                                        <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                            <div class="instructors-card-avatar">
-                                                <img src="{{ $img }}" alt="" class="img-cover">
-                                            </div>
-                                            <div class="instructors-card-info mt-10 text-center"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                        @include('web.default.includes.branch_showcase_carousel', ['items' => $showcasePartners])
                     </div>
                 </div>
             </section>

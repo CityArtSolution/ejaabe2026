@@ -27,11 +27,11 @@
    <div data-anim-wrap="" class="container animated">
            <div class="row y-gap-50 justify-between items-center">
             <div class="col-lg-8  sm:pr-15">
-              
+
                       <h2>رسالة رئيس مجلس المديرين</h2>
 
                 <div class="composition -type-8">
-                   
+
                      <p class="text-dark-1 mt-30">
                     شكلت السنوات الماضية نقطة تحول رئيسية لمجتمعنا. جنبًا إلى جنب مع رؤية المملكة العربية السعودية الطموحة 2030.  من خلال طرح هذه التغييرات ، فقد اختبرنا القوة الهائلة والقيمة الهائلة لمنظمات التمكين الإيجابي والأشخاص ذوي المعرفة والمهارات القوية ليكونوا متوافقين مع المتطلبات الأساسية والتغييرات الديناميكية..
                 </p>
@@ -63,13 +63,13 @@
                 <p class="text-dark-1 mt-30">
                     التفاعل الإيجابي للتدريب والاستشارات (إيجابي) من أهم بيوت الخبرة في مجال التدريب والاستشارات الإدارية والتعليمية المتكاملة للمؤسسات والأفراد في القطاعين العام والخاص.  مع المهنيين ذوي الخبرة والكفاءات الوطنية والدولية، يواكب التفاعل الإيجابي التطورات في مختلف قطاعات الأعمال. هذا التفاعل الإيجابي جعلها وجهة موثوقة منذ عام 2011..
                 </p>
-                 
+
 
             </div>
         </div>
     </div>
     </section>
-    
+
    <section class="home-sections container">
     <div class="text-center my-40">
         <div>
@@ -81,7 +81,7 @@
     </div>
              <div class="modern-services-area bottom-less">
         <div class="container">
-            
+
                 <div class="services-box text-center">
                     <div class="row">
                     <!-- Single Item -->
@@ -95,7 +95,7 @@
                                 <p>
                                   أن نكون مرجعاً موثوقاً في مجال التدريب والاستشارات محلياً وإقليمياً.
                                 </p>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
 <p>- والابتكار</p>
 <p>- الالتزام</p>
                                 </p>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                     <div class="single-item col-md-4 col-sm-6">
                         <div class="item noground">
                             <div class="icon">
-                                
+
                                 <i class="flaticon-start"></i>
                             </div>
                             <div class="content">
@@ -135,28 +135,28 @@
 
 الاستشارات الإدارية والتعليمية.
                                 </p>
-                                
+
                             </div>
                         </div>
                     </div>
                     <!-- End Single Item -->
-                     
+
                 </div>
             </div>
         </div>
     </div>
         </div>
     </div>
-    @else 
+    @else
       <section class="home-sections position-relative">
    <div data-anim-wrap="" class="container animated">
            <div class="row y-gap-50 justify-between items-center">
             <div class="col-lg-8 pr-50 sm:pr-15">
-              
+
                       <h2>Message from the Chairman of the Board of Directors</h2>
 
                 <div class="composition -type-8">
-                   
+
                      <p class="text-dark-1 mt-30">
                     The past years marked a major turning point for our society. Along with the ambitious 2030 Vision of the Kingdom of Saudi Arabia.  In throwing these changes in, we have experienced the great power and value of empowering organizations and individuals positively with a solid knowledge and skills to be compatible with the basic requirements and dynamic changes.
                 </p>
@@ -188,13 +188,13 @@
                 <p class="text-dark-1 mt-30">
                     Positive interaction for training and consulting (Ejaabi) is one of the most important houses of expertise in the field of training, integrated administrative, and educational consultations for enterprises and individuals in the both public and private sectors.  With experienced professionals, national and international competencies, Positive Interaction is keeping pace with developments in various business sectors. This has made positive interaction a trusted destination since 2011.
                 </p>
-                 
+
 
             </div>
         </div>
     </div>
     </section>
-    
+
    <section class="home-sections container">
     <div class="text-center my-40">
         <div>
@@ -206,7 +206,7 @@
     </div>
              <div class="modern-services-area bottom-less">
         <div class="container">
-            
+
                 <div class="services-box text-center">
                     <div class="row">
                     <!-- Single Item -->
@@ -220,7 +220,7 @@
                                 <p>
                                 To be a reliable reference in the field of consulting and training locally and regionally.
                                 </p>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
 <p> innovation.</p>
 
 
-                                
+
                             </div>
                         </div>
                     </div>
@@ -249,13 +249,13 @@
                     <div class="single-item col-md-4 col-sm-6">
                         <div class="item noground">
                             <div class="icon">
-                                
+
                                 <i class="flaticon-meeting"></i>
                             </div>
                             <div class="content">
                                 <h4>   	Our Mission</h4>
                                 <p>
-                               
+
 
 We are working with exceptional experienced professionals to provide an intellectual capital that keeps pace with local and international changes, adopting the best professional practices in providing our services in both fields:
 
@@ -263,12 +263,12 @@ We are working with exceptional experienced professionals to provide an intellec
 
 •Administrative and educational consulting.
                                 </p>
-                                
+
                             </div>
                         </div>
                     </div>
                     <!-- End Single Item -->
-                     
+
                 </div>
             </div>
         </div>
@@ -276,6 +276,7 @@ We are working with exceptional experienced professionals to provide an intellec
         </div>
     </div>
     @endif
+@if(!empty($showcasePartners) and !$showcasePartners->isEmpty())
 <section class="home-sections container" style="margin-top: 140px !important">
     <div class="text-center my-40">
         <div>
@@ -287,95 +288,14 @@ We are working with exceptional experienced professionals to provide an intellec
     </div>
 
     <div class="position-relative mt-20 ltr">
-        <div class="owl-carousel customers-testimonials instructors-swiper-container">
-
-
-            <div class="item">
-                <div class="shadow-effect">
-                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                        <div class="instructors-card-avatar">
-                            <img src="https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae01bdedbe.jpeg" alt="" class="img-cover">
-                        </div>
-                        <div class="instructors-card-info mt-10 text-center">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="shadow-effect">
-                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                        <div class="instructors-card-avatar">
-                            <img src="https://ejaabi.com/public/uploads/main/images/02-12-2023/656ae4cda1168.png" alt="" class="img-cover">
-                        </div>
-                        <div class="instructors-card-info mt-10 text-center">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="shadow-effect">
-                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                        <div class="instructors-card-avatar">
-                            <img src="https://ejaabi.com/public/uploads/main/images/27-12-2023/658c10b1e31d2.png" alt="" class=" img-cover">
-                        </div>
-                        <div class="instructors-card-info mt-10 text-center">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="shadow-effect">
-                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                        <div class="instructors-card-avatar">
-                            <img src="https://ejaabi.com/public/uploads/main/images/04-12-2023/656e2faf5e7a3.jpeg" alt="" class=" img-cover">
-                        </div>
-                        <div class="instructors-card-info mt-10 text-center">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="shadow-effect">
-                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                        <div class="instructors-card-avatar">
-                            <img src="https://ejaabi.com/public/uploads/main/images/19-05-2024/6649ba3691866.jpg" alt="" class=" img-cover">
-                        </div>
-                        <div class="instructors-card-info mt-10 text-center">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="shadow-effect">
-                    <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                        <div class="instructors-card-avatar">
-                            <img src="https://ejaabi.com/public/uploads/main/images/19-05-2024/6649bdb36f0cd.png" alt="" class=" img-cover">
-                        </div>
-                        <div class="instructors-card-info mt-10 text-center">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+        @include('web.default.includes.branch_showcase_carousel', ['items' => $showcasePartners])
     </div>
 </section>
+@endif
+@if(!empty($showcaseClients) and !$showcaseClients->isEmpty())
 <div class="position-relative home-sections testimonials-container">
 
- 
+
         <section class="home-sections container">
             <div class="text-center my-40">
                 <div>
@@ -389,81 +309,7 @@ We are working with exceptional experienced professionals to provide an intellec
 
             <div class="position-relative mt-20 ltr">
 
-                <div class="owl-carousel customers-testimonials instructors-swiper-container">
-                    <div class="item">
-                        <div class="shadow-effect">
-                            <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                <div class="instructors-card-avatar">
-                                    <img src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeaca39a58.jpeg"
-                                        alt="" class="img-cover">
-                                </div>
-                                <div class="instructors-card-info mt-10 text-center">
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="shadow-effect">
-                            <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                <div class="instructors-card-avatar">
-                                    <img src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfefa364dfb.jpeg"
-                                        alt="" class="img-cover">
-                                </div>
-                                <div class="instructors-card-info mt-10 text-center">
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="shadow-effect">
-                            <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                <div class="instructors-card-avatar">
-                                    <img src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfea64e8494.jpeg"
-                                        alt="" class=" img-cover">
-                                </div>
-                                <div class="instructors-card-info mt-10 text-center">
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="shadow-effect">
-                            <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                <div class="instructors-card-avatar">
-                                    <img src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeac220c6e.jpeg"
-                                        alt="" class=" img-cover">
-                                </div>
-                                <div class="instructors-card-info mt-10 text-center">
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="shadow-effect">
-                            <div class="instructors-card d-flex flex-column align-items-center justify-content-center">
-                                <div class="instructors-card-avatar">
-                                    <img src="https://ejaabi.com/public/uploads/main/images/10-09-2024/66dfeb708b082.png"
-                                        alt="" class=" img-cover">
-                                </div>
-                                <div class="instructors-card-info mt-10 text-center">
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
+                @include('web.default.includes.branch_showcase_carousel', ['items' => $showcaseClients])
             </div>
         </section>
 
@@ -475,7 +321,8 @@ We are working with exceptional experienced professionals to provide an intellec
         <div data-depth="0.8" class="gradient-box bottom-gradient-box"></div>
     </div>
 </div>
- 
+@endif
+
 @endsection
 @push('scripts_bottom')
 <script src="/assets/default/vendors/swiper/swiper-bundle.min.js"></script>
