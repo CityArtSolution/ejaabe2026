@@ -2086,7 +2086,12 @@ function sendNotificationToEmail($template, $options, $email)
             try {
                 \Mail::to($email)->send(new \App\Mail\SendNotifications(['title' => $title, 'message' => $message]));
             } catch (Exception $exception) {
-                dd($exception);
+                \Log::error('Notification email failed: ' . $exception->getMessage(), [
+                    'template' => $template,
+                    'email' => $email,
+                ]);
+
+                return false;
             }
         }
 
