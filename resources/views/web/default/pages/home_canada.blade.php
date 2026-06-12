@@ -1295,7 +1295,7 @@
             </div>
 
             <div class="wa-chat-box-send">
-                <a role="button" target="_blank" href="https://wa.me/+12267003361" title="WhatsApp"
+                <a role="button" target="_blank" href="https://wa.me/1647821969" title="WhatsApp"
                    class="wa-chat-box-content-send-btn">
                     <svg width="20" height="20" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg"
                          fill-rule="evenodd" clip-rule="evenodd" class="wa-chat-box-content-send-btn-icon">

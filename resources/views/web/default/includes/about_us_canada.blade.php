@@ -488,14 +488,14 @@
                                 and individuals positively with a solid knowledge and skills to be compatible
                                 with the basic requirements and dynamic changes.
                             </p>
-                            <div class="author-badge" style="border-radius:50px;">Dr. / Jawaher Basoodan</div>
+                            <div class="author-badge" style="border-radius:50px;">Jawaher Basoodan</div>
                         </div>
                         <div class="col-lg-4 mt-4 mt-lg-0 text-center">
                             <div style="background: linear-gradient(135deg, rgba(19,99,161,0.06), rgba(19,99,161,0.12)); border-radius: 16px; padding: 2rem; border: 1px solid var(--border);">
                                 <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
                                     <svg width="36" height="36" fill="white" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
                                 </div>
-                                <div style="color: var(--primary); font-weight: 700; font-size: 1rem;">Dr. Jawaher Basoodan</div>
+                                <div style="color: var(--primary); font-weight: 700; font-size: 1rem;">Jawaher Basoodan</div>
                                 <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">CEO & Board Chair</div>
                             </div>
                         </div>
