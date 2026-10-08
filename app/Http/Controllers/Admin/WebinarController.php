@@ -354,7 +354,10 @@ foreach ($originalEvalCategories as $cat) {
         removeContentLocale();
 
         $type = $request->get('type', 'webinar');
-        $query = Webinar::byBranch()->where('webinars.type', $type);
+        //$query = Webinar::byBranch()->where('webinars.type', $type);
+        //dd(session()->get('admin_selected_branch'));
+        $branch=session()->get('admin_selected_branch') ?? 1;
+        $query = Webinar::where('webinars.branch_id',$branch)->where('webinars.type', $type);
         //return $query;
         $totalWebinars = $query->count();
         $totalPendingWebinars = deepClone($query)->where('webinars.status', 'pending')->count();

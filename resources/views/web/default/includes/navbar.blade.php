@@ -75,6 +75,7 @@
                                                     @if(!empty($category->subCategories) and count($category->subCategories))
                                                       <!--  <ul class="sub-menu" data-simplebar @if((!empty($isRtl) and $isRtl)) data-simplebar-direction="rtl" @endif>-->
                                                             @foreach($category->subCategories as $subCategory)
+                                                            @if($subCategory->slug!='/lang-training/training')
                                                                 <li>
                                                                     <a href="{{ $subCategory->getUrl() }}">
                                                                         @if(!empty($subCategory->icon))
@@ -84,6 +85,7 @@
                                                                         {{ $subCategory->title }}
                                                                     </a>
                                                                 </li>
+                                                            @endif
                                                             @endforeach
                                                        <!-- </ul>-->
                                                     @endif
@@ -97,7 +99,7 @@
                         @else
                          
                               
-                     
+                        @if($category->slug!='/lang-training/training')
                          <li class="nav-item">
                             
                              @if(Illuminate\Support\Str::contains($category->slug, 'https://')) 
@@ -108,6 +110,7 @@
                                  <a class="nav-link" href="/{{ app()->getLocale().'/'.$category->slug }}">{{ $category->title }}</a>
                             @endif
                             </li>
+                        @endif
                       
                         @endif   
                          @endforeach

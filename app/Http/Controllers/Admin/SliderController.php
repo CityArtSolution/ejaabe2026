@@ -31,6 +31,9 @@ class SliderController extends Controller
             'description.en' => 'nullable|string',
             'description.ar' => 'nullable|string',
             'image' => 'required|mimes:jpeg,png',
+            'image_1' => 'required|mimes:jpeg,png',
+            'image_2' => 'required|mimes:jpeg,png',
+            'image_3' => 'required|mimes:jpeg,png',
             'button1_title.en' => 'nullable|string',
             'button1_title.ar' => 'nullable|string',
             'button1_link.en' => 'nullable|string',
@@ -51,6 +54,9 @@ class SliderController extends Controller
                 'ar' => $validated['description']['ar'] ?? null
             ],
             'image' => $validated['image'],
+            'image_1' => $validated['image_1'],
+            'image_2' => $validated['image_2'],
+            'image_3' => $validated['image_3'],
             'button1_title' => [
                 'en' => $validated['button1_title']['en'] ?? null,
                 'ar' => $validated['button1_title']['ar'] ?? null
@@ -99,7 +105,11 @@ class SliderController extends Controller
     //dd(\Schema::getColumnListing('sliders')); // This will show all columns in the table
     $this->validate($request, [
         'title'=> 'required|string',
-        'image'=> 'required|string',
+        //'image'=> 'required|string',
+        'image_locale'=> 'required|string',
+        /*'image_1' => 'required|string',
+         'image_2' => 'required|string',
+         'image_3' => 'required|string',*/
         'button1_title'=> 'nullable|string|max:255',
         'button2_title'=> 'nullable|string|max:255',
         'button1_link'=> 'nullable|string|max:255',
@@ -115,12 +125,16 @@ class SliderController extends Controller
        $slider = Slider::create([
         'title' => $data['title'],
         'description' => $data['description'],
-        'image' => $data['image'],
+        //'image' => $data['image'],
+         'image_1' => $data['image_1'],
+          'image_2' => $data['image_2'],
+           'image_3' => $data['image_3'],
         'button1_title' => $data['button1_title'],
         'button1_link' => $data['button1_link'],
         'button2_title' => $data['button2_title'],
         'button2_link' => $data['button2_link'],
         'status' => $request->status ? 1 : 0,
+        'branch_id'=>$request->branch_id
     ]);
        /* $slider = new Slider();
         $slider->title = $data['title'];
@@ -146,7 +160,7 @@ class SliderController extends Controller
                 'button1_link' => $data['button1_link'],
                 'button2_link' => $data['button2_link'],
     
-    
+                'image_locale'=>$data['image_locale'],
             ]);
     
          
@@ -176,7 +190,11 @@ class SliderController extends Controller
 
         $this->validate($request, [
             'title'=> 'required|string',
-            'image'=> 'required|string',
+            //'image'=> 'required|string',
+            'image_locale'=> 'required|string',
+            /*'image_1' => 'required|string',
+         'image_2' => 'required|string',
+         'image_3' => 'required|string',*/
             'button1_title'=> 'nullable|string|max:255',
             'button2_title'=> 'nullable|string|max:255',
             'button1_link'=> 'nullable|string|max:255',
@@ -193,7 +211,11 @@ class SliderController extends Controller
        $slider->update([
           
             'status' => $request->status ? 1 : 0,
-            'image' => $data['image'],
+            //'image' => $data['image'],
+             'image_1' => $data['image_1'],
+          'image_2' => $data['image_2'],
+           'image_3' => $data['image_3'],
+           'branch_id'=>$request->branch_id,
             'updated_at'=>time()
 
             
@@ -217,6 +239,7 @@ class SliderController extends Controller
                     'button2_title' => $data['button2_title'],
                     'button1_link' => $data['button1_link'],
                     'button2_link' => $data['button2_link'],
+                    'image_locale'=>$data['image_locale'],
                 ]);
 
               
@@ -232,6 +255,7 @@ class SliderController extends Controller
                     'button2_title' => $data['button2_title'],
                     'button1_link' => $data['button1_link'],
                     'button2_link' => $data['button2_link'],
+                    'image_locale'=>$data['image_locale'],
                 ]);
             }
         }

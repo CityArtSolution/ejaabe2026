@@ -1297,6 +1297,20 @@
                                 <a class="nav-link" href="{{ getAdminPanelUrl('/reports/showRequests') }}">{{ trans('update.Courses And Consultings') }}</a>
                             </li>
                             
+                            <li class="{{ request()->is(getAdminPanelUrl('/reports/content-development-requests', false)) ? 'active' : '' }}">
+    <a class="nav-link"
+       href="{{ getAdminPanelUrl('/reports/content-development-requests') }}">
+        طلبات خدمات تطوير المحتوى
+    </a>
+</li>
+
+<li class="{{ request()->is(getAdminPanelUrl('/reports/quotation-requests', false)) ? 'active' : '' }}">
+    <a class="nav-link"
+       href="{{ getAdminPanelUrl('/reports/quotation-requests') }}">
+        طلبات عروض الأسعار
+    </a>
+</li>
+                            
                               <li class="{{ (request()->is(getAdminPanelUrl('/reports/evens-registrations-orders', false))) ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ getAdminPanelUrl('/reports/evens-registrations-orders') }}">{{ trans('events.Events Orders') }}</a>
                             </li>

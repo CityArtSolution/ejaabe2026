@@ -12,7 +12,8 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>طلبات الخدمات</h1>
+            {{--<h1>طلبات الخدمات</h1>--}}
+            <h1>{{ $pageTitle }}</h1>
         </div>
     </section>
 
@@ -52,6 +53,14 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
+                @php
+    $serviceLabels = [
+        'course' => 'دورة تدريبية',
+        'consulting' => 'طلب استشارة',
+        'content_development' => 'طلب خدمات تطوير المحتوى',
+        'quotation' => 'طلب عرض سعر',
+    ];
+@endphp
                 <table id="requestsTable" class="table table-striped font-14">
                     <thead>
                         <tr>
@@ -67,31 +76,36 @@
                     <tbody>
                         @foreach($items as $request)
                             <tr>
-                                <td>
-                                    @if($request->type == 'course')
-                                        دورة تدريبية
-                                    @else
-                                        استشارة
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($request->type == 'course' && $request->webinar)
-                                        {{ $request->webinar->title }}
-                                    @else
-                                        {{ $request->title }}
-                                    @endif
-                                </td>
-                                <td>{{ $request->name }}</td>
-                                <td>{{ $request->phone }}</td>
-                                <td>{{ $request->email }}</td>
-                                <td>{{ Str::limit($request->description, 50) }}</td>
-                                <td>{{ \Carbon\Carbon::parse($request->created_at)->format('Y-m-d') }}</td>
+                                            <td>{{ $serviceLabels[$item->type] ?? $item->type }}</td>
+
+            <td>
+                {{ $item->type === 'course'
+                    ? optional($item->webinar)->title
+                    : ($serviceLabels[$item->type] ?? '—') }}
+            </td>
+
+            <td>{{ $item->name }}</td>
+         
+            <td>{{ $item->phone }}</td>
+            <td>{{ $item->email }}</td>
+
+            <td>
+                <details>
+                    <summary>عرض التفاصيل</summary>
+                    <div style="white-space: pre-wrap; overflow-wrap: anywhere; min-width: 180px;">{{ $item->description ?: '—' }}</div>
+                </details>
+            </td>
+
+            <td>{{ $item->created_at->format('Y-m-d') }}</td>
+
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-           
+           <div class="mt-3">
+    {{ $items->links() }}
+</div>
         </div>
     </div>
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

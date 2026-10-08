@@ -26,12 +26,15 @@ class Slider extends Model
         'button1_link',
         'button2_title',
         'button2_link',
-        'status'
+        'status',
+        'image_1',
+        'image_2',
+        'image_3',
     ];
     protected $casts = [
         'status' => 'boolean'
     ];
-    public $translatedAttributes = ['title', 'description', 'button1_title', 'button2_title','button1_link','button2_link'];
+    public $translatedAttributes = ['title', 'description', 'button1_title', 'button2_title','button1_link','button2_link','sub_title','image_locale'];
 
     /**
      * Return the sluggable configuration array for this model.

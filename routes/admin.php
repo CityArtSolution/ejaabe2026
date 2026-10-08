@@ -39,6 +39,10 @@ Route::delete('/file-library/delete/{id}', [FileLibraryController::class, 'destr
 
 
     Route::group(['middleware' => 'admin'], function () {
+        
+        Route::get('/content-development-requests', 'ReportsController@contentDevelopmentRequests');
+
+Route::get('/quotation-requests', 'ReportsController@quotationRequests');
 
         Route::get('/', 'DashboardController@index');
         Route::get('/clear-cache', 'DashboardController@cacheClear');

@@ -7,8 +7,22 @@
 
 @section('content')
 <!--{{ $contactSettings['background'] }}-->
-    <section class="site-top-banner search-top-banner opacity-04 position-relative">
+    {{--<section class="site-top-banner search-top-banner opacity-04 position-relative">
         <img src="{{ asset('store/1/default_images/contact_cover.png') }}" class="img-cover" alt="{{ $pageTitle ?? '' }}"/>
+
+        <div class="container h-100">
+            <div class="row contact-us-head h-100 justify-content-center text-center">
+                <div class="col-12 col-md-9 col-lg-7">
+                    <div class="top-search-categories-form">
+                        <h1 class="text-white font-30 mb-15">{{ trans('site.contact_us') }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>--}}
+    
+    <section class="site-top-banner search-top-banner opacity-04 position-relative">
+        {{--<img src="{{ asset('store/1/default_images/contact_cover.png') }}" class="img-cover" alt="{{ $pageTitle ?? '' }}"/>--}}
 
         <div class="container h-100">
             <div class="row contact-us-head h-100 justify-content-center text-center">

@@ -354,7 +354,7 @@
             <div class="swiper-wrapper" style="padding-bottom:50px">
                 @foreach ($sliders_ as $slider)
                     <div class="swiper-slide">
-                        <div class="hero-slide" style="background-image: url('{{ asset($slider->image) }}')">
+                        <div class="hero-slide" style="background-image: url('{{ asset($slider->image_locale) }}')">
                             <div class="hero-content">
                                 <h1 class="hero-title">{{ $slider->title }}</h1>
                                 <p class="hero-description">{{ $slider->description }}</p>

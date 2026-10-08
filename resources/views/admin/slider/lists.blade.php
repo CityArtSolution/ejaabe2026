@@ -29,6 +29,7 @@
                                             <th>{{ trans('admin/main.id') }}</th>
                                             <th>{{ trans('admin/main.title') }}</th>
                                             <th>{{ trans('admin/main.image') }}</th>
+                                            <th>{{ app()->getLocale()=='ar' ? 'الفرع'  : 'branch' }}</th>
                                             <th>{{ trans('admin/main.status') }}</th>
                                             <th>{{ trans('admin/main.actions') }}</th>
                                         </tr>
@@ -41,7 +42,10 @@
                                                     <div>{{ $slider->title }}</div>
                                                 </td>
                                                 <td>
-                                                    <img src="{{ $slider->image }}" alt="slider" width="100">
+                                                    <img src="{{ $slider->image_locale }}" alt="slider" width="100">
+                                                </td>
+                                                <td>
+                                                    <div>{{ App\Models\Branch::find($slider->branch_id)->name ?? '' }}</div>
                                                 </td>
                                                 <td>
                                                     <span class="badge {{ $slider->status ? 'badge-success' : 'badge-danger' }}">

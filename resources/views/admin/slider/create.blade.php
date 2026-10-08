@@ -49,7 +49,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-group">
+                                        {{--<div class="form-group">
                                             <label class="input-label">{{ trans('public.cover_image') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -59,6 +59,84 @@
                                                 </div>
                                                 <input type="text" name="image" id="image" value="{{ (!empty($slider)) ? $slider->image : old('image') }}" class="form-control @error('image') is-invalid @enderror" placeholder="{{ trans('update.slider_cover_image_placeholder') }}"/>
                                                 @error('image')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>--}}
+                                        
+                                         <div class="form-group">
+                                          <label class="form-label">{{ app()->getLocale()=='ar' ? 'الفرع'  : 'branch' }}</label>
+                                            <select class="form-select select2" name="branch_id" required>
+                                                @foreach(\App\Models\Branch::get() as $branch)
+                                                <option value="{{ $branch->id }}"     {{ $branch->id == old('branch_id') || (!empty($slider) && $slider->branch_id) ? 'selected' : '' }}>
+                                                {{ $branch->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="input-label">{{ trans('public.cover_image') }}</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="input-group-text admin-file-manager" data-input="image_locale" data-preview="holder">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="image_locale" id="image_locale" value="{{ (!empty($slider)) ? $slider->image_locale : old('image_locale') }}" class="form-control @error('image') is-invalid @enderror" placeholder="{{ trans('update.slider_cover_image_placeholder') }}"/>
+                                                @error('image_locale')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                            <label class="input-label">{{ app()->getLocale()=='ar' ? 'الصورة الصغيرة 1' : 'small image 1' }}</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="input-group-text admin-file-manager" data-input="image_1" data-preview="holder">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="image_1" id="image_1" value="{{ (!empty($slider)) ? $slider->image_1 : old('image_1') }}" class="form-control @error('image_1') is-invalid @enderror" placeholder="{{ app()->getLocale()=='ar' ? 'الصورة الصغيرة 1' : 'small image 1' }}"/>
+                                                @error('image_1')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="input-label">{{ app()->getLocale()=='ar' ? 'الصورة الصغيرة 2' : 'small image 2' }}</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="input-group-text admin-file-manager" data-input="image_2" data-preview="holder">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="image_2" id="image_2" value="{{ (!empty($slider)) ? $slider->image_2 : old('image_2') }}" class="form-control @error('image_2') is-invalid @enderror" placeholder="{{ app()->getLocale()=='ar' ? 'الصورة الصغيرة 2' : 'small image 2' }}"/>
+                                                @error('image_2')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="input-label">{{ app()->getLocale()=='ar' ? 'الصورة الصغيرة 3' : 'small image 3' }}</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="input-group-text admin-file-manager" data-input="image_3" data-preview="holder">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="image_3" id="image_3" value="{{ (!empty($slider)) ? $slider->image_3 : old('image_3') }}" class="form-control @error('image_3') is-invalid @enderror" placeholder="{{ app()->getLocale()=='ar' ? 'الصورة الصغيرة 3' : 'small image 3' }}"/>
+                                                @error('image_3')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

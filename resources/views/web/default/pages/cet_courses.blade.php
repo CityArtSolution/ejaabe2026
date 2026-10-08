@@ -50,7 +50,11 @@ a.btn.btn-info.btn-sm {
             
               @php
 
-                                        $categories_filter=\App\Models\Category::whereNotIn('id', [612, 613])->/*->where('branch_id',session()->get('branch'))->*/orderBy('order','asc')->get();
+                                        $categories_filter=\App\Models\Category::whereNotIn('id', [612, 613])->whereHas('webinars',function($q){
+    
+    $q->where('status', 'active')->where('private', false)->where('type', 'text_lesson')
+    ->whereNotNull('category_id');
+})->/*->where('branch_id',session()->get('branch'))->*/orderBy('order','asc')->get();
                                         $selectedCategory = session()->get('selectedCategory') ?? '';
                                         $selectedDuration=session()->get('selectedDuration') ?? '';
 

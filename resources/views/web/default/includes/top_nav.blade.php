@@ -177,7 +177,7 @@
 }
 </style>
 
-<div class="branch-dropdown" id="branchDropdown">
+{{--<div class="branch-dropdown" id="branchDropdown">
   <div class="current-branch" style="margin: 3px;">
       <img src="/flags/sa.svg.webp" style="width: 16px;margin: 6px;" alt="SA"> {{ __('navbar.saudi') }}
   </div>
@@ -198,7 +198,7 @@
       </a>
     </li>
   </ul>
-</div>
+</div>--}}
 
 <script>
   const dropdown = document.getElementById("branchDropdown");

@@ -38,14 +38,19 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            {{--<div class="col-lg-4">
     <div class="-el-1" style="position: relative;">
-        <img src="https://ejaabi.com/public/uploads/main/images/28-11-2023/65660a3538bdf.jpeg" alt="image" style="max-height: 300px;">
+        @if(!empty($generalSettings['about_image']))
+                    <img src="{{ $generalSettings['about_image'] }}" class="about_image"  alt="site logo" style="max-height: 300px;">
+                    @else
+                    <img src="https://ejaabi.com/public/uploads/main/images/28-11-2023/65660a3538bdf.jpeg" alt="image" style="max-height: 300px;">
+                @endif
+        
         <div class="author-name" style="position: relative; background-color: rgb(240 243 246); color: #1363a1; padding: 10px;max-width:270px;text-align:center">
             دكتور/محمد بن عمر شيخ
         </div>
     </div>
-</div>
+</div>--}}
         </div>
         <br>
         <hr>
@@ -165,7 +170,11 @@
 
             <div class="col-lg-4">
     <div class="-el-1" style="position: relative;">
-        <img src="https://ejaabi.com/public/uploads/main/images/28-11-2023/65660a3538bdf.jpeg" alt="image" style="max-height: 300px;">
+        @if(!empty($generalSettings['about_image']))
+                    <img src="{{ $generalSettings['about_image'] }}" class="about_image"  alt="site logo" style="max-height: 300px;">
+                    @else
+                    <img src="https://ejaabi.com/public/uploads/main/images/28-11-2023/65660a3538bdf.jpeg" alt="image" style="max-height: 300px;">
+                @endif
         <div class="author-name" style="position: relative; background-color: rgb(240 243 246); color: #1363a1; padding: 10px;max-width:270px;text-align:center">
             Dr./Mohammed Bin Omar Sheikh
         </div>

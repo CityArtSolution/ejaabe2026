@@ -26,6 +26,30 @@ Route::get('/send-test-email', function () {
     Mail::to('info@growthwave-sa.com')->send(new TestEmail());
     return 'Test email sent!';
 });*/
+
+Route::get('/mizo', function () {
+    $sliders=\App\Models\Slider::get();
+    foreach($sliders as $slider){
+          $translation_ar = \App\Models\Translation\SliderTranslation::where('slider_id', $slider->id)
+                ->where('locale', 'ar')
+                ->first();
+                if($translation_ar){
+                     $translation_ar->update([
+                    'image_locale'=>$slider->image
+                    ]);
+                }
+               
+                $translation_en = \App\Models\Translation\SliderTranslation::where('slider_id', $slider->id)
+                ->where('locale', 'en')
+                ->first();
+                 if($translation_en){
+                       $translation_en->update([
+                    'image_locale'=>$slider->image
+                    ]);
+                 }
+              
+    }
+});
 Route::post('/payments/payment-request-test', [PaymentController::class, 'tamaraTest'])->name('payments.tamara.test');
 
 
@@ -256,6 +280,12 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
         Route::group(['prefix' => 'pages'], function () {
             Route::get('uae/{link}', 'PagesController@index');
         });
+        Route::get('/events', 'HomeController@events')->name('web.events.en');
+        Route::get('/request-content-development', 'ServiceRequestController@create')
+    ->defaults('requestType', 'content_development');
+
+Route::get('/request-quotation', 'ServiceRequestController@create')
+    ->defaults('requestType', 'quotation');
     });
 
     Route::group(['middleware' => ['language'],'prefix' => 'ar'], function() {
@@ -352,6 +382,12 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
          Route::group(['prefix' => 'pages'], function () {
             Route::get('/uae/{link}', 'PagesController@index');
         });
+        Route::get('/events', 'HomeController@events')->name('web.events.ar');
+         Route::get('/request-content-development', 'ServiceRequestController@create')
+    ->defaults('requestType', 'content_development');
+
+Route::get('/request-quotation', 'ServiceRequestController@create')
+    ->defaults('requestType', 'quotation');
     });
 
     Route::group(['prefix' => 'course'], function () {
@@ -661,6 +697,13 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
 
 
     Route::post('/request-consulting', 'WebinarController@storeRequestConsulting')->name('store_request_consulting');
+    Route::post('/request-content-development', 'ServiceRequestController@store')
+    ->defaults('requestType', 'content_development')
+    ->name('store_request_content_development');
+
+Route::post('/request-quotation', 'ServiceRequestController@store')
+    ->defaults('requestType', 'quotation')
+    ->name('store_request_quotation');
     Route::post('/request-course', 'WebinarController@storeRequestCourse')->name('store_request_course');
 
     Route::post('/event/register','HomeController@register')->name('event.register');

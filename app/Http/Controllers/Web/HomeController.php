@@ -441,7 +441,7 @@ class HomeController extends Controller
         }
 
         if (in_array(HomeSection::$latest_classes, $selectedSectionsName)) {
-            $latestWebinars = Webinar::where('status', Webinar::$active)
+            /*$latestWebinars = Webinar::where('status', Webinar::$active)
     ->where('private', false)
     ->where('type', 'course') // شرط النوع
     ->where('show_on_homepage', 1) // شرط العرض على الصفحة الرئيسية
@@ -457,7 +457,84 @@ class HomeController extends Controller
         'feature'
     ])
     ->limit(6)
+    ->get();*/
+    
+    /*$tracksQuery = Webinar::query()
+    ->where('status', Webinar::$active)
+    ->where('private', false)
+    ->where('type', 'course')
+    ->where('show_on_homepage', 1);
+
+// التصنيفات التي تحتوي على دورات متاحة لهذا السكشن.
+$trackCategories = \App\Models\Category::query()
+    ->whereIn(
+        'id',
+        (clone $tracksQuery)
+            ->select('category_id')
+            ->whereNotNull('category_id')
+            ->distinct()
+    )
+    ->with('translations')
+    ->get()
+    ->sortBy('title')
+    ->values();
+
+$requestedCategory = request()->query('track_category');
+
+$selectedTrackCategory = is_scalar($requestedCategory)
+    ? (string) $requestedCategory
+    : '';
+
+// تجاهل أي تصنيف غير متاح في السكشن.
+if (!$trackCategories->contains(function ($category) use ($selectedTrackCategory) {
+    return (string) $category->id === $selectedTrackCategory;
+})) {
+    $selectedTrackCategory = '';
+}
+
+$latestWebinars = (clone $tracksQuery)
+    ->when($selectedTrackCategory !== '', function ($query) use ($selectedTrackCategory) {
+        $query->where('category_id', $selectedTrackCategory);
+    })
+    ->with([
+        'teacher' => function ($query) {
+            $query->select('id', 'full_name', 'avatar');
+        },
+        'reviews' => function ($query) {
+            $query->where('status', 'active');
+        },
+        'tickets',
+        'feature',
+    ])
+    ->orderBy('updated_at', 'desc')
+    ->orderBy('id', 'desc')
+    ->limit(6)
+    ->get();*/
+    
+    $tracksQuery = Webinar::where('status', 'active')->where('private', false)->where('type', 'text_lesson')
+    ->whereNotNull('category_id');
+
+$selectedTrackCategory = (string) request('track_category', '');
+
+$latestWebinars = (clone $tracksQuery)
+    ->when($selectedTrackCategory !== '', function ($query) use ($selectedTrackCategory) {
+        $query->where('category_id', $selectedTrackCategory);
+    })
+    ->orderBy('updated_at', 'desc')
+    ->limit(6)
     ->get();
+
+$trackCategories = \App\Models\Category::whereNotIn(
+    'id',
+    [612, 613]
+    
+)->whereHas('webinars',function($q){
+    
+    $q->where('status', 'active')->where('private', false)->where('type', 'text_lesson')
+    ->whereNotNull('category_id');
+})->with('translations')->orderBy('order')->get();
+
+
 
             //$selectedWebinarIds = array_merge($selectedWebinarIds, $latestWebinars->pluck('id')->toArray());
         }
@@ -781,6 +858,8 @@ class HomeController extends Controller
             'sliders'=>$sliders,
             'showcasePartners' => $showcasePartners,
             'showcaseClients' => $showcaseClients,
+            'trackCategories' => $trackCategories ?? collect(),
+'selectedTrackCategory' => $selectedTrackCategory ?? '',
         ];
 
         // old home view is pages.home
@@ -1885,4 +1964,18 @@ $data = [
         }
     }
 
+    public function events()
+{
+    $events = \App\Models\Event::query()
+        ->where('status', 1)
+        ->with('translations')
+        ->orderBy('start_date', 'desc')
+        ->orderBy('id', 'desc')
+        ->paginate(12);
+
+    return view(getTemplate() . '.pages.events', [
+        'pageTitle' => trans('events.events'),
+        'events' => $events,
+    ]);
+}
 }

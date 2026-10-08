@@ -148,6 +148,39 @@
                             required
                         >
                     </div>
+                    
+                    <div class="col-12">
+                         @php
+        $ar = app()->getLocale() === 'ar';
+
+        $fields = [
+           
+            'company' => [
+                'label' => $ar
+                    ? 'الجهة أو الشركة (اختياري)'
+                    : 'Organization or company (optional)',
+                'type' => 'text',
+                'autocomplete' => 'organization',
+                'max' => 255,
+            ],
+        ];
+    @endphp
+                        <label class="form-label">{{ $ar
+                    ? 'الجهة أو الشركة (اختياري)'
+                    : 'Organization or company (optional)',}}</label>
+                        @if($errors->has('phone'))
+                            <span class="error-text">{{$errors->first('company')}}</span>
+                        @endif
+                        <input 
+                            type="text" 
+                            name="company" 
+                            class="form-control @error('company') is-invalid @enderror" 
+                        
+                           
+                            value="{{old('company')}}"
+                            required
+                        >
+                    </div>
 
 
                     <!-- Details Field -->

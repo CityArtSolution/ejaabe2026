@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </div>
                                 </div>
                              
-                                <div class="mt-25 pt-25 border-top border-gray300">
+                                {{--<div class="mt-25 pt-25 border-top border-gray300">
                                     <h3 class="category-filter-title font-20 font-weight-bold text-dark-blue">{{ trans('public.reviews') }}</h3>
                                     <div class="pt-10">
                                         @foreach([5, 4, 3, 2, 1] as $rating)
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             </div>
                                         @endforeach
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
 
                             <!-- Type Filter -->

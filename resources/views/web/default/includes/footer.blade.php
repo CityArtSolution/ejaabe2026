@@ -19,20 +19,26 @@
             <div style="flex:1; min-width:160px">
                 <h5 style="margin-bottom:18px; font-weight:700">{{ __('home.policies') }}</h5>
                 <ul style="list-style:none; padding:0; margin:0; line-height:2.2; color:#a9bfd3; font-size:14px">
-                    <li>{{ __('home.privacy_policy') }}</li>
-                    <li>{{ __('home.intellectual_property') }}</li>
-                    <li>{{ __('home.tech_support') }}</li>
-                    <li>{{ __('home.terms') }}</li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/policy">{{ __('home.privacy_policy') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/alaltzam-bhkok-almlky-alfkry">{{ __('home.intellectual_property') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/support-policy">{{ __('home.tech_support') }}</a></li>
+                    
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/nazaha-policy">{{ __('Academic Integrity Policy') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/syas-alhdor-alaftrady">{{ __('Virtual Attendance Policy') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/elearning">{{ __('E-learning policies') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/kht-tdryb-almdrbyn">{{ __('Train-the-Trainer Plan') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/pages/terms-and-conditions">{{ __('home.terms') }}</li>
                 </ul>
             </div>
 
             <div style="flex:1; min-width:160px">
                 <h5 style="margin-bottom:18px; font-weight:700">{{ __('home.site_sections') }}</h5>
                 <ul style="list-style:none; padding:0; margin:0; line-height:2.2; color:#a9bfd3; font-size:14px">
-                    <li>{{ __('home.courses') }}</li>
-                    <li>{{ __('home.about_us') }}</li>
-                    <li>{{ __('home.contact_us') }}</li>
-                    <li>{{ __('home.join_trainer') }}</li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/classes">{{ __('home.courses') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/about">{{ __('home.about_us') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/contact">{{ __('home.contact_us') }}</a></li>
+                    <li><a class="text-white" href="/become-instructor">{{ __('home.join_trainer') }}</a></li>
+                    <li><a class="text-white" href="/{{app()->getLocale()}}/blog">{{ __('home.blog') }}</a></li>
                 </ul>
             </div>
 

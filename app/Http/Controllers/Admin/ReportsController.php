@@ -125,7 +125,7 @@ class ReportsController extends Controller
 
 
     //courses &consulting requests
-    public function show_requests(Request $request)
+    /*public function show_requests(Request $request)
     {
         $query = ServiceRequest::with('webinar')
             ->whereIn('type', ['course', 'consulting'])
@@ -158,6 +158,79 @@ class ReportsController extends Controller
         ];
             
         return view('admin.reports.coursesConsult', $data);
+}*/
+
+    public function show_requests(Request $request)
+{
+    return $this->serviceRequestsReport(
+        $request,
+        ['course', 'consulting'],
+        trans('public.Courses & Consulting requests')
+    );
+}
+
+public function contentDevelopmentRequests(Request $request)
+{
+    return $this->serviceRequestsReport(
+        $request,
+        ['content_development'],
+        'طلبات خدمات تطوير المحتوى'
+    );
+}
+
+public function quotationRequests(Request $request)
+{
+    return $this->serviceRequestsReport(
+        $request,
+        ['quotation'],
+        'طلبات عروض الأسعار'
+    );
+}
+
+private function serviceRequestsReport(Request $request, array $types, $title)
+{
+    $filters = $request->validate([
+        'from' => ['nullable', 'date_format:Y-m-d'],
+        'to' => ['nullable', 'date_format:Y-m-d'],
+    ]);
+
+    $query = ServiceRequest::with('webinar')
+        ->whereIn('type', $types);
+
+    $branchId = session('admin_selected_branch') ?? session('branch_id');
+
+    if ($branchId !== null) {
+        $query->where(function ($query) use ($branchId) {
+            // الطلبات الجديدة: الفرع محفوظ على الطلب نفسه.
+            $query->where('branch_id', $branchId)
+
+                // طلبات الدورات القديمة: استخراج الفرع من الدورة.
+                ->orWhere(function ($legacy) use ($branchId) {
+                    $legacy->whereNull('branch_id')
+                        ->where('type', 'course')
+                        ->whereHas('webinar', function ($webinar) use ($branchId) {
+                            $webinar->where('branch_id', $branchId);
+                        });
+                });
+        });
+    }
+
+    if (!empty($filters['from'])) {
+        $query->whereDate('created_at', '>=', $filters['from']);
+    }
+
+    if (!empty($filters['to'])) {
+        $query->whereDate('created_at', '<=', $filters['to']);
+    }
+
+    $items = $query->orderByDesc('id')
+        ->paginate(10)
+        ->appends($request->only(['from', 'to']));
+
+    return view('admin.reports.coursesConsult', [
+        'pageTitle' => $title,
+        'items' => $items,
+    ]);
 }
     
     

@@ -4000,7 +4000,7 @@ if ($request->has('course_title') && $request->course_title) {
             'email' => 'required|email|max:255',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'type' => 'required|in:consulting',
-
+            'company' => 'nullable|string|max:255',
 
             'description' => 'nullable',
         ], [
@@ -4026,7 +4026,7 @@ if ($request->has('course_title') && $request->course_title) {
                 'phone' => $request->phone,
                 'type' => $request->type,
 
-
+                'company'=>$request->company,
                 'description' => $request->description,
             ]);
 

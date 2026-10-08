@@ -120,20 +120,7 @@
         }
 
         /* THE CARD: large rounded square, white, elevated */
-        .shadow-effect {
-            width: 180px !important;
-            height: 180px !important;
-            border-radius: 28px !important;
-            background: #ffffff;
-            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.10);
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            overflow: hidden;
-            padding: 20px !important;
-            transition: transform .25s ease, box-shadow .25s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
+        
 
         .shadow-effect:hover {
             transform: translateY(-6px) scale(1.02);
@@ -191,22 +178,22 @@
             }
 
             /* Slightly smaller logo cards on mobile */
-            .shadow-effect {
+            /*.shadow-effect {
                 width: 130px !important;
                 height: 130px !important;
                 border-radius: 20px !important;
                 padding: 14px !important;
-            }
+            }*/
         }
 
-        @media (max-width: 480px) {
+        /*@media (max-width: 480px) {
             .shadow-effect {
                 width: 110px !important;
                 height: 110px !important;
                 border-radius: 16px !important;
                 padding: 12px !important;
             }
-        }
+        }*/
 
         .section-title {
             font-size: 36px;
@@ -248,7 +235,8 @@
             width: 100%;
             border-radius: 20px;
             object-fit: cover;
-            height: 300px;
+            /*height: 300px;*/
+            max-height:600px;
             display: block;
         }
 
@@ -963,12 +951,12 @@
             .event-card { margin-bottom: 16px; }
 
             /* Partners/Clients owl carousel — smaller cards on mobile */
-            .shadow-effect {
+            /*.shadow-effect {
                 width: 120px !important;
                 height: 120px !important;
                 border-radius: 18px !important;
                 padding: 14px !important;
-            }
+            }*/
         }
 
         /* ── Extra small ≤ 400px ── */
@@ -979,19 +967,466 @@
             .solutions-box { border-radius: 18px; }
             .tab-item { font-size: 12px; padding: 8px 10px; }
             .tab-item i { display: none; }
-            .shadow-effect {
+            /*.shadow-effect {
                 width: 100px !important;
                 height: 100px !important;
                 border-radius: 14px !important;
                 padding: 10px !important;
-            }
+            }*/
         }
+        
+        /*.shadow-effect {
+    width: auto;
+    height: 100%;
+    border-radius: 28px !important;
+    background: #ffffff;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.10);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden;
+    padding: 20px !important;
+    transition: transform .25s ease, box-shadow .25s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}*/
+
+.shadow-effect {
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+    border-radius: 28px !important;
+    background: #ffffff;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.10);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden;
+    padding: 20px !important;
+    transition: transform .25s ease, box-shadow .25s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.shadow-effect .instructors-card-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center;
+}
+    </style>
+    <style>
+        .modern-hero-section {
+    background: #e6eef7;
+    padding: 24px 0 10px;
+}
+
+.modern-hero-section .modern-hero-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f3f8fd 100%);
+    border-radius: 28px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(13, 59, 102, .08);
+}
+
+.modern-hero-section .hero-main {
+    display: flex;
+    align-items: stretch;
+    min-height: 600px;
+}
+
+/* ---------- Content ---------- */
+.modern-hero-section .hero-content-col {
+    flex: 0 0 42%;
+    max-width: 42%;
+    padding: 38px 50px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modern-hero-section .hero-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.modern-hero-section .hero-badge {
+    background: #f6e9dc;
+    color: #0b1d51;
+    padding: 10px 26px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.modern-hero-section .hero-badge-line {
+    width: 50px;
+    height: 2px;
+    background: #d98e1f;
+}
+
+.modern-hero-section .hero-title {
+    font-size: 42px;
+    line-height: 1.3;
+    font-weight: 800;
+    margin: 0;
+}
+
+.modern-hero-section .hero-title .t-dark { color: #0b1d51; display: block; }
+.modern-hero-section .hero-title .t-blue { color: #0d5cff; display: block; }
+
+.modern-hero-section .hero-title-underline {
+    display: block;
+    width: 75%;
+    height: 10px;
+    margin: 4px 0 26px;
+    border-bottom: 3px solid #d98e1f;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+.modern-hero-section .hero-description {
+    color: #2f3b4e;
+    font-size: 22px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+}
+
+.modern-hero-section .hero-tagline {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: #2f3b4e;
+    font-size: 17px;
+}
+
+.modern-hero-section .hero-tagline-line {
+    flex: 0 0 140px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #9db8f5);
+}
+
+/* ---------- Image ---------- */
+
+
+/*.modern-hero-section .hero-main-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+}*/
+
+.modern-hero-section .hero-float-card {
+    position: absolute;
+    bottom: 70px;
+    inset-inline-start: -30px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px 26px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 15px 40px rgba(13, 59, 102, .15);
+    z-index: 2;
+}
+
+.modern-hero-section .hero-float-card i {
+    font-size: 34px;
+    color: #0d5cff;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #d98e1f;
+    line-height: 1;
+}
+
+.modern-hero-section .float-divider {
+    width: 1px;
+    height: 44px;
+    background: #e3e8ef;
+}
+
+.modern-hero-section .hero-float-card strong {
+    display: block;
+    font-size: 18px;
+    color: #0b1d51;
+}
+
+.modern-hero-section .hero-float-card span:not(.float-divider) {
+    font-size: 16px;
+    color: #3d4a5c;
+}
+
+/* ---------- Features strip ---------- */
+.hero-features {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #e9f1fb;
+    padding: 28px 30px;
+    margin-top:60px;
+}
+
+.hero-feature {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    position: relative;
+}
+
+.hero-feature:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 44px;
+    background: #d98e1f;
+}
+
+.hero-feature-icon i {
+    font-size: 40px;
+    color: #0d5cff;
+    display: inline-block;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #d98e1f;
+    line-height: 1;
+}
+
+.hero-feature-text strong {
+    display: block;
+    font-size: 20px;
+    color: #0b1d51;
+}
+
+.hero-feature-text span {
+    font-size: 15px;
+    color: #6b7a90;
+}
+
+/* ---------- Tabs: تحت الكارت بدل ما تتداخل معاه ---------- */
+.hero-tabs-section { margin-top: 0 !important; padding-top: 24px; background: #e6eef7; }
+
+.hero-tabs-wrapper { background: #f3f6fa; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 992px) {
+    .modern-hero-section .hero-main { flex-direction: column; min-height: 0; }
+    .modern-hero-section .hero-content-col { flex: none; max-width: 100%; padding: 35px 28px 20px; }
+    .modern-hero-section .hero-title { font-size: 22px; }
+    .modern-hero-section .hero-description { font-size: 18px; }
+    .modern-hero-section .hero-image-col { min-height: 320px; }
+    .modern-hero-section .hero-float-card { inset-inline-start: 20px; bottom: 20px; }
+    .modern-hero-section .hero-features { flex-direction: column; align-items: stretch; gap: 18px; }
+    .modern-hero-section .hero-feature { justify-content: flex-start; }
+    .modern-hero-section .hero-feature:not(:last-child)::after { display: none; }
+}
+
+@media (max-width: 576px) {
+    .modern-hero-section { padding: 12px 0 6px; }
+    .modern-hero-section .modern-hero-card { border-radius: 20px; }
+    .modern-hero-section .hero-content-col { padding: 24px 18px 16px; }
+    .modern-hero-section .hero-badge { font-size: 14px; padding: 8px 18px; }
+    .modern-hero-section .hero-title { font-size: 10px; }
+    .modern-hero-section .hero-description { font-size: 15px; }
+    .modern-hero-section .hero-tagline-line { flex-basis: 60px; }
+    .modern-hero-section .hero-image-col { min-height: 240px; }
+    .modern-hero-section .hero-float-card { padding: 10px 16px; }
+    .modern-hero-section .hero-features { padding: 20px 18px; }
+    .hero-tabs-section { margin-top: 0 !important; }
+}
+
+.modern-hero-section .swiper-wrapper { align-items: stretch; }
+
+.modern-hero-section .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+}
+
+.modern-hero-section .hero-container {
+    width: 100%;
+    display: flex;
+}
+
+.modern-hero-section .modern-hero-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modern-hero-section .hero-main {
+    flex: 1 1 auto;
+    /*height: 580px;*/              /* ارتفاع ثابت لكل السلايدات، غيّره براحتك */
+    min-height: 0;
+}
+
+
+
+
+/* ---------- شريط المميزات: كارت مستقل بمسافة عن السلايدر ---------- */
+.hero-features-section {
+    background: #e6eef7;
+    padding: 0 0 10px;
+}
+
+.hero-features-section .hero-features {
+    margin-top: 28px;           /* المسافة بينه وبين بوكس السلايدر */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #f3f8fd;
+    border-radius: 22px;
+    padding: 28px 30px;
+    box-shadow: 0 12px 35px rgba(13, 59, 102, .07);
+}
+
+.hero-features-section .hero-feature {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    position: relative;
+}
+
+.hero-features-section .hero-feature:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 44px;
+    background: #d98e1f;
+}
+
+.hero-features-section .hero-feature-icon i {
+    font-size: 40px;
+    color: #0d5cff;
+    display: inline-block;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #d98e1f;
+    line-height: 1;
+}
+
+.hero-features-section .hero-feature-text strong {
+    display: block;
+    font-size: 20px;
+    color: #0b1d51;
+}
+
+.hero-features-section .hero-feature-text span {
+    font-size: 15px;
+    color: #6b7a90;
+}
+
+/* التابات تحت المميزات بمسافة */
+.hero-tabs-section { padding-top: 14px; }
+
+@media (max-width: 992px) {
+    .modern-hero-section .hero-main { height: auto; flex-direction: column; }
+  
+
+    .hero-features-section .hero-features { flex-direction: column; align-items: stretch; gap: 18px; }
+    .hero-features-section .hero-feature { justify-content: flex-start; }
+    .hero-features-section .hero-feature:not(:last-child)::after { display: none; }
+}
+
+@media (max-width: 576px) {
+    
+    .hero-features-section .hero-features { margin-top: 16px; padding: 20px 18px; border-radius: 16px; }
+}
+
+.modern-hero-section .hero-main {
+    display: flex;
+    align-items: stretch;      /* النص يتمدد على ارتفاع الصورة */
+    height: auto;
+    min-height: 0;
+}
+
+.modern-hero-section .hero-image-col {
+    position: relative;
+    flex: 1 1 58%;
+    min-height: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.modern-hero-section .hero-main-img {
+    position: static !important;   /* ترجع في مكانها الطبيعي */
+    display: block;
+    width: 100% !important;
+    height: auto !important;       /* الارتفاع تابع لنسبة الصورة */
+    max-height: none !important;
+    object-fit: contain;
+    border-radius: 0;
+}
+
+/* كل السلايدات بنفس الارتفاع (أطول واحدة) والكارت يملا الارتفاع */
+.modern-hero-section .swiper-wrapper { align-items: stretch; }
+.modern-hero-section .swiper-slide { height: auto !important; display: flex !important; }
+.modern-hero-section .hero-container { display: flex; width: 100%; }
+.modern-hero-section .modern-hero-card { display: flex; flex-direction: column; width: 100%; }
+.modern-hero-section .hero-main { flex: 1 1 auto; }
+
+
+
+@media (max-width: 992px) {
+    .modern-hero-section .hero-main { flex-direction: column; }
+    .modern-hero-section .hero-image-col { flex: none; width: 100%; height: auto; }
+}
+
+.hero-slider-wrap { position: relative; background: #e6eef7; }
+
+.hero-slider-wrap > .container {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 24px;          /* المسافة من أسفل الكارت */
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;  /* عشان الـ container ميمنعش السحب */
+}
+
+.hero-slider-wrap .hero-tabs-wrapper { pointer-events: auto; width: 100%; }
+
+.modern-hero-section .hero-main {
+    display: flex;
+    align-items: stretch;      /* النص والصورة بنفس الارتفاع */
+    height: auto;
+    min-height: 0;
+}
+
+.modern-hero-section .hero-image-col {
+    position: relative;
+    flex: 1 1 58%;
+    min-height: 0;
+    align-self: stretch;
+    aspect-ratio: 16 / 10;     /* يحدد ارتفاع البوكس من عرض الصورة */
+    overflow: hidden;
+    display: block;
+}
+
+.modern-hero-section .hero-main-img {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    object-fit: contain;         /* تملا المساحة بالكامل */
+    object-position: center;
+    border-radius: 0 !important;
+    display: block;
+}
+
     </style>
 @endpush
 
 @section('content')
 
-    @if (!empty($sliders) && count($sliders))
+    {{--@if (!empty($sliders) && count($sliders))
         <section class="modern-hero-section hero-slider swiper" style="overflow:visible;">
             <div class="swiper-wrapper">
                 @foreach ($sliders as $index => $slider)
@@ -1000,10 +1435,10 @@
                             <div class="modern-hero-card">
                                 <div class="row align-items-center">
 
-                                    {{-- Images column --}}
+                                    
                                     <div class="col-lg-6 col-md-12">
                                         <div>
-                                            <img src="{{ asset($slider->image ?? 'images/default/main.jpg') }}"
+                                            <img src="{{ asset($slider->image_locale ?? 'images/default/main.jpg') }}"
                                                  class="hero-main-img" loading="lazy"
                                                  alt="{{ $slider->title }}">
 
@@ -1021,10 +1456,10 @@
                                         </div>
                                     </div>
 
-                                    {{-- Content column --}}
+                                    
                                     <div class="col-lg-6 col-md-12">
                                         <div class="hero-content-col">
-                                            <span class="hero-badge">{{ $slider->subtitle }}</span>
+                                            <span class="hero-badge">{{ $slider->sub_title }}</span>
 
                                             <h1>{{ $slider->title }}</h1>
 
@@ -1070,16 +1505,135 @@
                 @endforeach
             </div>
         </section>
-    @endif
+    @endif --}}
+    
+    @php
+        $isAr = app()->getLocale() == 'ar';
+        $heroFeatures = [
+            ['icon' => 'bi-bar-chart',
+             'title' => $isAr ? 'إدارة المشاريع' : 'Project Management',
+             'desc'  => $isAr ? 'طور مهارات القيادة والتنفيذ' : 'Develop leadership and execution skills'],
+            ['icon' => 'bi-briefcase',
+             'title' => $isAr ? 'الأعمال والاحترافية' : 'Business & Professionalism',
+             'desc'  => $isAr ? 'ارتقِ بخبراتك العملية' : 'Elevate your practical experience'],
+            ['icon' => 'bi-gear',
+             'title' => $isAr ? 'نظم الإدارة' : 'Management Systems',
+             'desc'  => $isAr ? 'عزز الجودة وكفاءة الأداء' : 'Boost quality and performance efficiency'],
+        ];
+    @endphp
 
-    <section class="hero-tabs-section">
-        <div class="container">
+    
+    @if (!empty($sliders) && count($sliders))
+    <div class="hero-slider-wrap">
+    <section class="modern-hero-section hero-slider swiper" style="overflow:hidden;">
+        <div class="swiper-wrapper">
+            @foreach ($sliders as $index => $slider)
+                @php
+                    // تقسيم العنوان: النص الأول كحلي والنص التاني أزرق
+                    $words = preg_split('/\s+/u', trim($slider->description ?? ''));
+                    $half  = (int) ceil(count($words) / 2);
+                    $t1 = implode(' ', array_slice($words, 0, $half));
+                    $t2 = implode(' ', array_slice($words, $half));
+                @endphp
+
+                <div class="swiper-slide" style="display:flex; justify-content:center;">
+                    <div class="container hero-container" style="max-width:1800px;">
+                        <div class="modern-hero-card">
+
+                            <div class="hero-main">
+
+                                {{-- النص (يمين في العربي) --}}
+                                <div class="hero-content-col">
+                                    <div class="hero-badge-row">
+                                        @if($isAr)
+                                        <span class="hero-badge-line"></span>
+                                        <span class="hero-badge">{{ $slider->title }}</span>
+                                        
+                                        @else
+                                        <span class="hero-badge">{{ $slider->title }}</span>
+                                        <span class="hero-badge-line"></span>
+                                        @endif
+                                        
+                                    </div>
+
+                                    <h1 class="hero-title">
+                                        <span class="t-dark">{{ $t1 }}</span>
+                                        <span class="t-blue">{{ $t2 }}</span>
+                                    </h1>
+                                    <span class="hero-title-underline"></span>
+                                    
+                                    <div class="hero-buttons">
+                                                <a href="{{ $slider->button1_link }}" class="btn-hero-primary">
+                                                    <i class="bi bi-folder"></i>
+                                                    {{ $slider->button1_title }}
+                                                </a>
+                                                <a href="{{ $slider->button2_link }}" class="btn-hero-outline">
+                                                    <i class="bi bi-book"></i>
+                                                    {{ $slider->button2_title }}
+                                                </a>
+                                            </div>
+
+                                    {{--<p class="hero-description">{{ $slider->description }}</p>
+
+                                    <div class="hero-tagline">
+                                        <span class="hero-tagline-line"></span>
+                                        <span>{{ $isAr ? 'معرفة تتطور. فرص تتسع.' : 'Knowledge evolves. Opportunities expand.' }}</span>
+                                    </div>--}}
+                                </div>
+
+                                {{-- الصورة (شمال في العربي) --}}
+                                <div class="hero-image-col">
+                                    <img src="{{ asset($slider->image_locale ?? 'images/default/main.jpg') }}"
+                                         class="hero-main-img" loading="lazy" alt="{{ $slider->title }}">
+
+                                    {{--<div class="hero-float-card">
+                                        <i class="bi bi-mortarboard-fill"></i>
+                                        <span class="float-divider"></span>
+                                        <div>
+                                            <strong>{{ $isAr ? 'استثمر' : 'Invest' }}</strong>
+                                            <span>{{ $isAr ? 'في مستقبلك' : 'in your future' }}</span>
+                                        </div>
+                                    </div>--}}
+                                </div>
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            {{-- شريط المميزات --}}
+                            
+        </div>
+      
+    </section>
+   {{--<section class="hero-features-section">
+          <div class="container hero-container" style="max-width:1800px;">
+        <div class="hero-features">
+            @foreach ($heroFeatures as $f)
+                <div class="hero-feature">
+                    <div class="hero-feature-icon"><i class="bi {{ $f['icon'] }}"></i></div>
+                    <div class="hero-feature-text">
+                        <strong>{{ $f['title'] }}</strong>
+                        <span>{{ $f['desc'] }}</span>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    </section>--}}   
+    
+      
+    
+    </div>
+      <div class="container">
             <div class="hero-tabs-wrapper">
                 @foreach ($sliders as $index => $slider)
                     <button
-                        class="tab-item {{ $index == 1 ? 'active' : '' }}"
-                        data-slide-index="{{ $index }}"
-                        style="background:{{ $index == 1 ? '#1f6ea5' : 'transparent' }};color:{{ $index == 1 ? '#ffffff' : '#6c7a89' }};">
+                       class="tab-item {{ $index == 0 ? 'active' : '' }}"
+    data-slide-index="{{ $index }}"
+    style="background:{{ $index == 0 ? '#1f6ea5' : 'transparent' }};color:{{ $index == 0 ? '#ffffff' : '#6c7a89' }};">
 
                         @if($index == 0)<i class="bi bi-bullseye" style="font-size:18px;"></i>@endif
                         @if($index == 1)<i class="bi bi-pen" style="font-size:18px;"></i>@endif
@@ -1090,7 +1644,9 @@
                 @endforeach
             </div>
         </div>
-    </section>
+@endif
+
+    
 
     {{-- Tab/slider JS --}}
     <script>
@@ -1166,6 +1722,10 @@
                             @endforeach
                         </div>
                     </div>
+                    
+                    <div class="d-flex justify-content-center">
+                        <a href="/{{app()->getLocale()}}/classes" class="btn-primary-custom px-3 py-2 mt-3" style="    border-radius: 20px;">{{__('all courses')}}</a>
+                    </div>
                 </div>
             </section>
         @endif
@@ -1177,7 +1737,7 @@
         )
             <section class="home-sections home-sections-swiper container arabic-font">
                 <div class="px-10 px-md-0">
-                    <h2 class="section-title">{{ trans('home.featured_classes') }}</h2>
+                    <h2 class="section-title">{{ trans('home.featured_classes') }} 111</h2>
                     <p class="section-hint">{{ trans('home.featured_classes_hint') }}</p>
                 </div>
                 <div class="feature-slider-container position-relative d-flex justify-content-center mt-10 arabic-font">
@@ -1291,7 +1851,7 @@
 
 
         {{-- Latest Classes (Tracks Grid) --}}
-        @if ($homeSection->name == \App\Models\HomeSection::$latest_classes && !empty($latestWebinars) && !$latestWebinars->isEmpty())
+        {{--@if ($homeSection->name == \App\Models\HomeSection::$latest_classes && !empty($latestWebinars) && !$latestWebinars->isEmpty())
             <section class="home-sections container-fluid py-60">
                 <div class="text-center mb-40">
                     <h2 class="section-title mb-10">{{__('home.Specialized_educational')}}</h2>
@@ -1326,7 +1886,253 @@
                     </div>
                 </div>
             </section>
-        @endif
+        @endif--}}
+        
+        {{-- Latest Classes (Tracks Grid) --}}
+{{--@if (
+    $homeSection->name == \App\Models\HomeSection::$latest_classes
+    && !empty($latestWebinars)
+    && !$latestWebinars->isEmpty()
+)
+    <section id="specialized-tracks"
+             class="home-sections container-fluid py-60">
+
+        <div class="text-center mb-40">
+            <h2 class="section-title mb-10">
+                {{ __('home.Specialized_educational') }}
+            </h2>
+
+            <p class="section-hint">
+                {{ __('home.Choose_path') }}
+            </p>
+
+            <form action="{{ url()->current() }}#specialized-tracks"
+                  method="GET"
+                  class="tracks-filter"
+                  aria-label="{{ app()->getLocale() === 'ar' ? 'تصفية المسارات' : 'Filter tracks' }}">
+
+                <button type="submit"
+                        name="track_category"
+                        value=""
+                        class="filter-btn {{ $selectedTrackCategory === '' ? 'active' : '' }}"
+                        aria-pressed="{{ $selectedTrackCategory === '' ? 'true' : 'false' }}">
+                    {{ __('home.all') }}
+                </button>
+
+                @foreach ($trackCategories as $trackCategory)
+                    @php
+                        $isSelected = (string) $trackCategory->id === $selectedTrackCategory;
+                    @endphp
+
+                    <button type="submit"
+                            name="track_category"
+                            value="{{ $trackCategory->id }}"
+                            class="filter-btn {{ $isSelected ? 'active' : '' }}"
+                            aria-pressed="{{ $isSelected ? 'true' : 'false' }}">
+                        {{ $trackCategory->title }}
+                    </button>
+                @endforeach
+            </form>
+        </div>
+
+        <div class="tracks-grid">
+            @foreach ($latestWebinars as $latestWebinar)
+                <div class="track-card">
+                    <div class="track-top">
+                        <div class="track-icon">
+                            <i class="bi bi-book" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="track-badge">
+                            {{ __('home.remote') }}
+                        </span>
+                    </div>
+                    
+                     
+
+                    <h3 class="track-title">
+                        {{ $latestWebinar->title }}
+                    </h3>
+
+                    <p class="track-desc">
+                        {{ \Illuminate\Support\Str::limit(
+                            strip_tags($latestWebinar->description ?? ''),
+                            120
+                        ) }}
+                    </p>
+
+                    <div class="track-divider"></div>
+
+                    <div class="track-footer">
+                        <a href="{{ $latestWebinar->getUrl() }}"
+                           class="track-details">
+                            {{ __('home.details') }}
+                        </a>
+
+                        <span class="track-date">
+                            {{ date('Y d M', $latestWebinar->created_at) }}
+                        </span>
+                    </div>
+                </div>
+            @endforeach
+
+            <a href="{{ url(app()->getLocale() . '/classes') }}"
+               class="track-card discover-card">
+                <div class="discover-icon" aria-hidden="true">+</div>
+
+                <h3 class="discover-title">
+                    {{ __('home.Discover_more') }}
+                </h3>
+
+                <p class="discover-text">
+                    {{ __('home.Browse_programs') }}
+                </p>
+            </a>
+        </div>
+    </section>
+@endif--}}
+
+{{-- CET Courses --}}
+@if (
+    $homeSection->name == \App\Models\HomeSection::$latest_classes
+    && !empty($latestWebinars)
+    /*&& !$latestWebinars->isEmpty()*/
+)
+    <section id="specialized-tracks"
+             class="home-sections container-fluid py-60">
+
+        <div class="text-center mb-40">
+            <h2 class="section-title mb-10">
+                @if(app()->getLocale()=='ar')
+                خطة البرامج التدريبة
+                @else
+                training program plans
+                @endif
+                
+            </h2>
+
+            <p class="section-hint">
+                {{ __('home.Choose_path') }}
+            </p>
+
+            <form action="{{ url()->current() }}#specialized-tracks"
+                  method="GET"
+                  class="tracks-filter">
+
+                <button type="submit"
+                        name="track_category"
+                        value=""
+                        class="filter-btn {{ empty($selectedTrackCategory) ? 'active' : '' }}">
+                    {{ __('home.all') }}
+                </button>
+
+                @foreach ($trackCategories as $trackCategory)
+                    <button type="submit"
+                            name="track_category"
+                            value="{{ $trackCategory->id }}"
+                            class="filter-btn {{ (string) $trackCategory->id === (string) $selectedTrackCategory ? 'active' : '' }}">
+                        {{ $trackCategory->title }}
+                    </button>
+                @endforeach
+            </form>
+        </div>
+
+        <div class="tracks-grid">
+            @foreach ($latestWebinars as $latestWebinar)
+                @php
+                    $details = json_decode($latestWebinar->details, true);
+                    $detail = is_array($details) ? ($details[0] ?? []) : [];
+                @endphp
+
+                <div class="track-card">
+                    {{--<div class="track-top">
+                        <div class="track-icon">
+                            <i class="bi bi-book" aria-hidden="true"></i>
+                        </div>
+
+                        <span class="track-badge">
+                            {{ __('home.remote') }}
+                        </span>
+                    </div>--}}
+                    
+                    <img src="{{ $latestWebinar->getImage() }}" alt="{{ $latestWebinar->title ?? '' }}" class="img-cover mb-3">
+
+                    <h3 class="track-title">
+                        {{ $latestWebinar->title }}
+                    </h3>
+
+                    <div class="track-desc">
+                        @if (!empty($detail['date']))
+                            <div>
+                                <strong>{{ trans('public.Date') }}:</strong>
+                                {{ $detail['date'] }}
+                            </div>
+                        @endif
+
+                        @if (!empty($detail['start_time']) || !empty($detail['end_time']))
+                            <div>
+                                <strong>{{ trans('public.Time') }}:</strong>
+                                {{ $detail['start_time'] ?? '---' }}
+                                -
+                                {{ $detail['end_time'] ?? '---' }}
+                            </div>
+                        @endif
+
+                        @if (isset($detail['price']))
+                            <div>
+                                <strong>{{ trans('public.Price') }}:</strong>
+                                {{ number_format($detail['price'], 2) }}
+                                {{ trans('public.SAR') }}
+                            </div>
+                        @endif
+
+                        <div>
+                            <strong>{{ trans('public.Location') }}:</strong>
+                            {{ $detail['location'] ?? '—' }}
+                        </div>
+
+                        <div>
+                            <strong>{{ trans('public.Language') }}:</strong>
+                            @switch($detail['lang'] ?? '')
+                                @case('AR') {{ trans('public.Arabic') }} @break
+                                @case('EN') {{ trans('public.English') }} @break
+                                @default {{ trans('public.Bilanguage') }}
+                            @endswitch
+                        </div>
+
+                        <div>
+                            <strong>{{ trans('public.Duration') }}:</strong>
+                            {{ $detail['ndays'] ?? '—' }}
+                            {{ trans('public.Days') }}
+                        </div>
+                    </div>
+
+                    <div class="track-divider"></div>
+
+                    <div class="track-footer">
+                        <a href="{{ $latestWebinar->getUrl() }}"
+                           class="track-details">
+                            {{ trans('public.details') }}
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+
+            <a href="{{ url(app()->getLocale() . '/cet-course/plan') }}"
+               class="track-card discover-card">
+                <div class="discover-icon" aria-hidden="true">+</div>
+
+                <h3 class="discover-title">
+                    {{ __('home.Discover_more') }}
+                </h3>
+
+                <p class="discover-text">
+                    {{ __('home.Browse_programs') }}
+                </p>
+            </a>
+        </div>
+    </section>
+@endif
 
     @endforeach
 
@@ -1472,7 +2278,7 @@
                             <span class="solutions-badge">{{__("home.Solutions_organizations")}}</span>
                             <h2>{{__("home.Programs_organization")}}</h2>
                             <p>{{__("home.design_customized_training")}}</p>
-                            <a href="#">{{__("home.Request_consultation")}}</a>
+                            <a href="/{{app()->getLocale()}}/request-consulting">{{__("home.Request_consultation")}}</a>
                         </div>
                     </div>
                 </div>
@@ -1487,7 +2293,7 @@
                     <div class="services-big-content">
                         <h2>{{__('home.Content_development')}}</h2>
                         <p>{{__("home.Integrated_solutions")}}</p>
-                        <a href="#" class="btn-outline">{{__("home.Request_now")}}</a>
+                        <a href="{{ url(app()->getLocale() . '/request-content-development') }}" class="btn-outline">{{__("home.Request_now")}}</a>
                     </div>
                 </div>
             </section>
@@ -1500,8 +2306,8 @@
                         <p>{{__('home.team_is_ready')}}</p>
                     </div>
                     <div class="services-cta-actions">
-                        <a href="#" class="btn-outline-custom">{{__("home.Request_quotation")}}</a>
-                        <a href="#" class="btn-primary-custom">{{__("home.Contact_us")}}</a>
+                        <a href="{{ url(app()->getLocale() . '/request-quotation') }}" class="btn-outline-custom">{{__("home.Request_quotation")}}</a>
+                        <a href="{{ url(app()->getLocale() . '/contact') }}" class="btn-primary-custom">{{__("home.Contact_us")}}</a>
                     </div>
                 </div>
             </section>
@@ -1844,6 +2650,14 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                             
+                            <div class="d-flex justify-content-center">
+                              
+                                 <a href="{{ route(app()->getLocale() === 'en' ? 'web.events.en' : 'web.events.ar') }}"
+       class="btn btn-light btn-sm mt-15">
+        {{ app()->getLocale() === 'en' ? 'View all events' : 'عرض كل الفعاليات' }}
+    </a>
                             </div>
                         </div>
                     </div>

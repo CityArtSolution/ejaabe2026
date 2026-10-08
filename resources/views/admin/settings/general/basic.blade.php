@@ -130,6 +130,18 @@
                         <input type="text" name="value[footer_logo]" id="footer_logo" value="{{ (!empty($itemValue) and !empty($itemValue['footer_logo'])) ? $itemValue['footer_logo'] : old('footer_logo') }}" class="form-control" placeholder="{{ trans('admin/main.footer_logo_placeholder') }}"/>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="input-label">{{ trans('about image') }}</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="input-group-text admin-file-manager" data-input="logo" data-preview="holder">
+                                <i class="fa fa-upload"></i>
+                            </button>
+                        </div>
+                        <input type="text" name="value[about_image]" id="about_image" value="{{ (!empty($itemValue) and !empty($itemValue['about_image'])) ? $itemValue['about_image'] : old('about_image') }}" class="form-control" placeholder="{{ trans('about image') }}"/>
+                    </div>
+                </div>
 
                 <div class="form-group custom-switches-stacked">
                     <label class="custom-switch pl-0">

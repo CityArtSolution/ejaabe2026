@@ -38,6 +38,7 @@ class ContentsController extends Controller
 
     public function index($link)
     {
+        
         $firstCharacter = substr($link, 0, 1);
         if ($firstCharacter !== '/') {
             $link = '/' . $link;
@@ -50,7 +51,28 @@ class ContentsController extends Controller
                 'pageTitle' => $title,
             ];
             return view('web.default.contents.content_development_' . app()->getLocale(), $data);
-        } else {
+        } 
+        elseif($link=='/edcuational-cunsulting'){
+           $page = Page::where('link', $link)
+                ->where('status', 'publish')
+                ->first();
+            $data = [
+                   
+                    'page' => $page
+                ];
+            return view('web.default.pages.consulting_redesign', $data);
+        }
+        elseif($link=='/daleel-alistsharat'){
+            $page = Page::where('link', $link)
+                ->where('status', 'publish')
+                ->first();
+            $data = [
+                   
+                    'page' => $page
+                ];
+            return view('web.default.pages.consulting_redesign', $data);
+        }
+        else {
             $page = Page::where('link', $link)
                 ->where('status', 'publish')
                 ->first();

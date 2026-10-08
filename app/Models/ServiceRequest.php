@@ -12,7 +12,7 @@ class ServiceRequest extends Model
 {
     protected $table = 'service_requests';
 
-    protected $fillable = ['name', 'email', 'phone', 'description', 'type','course_id'];
+    protected $fillable = ['name', 'email', 'phone', 'description', 'type','course_id','branch_id','company'];
 
 
      public function scopeByBranch($query)

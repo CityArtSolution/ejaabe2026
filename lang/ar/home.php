@@ -21,7 +21,7 @@
     'Programs_organization' => 'برامج مخصصة لجهتك',
     'design_customized_training' => 'نصمم برامج تدريبية خاصة تتواءم مع استراتيجية مؤسستك واحتياجات فريق عملك.',
     'Request_consultation' => 'طلب استشارة مجانية',
-    'Content_development' => 'خدمات تطوير المحتوى للجامعات',
+    'Content_development' => 'خدمات تطوير المحتوى',
     'Integrated_solutions' => 'حلول متكاملة للجامعات والجهات التدريبية تشمل تحليل الاحتياج، تصميم البرامج، إنتاج المحتوى، وضمان الجودة.',
     'Request_now' => 'اطلب الخدمة الآن',
     'have_specific_training' => 'هل لديك احتياج تدريبي خاص؟',
