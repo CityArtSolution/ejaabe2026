@@ -382,7 +382,7 @@ body:not(.rtl) .pi-home .pi-step:not(:last-child)::after { transform: rotate(-13
   font-size: var(--pi-fs-xs); font-weight: 600; padding: 4px 12px; border-radius: 999px;
   background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
 }
-.pi-home .pi-cd-text .pi-btn { width: fit-content; }
+.pi-home .pi-cd-text .pi-btn { width: fit-content; justify-self: center; }
 .pi-home .pi-cd-media { position: relative; min-height: 300px; overflow: hidden; background: #0b1520; }
 .pi-home .pi-cd-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--pi-ease); }
 .pi-home .pi-cd-card:hover .pi-cd-media img { transform: scale(1.05); }

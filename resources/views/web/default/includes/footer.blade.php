@@ -91,6 +91,8 @@
     .pi-footer .pi-nl-form input {
         width: 100%; height: 46px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, .08);
         background: #0f3456; color: #fff; padding-inline: 14px; font: inherit; font-size: var(--pi-fs-sm);
+        /* اتجاه الحقل يتبع لغة الصفحة: يبدأ النص من اليمين في العربية ومن اليسار في الإنجليزية */
+        direction: inherit; text-align: start;
     }
     .pi-footer .pi-nl-form input::placeholder { color: #6f8ea8; }
     .pi-footer .pi-nl-form input:focus { outline: 2px solid var(--pi-c-sky); outline-offset: 1px; }
@@ -201,7 +203,7 @@
                 {{ csrf_field() }}
 
                 <label for="piNlEmail" class="sr-only">{{ __('home.email_placeholder') }}</label>
-                <input type="email" id="piNlEmail" name="newsletter_email" placeholder="{{ __('home.email_placeholder') }}" autocomplete="email" dir="auto" required>
+                <input type="email" id="piNlEmail" name="newsletter_email" placeholder="{{ __('home.email_placeholder') }}" autocomplete="email" required>
                 <button type="submit" class="pi-btn pi-btn--blue">{{ __('home.subscribe') }}</button>
             </form>
         </div>
