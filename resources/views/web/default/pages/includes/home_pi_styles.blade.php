@@ -300,7 +300,7 @@ body:not(.rtl) .pi-home .pi-step:not(:last-child)::after { transform: rotate(-13
 }
 .pi-home .pi-filter-btn:hover { background: rgba(255,255,255,.22); }
 .pi-home .pi-filter-btn.is-active { background: var(--pi-c-orange); border-color: var(--pi-c-orange); }
-.pi-home .pi-tracks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: clamp(14px, 2vw, 22px); }
+.pi-home .pi-tracks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: clamp(14px, 2vw, 22px); }
 .pi-home .pi-track-card {
   background: #fff; border: 4px solid #fff; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
   box-shadow: 0 12px 28px rgba(0, 30, 60, .25); transition: transform .35s var(--pi-ease), box-shadow .35s;
@@ -311,9 +311,24 @@ body:not(.rtl) .pi-home .pi-step:not(:last-child)::after { transform: rotate(-13
 .pi-home .pi-track-card:hover .pi-track-media img { transform: scale(1.07); }
 .pi-home .pi-track-body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .pi-home .pi-track-body h3 { color: var(--pi-c-blue); font-size: var(--pi-fs-md); line-height: 1.5; }
-.pi-home .pi-track-meta { display: grid; gap: 3px; color: var(--pi-c-muted); font-size: var(--pi-fs-xs); line-height: 1.7; }
-.pi-home .pi-track-meta strong { color: var(--pi-c-petrol); font-weight: 600; }
-.pi-home .pi-track-body .pi-btn { width: fit-content; margin-top: auto; }
+.pi-home .pi-track-top { position: relative; }
+.pi-home .pi-track-price {
+  position: absolute; inset-inline-start: 10px; bottom: 10px; padding: 4px 12px; border-radius: 999px;
+  background: var(--pi-c-orange); color: #fff; box-shadow: 0 6px 14px rgba(229, 140, 34, .4);
+  font-family: var(--pi-f-display); font-weight: 700; font-size: var(--pi-fs-xs); line-height: 1.6;
+}
+/* تفاصيل البرنامج: خانات صغيرة بأيقونة وعنوان وقيمة */
+.pi-home .pi-track-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.pi-home .pi-meta-item {
+  display: flex; align-items: flex-start; gap: 8px; min-width: 0; padding: 8px 10px; border-radius: 10px;
+  background: var(--pi-c-bg); color: var(--pi-c-petrol); font-size: 12.5px; line-height: 1.5;
+}
+.pi-home .pi-meta-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.pi-home .pi-meta-item svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--pi-c-blue); }
+.pi-home .pi-meta-item > span { display: grid; min-width: 0; }
+.pi-home .pi-meta-item small { font-size: 11px; color: var(--pi-c-muted); }
+.pi-home .pi-meta-item b { font-weight: 600; overflow-wrap: anywhere; }
+.pi-home .pi-track-body .pi-btn { width: 100%; margin-top: auto; }
 .pi-home .pi-tracks-empty { text-align: center; color: var(--pi-c-gold-soft); }
 
 /* =========================================================
@@ -440,13 +455,20 @@ body:not(.rtl) .pi-home .pi-cd-media::after { background: linear-gradient(90deg,
 }
 .pi-home .pi-event-status--upcoming { background: var(--pi-c-orange-600); }
 .pi-home .pi-event-status--current { background: #1f8a4c; }
-.pi-home .pi-event-body { padding: 14px 16px 18px; display: grid; gap: 8px; flex: 1; align-content: start; }
-.pi-home .pi-event-body h3 { color: var(--pi-c-blue); font-size: var(--pi-fs-md); font-weight: 800; }
-.pi-home .pi-event-body p { color: var(--pi-c-muted); font-size: var(--pi-fs-xs); line-height: 1.7; }
-.pi-home .pi-event-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--pi-c-petrol); font-weight: 600; }
-.pi-home .pi-event-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.pi-home .pi-event-body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.pi-home .pi-event-body h3 {
+  color: var(--pi-c-blue); font-size: var(--pi-fs-md); font-weight: 800; line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pi-home .pi-event-body p {
+  color: var(--pi-c-muted); font-size: var(--pi-fs-xs); line-height: 1.7;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pi-home .pi-event-meta { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--pi-c-petrol); font-weight: 600; }
+.pi-home .pi-event-meta:empty { display: none; }
+.pi-home .pi-event-meta span { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: var(--pi-c-bg); line-height: 1.6; }
 .pi-home .pi-event-meta svg { width: 14px; height: 14px; color: var(--pi-c-orange); flex: none; }
-.pi-home .pi-event-body .pi-btn { width: fit-content; margin-top: 4px; }
+.pi-home .pi-event-body .pi-btn { width: fit-content; margin-top: auto; }
 .pi-home .pi-events-more { display: flex; justify-content: center; margin-top: 30px; }
 
 /* =========================================================
@@ -568,10 +590,32 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
 @media (max-width: 520px) {
   .pi-home .pi-acc-card { flex-basis: calc((100% - var(--gap)) / 2); min-width: 0; min-height: 180px; }
   .pi-home .pi-org-features { grid-template-columns: 1fr; }
-  .pi-home .pi-org-feature { grid-template-columns: auto 1fr; text-align: start; align-items: center; }
-  .pi-home .pi-org-feature .pi-tag { grid-column: 1 / -1; width: fit-content; }
-  .pi-home .pi-org-feature svg { margin: 0; }
+  /* صف: أيقونة في مربع ثم العنوان والوصف بجانبها */
+  .pi-home .pi-org-feature { grid-template-columns: 48px 1fr; column-gap: 12px; row-gap: 4px; padding: 14px; text-align: start; align-items: center; }
+  .pi-home .pi-org-feature .pi-tag { grid-column: 2; grid-row: 1; width: fit-content; }
+  .pi-home .pi-org-feature svg { grid-column: 1; grid-row: 1 / span 2; width: 48px; height: 48px; padding: 11px; margin: 0; border-radius: 12px; background: rgba(255, 255, 255, .08); }
+  .pi-home .pi-org-feature p { grid-column: 2; grid-row: 2; }
   .pi-home .pi-slide-actions .pi-btn { flex: 1; }
+}
+
+/* ---------- الجوال: بطاقات البرامج والفعاليات شريط أفقي يُسحب بالإصبع بدل قائمة طويلة ---------- */
+@media (max-width: 760px) {
+  .pi-home .pi-tracks-grid, .pi-home .pi-events-grid {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    margin-inline: -20px; padding: 8px 20px 30px; margin-bottom: -12px; scroll-padding-inline: 20px; scrollbar-width: none;
+  }
+  .pi-home .pi-tracks-grid::-webkit-scrollbar, .pi-home .pi-events-grid::-webkit-scrollbar { display: none; }
+  .pi-home .pi-track-card, .pi-home .pi-event-card { flex: 0 0 84%; max-width: 340px; scroll-snap-align: start; }
+  .pi-home .pi-track-card:only-child, .pi-home .pi-event-card:only-child { flex-basis: 100%; max-width: none; }
+  .pi-home .pi-track-card:hover, .pi-home .pi-event-card:hover { transform: none; }
+  .pi-home .pi-event-body .pi-btn { width: 100%; }
+  .pi-home .pi-tracks-filter { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-inline: -20px; padding-inline: 20px; scrollbar-width: none; }
+  .pi-home .pi-tracks-filter::-webkit-scrollbar { display: none; }
+  .pi-home .pi-filter-btn { flex: none; }
+  .pi-home .pi-cta-actions { width: 100%; }
+  .pi-home .pi-cta-actions .pi-btn { flex: 1; }
+  .pi-home .pi-pb-actions .pi-btn { flex: 1; }
+  .pi-home .pi-logo-card { height: 84px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -66,6 +66,9 @@
             <symbol id="pi-i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></g></symbol>
             <symbol id="pi-i-quote" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></g></symbol>
             <symbol id="pi-i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+            <symbol id="pi-i-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+            <symbol id="pi-i-globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.7 2.6 14.3 0 17M12 3.5c-2.6 2.7-2.6 14.3 0 17"/></g></symbol>
+            <symbol id="pi-i-timer" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h10M7 20.5h10M8 3.5v3.2c0 1.5 4 3.3 4 5.3s-4 3.8-4 5.3v3.2M16 3.5v3.2c0 1.5-4 3.3-4 5.3s4 3.8 4 5.3v3.2"/></g></symbol>
             <symbol id="pi-i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/></g></symbol>
         </defs>
     </svg>
@@ -221,39 +224,46 @@
                                 @endphp
 
                                 <article class="pi-track-card pi-reveal" style="--d:{{ ($loop->index % 4) * .08 }}s">
-                                    <a href="{{ $latestWebinar->getUrl() }}" class="pi-track-media" tabindex="-1" aria-hidden="true">
-                                        <img src="{{ $latestWebinar->getImage() }}" alt="" loading="lazy">
-                                    </a>
+                                    <div class="pi-track-top">
+                                        <a href="{{ $latestWebinar->getUrl() }}" class="pi-track-media" tabindex="-1" aria-hidden="true">
+                                            <img src="{{ $latestWebinar->getImage() }}" alt="" loading="lazy">
+                                        </a>
+
+                                        @if (isset($piDetail['price']) and is_numeric($piDetail['price']))
+                                            <span class="pi-track-price">{{ number_format($piDetail['price'], 2) }} {{ trans('public.SAR') }}</span>
+                                        @endif
+                                    </div>
 
                                     <div class="pi-track-body">
                                         <h3><a href="{{ $latestWebinar->getUrl() }}">{{ $latestWebinar->title }}</a></h3>
 
-                                        <div class="pi-track-meta">
+                                        <ul class="pi-track-meta">
                                             @if (!empty($piDetail['date']))
-                                                <span><strong>{{ trans('public.Date') }}:</strong> {{ $piDetail['date'] }}</span>
+                                                <li class="pi-meta-item"><svg aria-hidden="true"><use href="#pi-i-calendar"/></svg><span><small>{{ trans('public.Date') }}</small><b>{{ $piDetail['date'] }}</b></span></li>
                                             @endif
 
                                             @if (!empty($piDetail['start_time']) || !empty($piDetail['end_time']))
-                                                <span><strong>{{ trans('public.Time') }}:</strong> {{ $piDetail['start_time'] ?? '---' }} - {{ $piDetail['end_time'] ?? '---' }}</span>
+                                                <li class="pi-meta-item"><svg aria-hidden="true"><use href="#pi-i-clock"/></svg><span><small>{{ trans('public.Time') }}</small><b>{{ $piDetail['start_time'] ?? '---' }} - {{ $piDetail['end_time'] ?? '---' }}</b></span></li>
                                             @endif
 
-                                            @if (isset($piDetail['price']))
-                                                <span><strong>{{ trans('public.Price') }}:</strong> {{ number_format($piDetail['price'], 2) }} {{ trans('public.SAR') }}</span>
-                                            @endif
+                                            <li class="pi-meta-item"><svg aria-hidden="true"><use href="#pi-i-pin"/></svg><span><small>{{ trans('public.Location') }}</small><b>{{ $piDetail['location'] ?? '—' }}</b></span></li>
 
-                                            <span><strong>{{ trans('public.Location') }}:</strong> {{ $piDetail['location'] ?? '—' }}</span>
+                                            <li class="pi-meta-item">
+                                                <svg aria-hidden="true"><use href="#pi-i-globe"/></svg>
+                                                <span>
+                                                    <small>{{ trans('public.Language') }}</small>
+                                                    <b>
+                                                        @switch($piDetail['lang'] ?? '')
+                                                            @case('AR') {{ trans('public.Arabic') }} @break
+                                                            @case('EN') {{ trans('public.English') }} @break
+                                                            @default {{ trans('public.Bilanguage') }}
+                                                        @endswitch
+                                                    </b>
+                                                </span>
+                                            </li>
 
-                                            <span>
-                                                <strong>{{ trans('public.Language') }}:</strong>
-                                                @switch($piDetail['lang'] ?? '')
-                                                    @case('AR') {{ trans('public.Arabic') }} @break
-                                                    @case('EN') {{ trans('public.English') }} @break
-                                                    @default {{ trans('public.Bilanguage') }}
-                                                @endswitch
-                                            </span>
-
-                                            <span><strong>{{ trans('public.Duration') }}:</strong> {{ $piDetail['ndays'] ?? '—' }} {{ trans('public.Days') }}</span>
-                                        </div>
+                                            <li class="pi-meta-item"><svg aria-hidden="true"><use href="#pi-i-timer"/></svg><span><small>{{ trans('public.Duration') }}</small><b>{{ $piDetail['ndays'] ?? '—' }} {{ trans('public.Days') }}</b></span></li>
+                                        </ul>
 
                                         <a href="{{ $latestWebinar->getUrl() }}" class="pi-btn pi-btn--blue pi-btn--sm">{{ trans('public.details') }}</a>
                                     </div>
