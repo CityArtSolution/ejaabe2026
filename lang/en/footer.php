@@ -24,4 +24,10 @@ return [
     'academic_integrity' => 'Academic integrity policy',
     'virtual_attendance' => 'Virtual attendance policy',
     'blogs_news' => 'Blogs & News',
+    'elearning_policy' => 'E-learning policy',
+    'trainers_plan' => 'Trainers training plan',
+    'join_us' => 'Join us',
+    'rights_reserved' => 'All rights reserved © :year Positive Interaction',
+    'countries' => 'Saudi Arabia · Canada · Egypt · UAE',
+    'back_to_top' => 'Back to top',
 ];
