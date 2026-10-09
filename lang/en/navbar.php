@@ -22,4 +22,8 @@ return [
     'saudi'  => 'Saudi Arabia',
     'uae'    => 'UAE',
     'ca'    => 'Canada',
+    'main_menu' => 'Main menu',
+    'open_menu' => 'Open menu',
+    'close_menu' => 'Close menu',
+    'request_quote' => 'Request a quote',
 ];
