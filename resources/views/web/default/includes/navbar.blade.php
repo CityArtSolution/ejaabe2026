@@ -72,6 +72,25 @@
 
             $piMenu[] = $piItem;
         }
+
+        // لا تطابق تام: نعتمد المسار وحده إن كان يخص رابطًا فرعيًا واحدًا فقط (مثل ‎/classes‎ دون ‎?sort=newest‎)
+        if (!collect($piMenu)->contains('active', true)) {
+            $piPathMatches = [];
+
+            foreach ($piMenu as $piIndex => $piItem) {
+                foreach ($piItem['children'] as $piChildIndex => $piChild) {
+                    if (trim((string) parse_url($piChild['url'], PHP_URL_PATH), '/') === $piCurrentPath) {
+                        $piPathMatches[] = [$piIndex, $piChildIndex];
+                    }
+                }
+            }
+
+            if (count($piPathMatches) === 1) {
+                [$piIndex, $piChildIndex] = $piPathMatches[0];
+                $piMenu[$piIndex]['active'] = true;
+                $piMenu[$piIndex]['children'][$piChildIndex]['active'] = true;
+            }
+        }
     }
 @endphp
 
@@ -152,10 +171,17 @@
     .pi-header .pi-has-sub.is-open > .pi-sub { opacity: 1; visibility: visible; transform: none; }
     .pi-header .pi-sub a {
         display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; white-space: nowrap;
-        font-size: var(--pi-fs-sm); font-weight: 500; line-height: 1.6; color: var(--pi-c-petrol);
-        transition: background-color .2s, color .2s;
+        font-size: var(--pi-fs-sm); font-weight: 500; line-height: 1.6; color: var(--pi-c-blue-800);
+        transition: color .2s;
     }
-    .pi-header .pi-sub a:hover, .pi-header .pi-sub a.is-active { background: var(--pi-c-bg); color: var(--pi-c-orange-600); }
+    .pi-header .pi-sub-text { position: relative; padding-block: 3px; }
+    .pi-header .pi-sub-text::after {
+        content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; border-radius: 2px;
+        background: var(--pi-c-orange); transform: scaleX(0); transform-origin: right; transition: transform .3s var(--pi-ease);
+    }
+    body:not(.rtl) .pi-header .pi-sub-text::after { transform-origin: left; }
+    .pi-header .pi-sub a:hover, .pi-header .pi-sub a.is-active { color: var(--pi-c-orange-600); }
+    .pi-header .pi-sub a:hover .pi-sub-text::after, .pi-header .pi-sub a.is-active .pi-sub-text::after { transform: scaleX(1); }
     .pi-header .pi-sub img, .pi-drawer .pi-drawer-sub img { width: 20px; height: 20px; object-fit: contain; flex: none; }
 
     .pi-header .pi-nav-cta { display: none; }
@@ -252,7 +278,7 @@
                                                 <img src="{{ $piChild['icon'] }}" alt="">
                                             @endif
 
-                                            {{ $piChild['title'] }}
+                                            <span class="pi-sub-text">{{ $piChild['title'] }}</span>
                                         </a>
                                     </li>
                                 @endforeach

@@ -285,7 +285,7 @@
 
                 <div class="pi-cta-actions">
                     <a href="{{ $piContactUrl }}" class="pi-btn pi-btn--blue"><svg aria-hidden="true"><use href="#pi-i-quote"/></svg>{{ __('home.Request_quotation') }}</a>
-                    <a href="{{ $piBase }}/contactus" class="pi-btn pi-btn--outline"><svg aria-hidden="true"><use href="#pi-i-chat"/></svg>{{ __('home.Contact_us') }}</a>
+                    <a href="{{ $piContactUrl }}" class="pi-btn pi-btn--outline"><svg aria-hidden="true"><use href="#pi-i-chat"/></svg>{{ __('home.Contact_us') }}</a>
                 </div>
             </div>
         </div>
