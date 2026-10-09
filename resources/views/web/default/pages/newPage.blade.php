@@ -10,7 +10,8 @@
 @php
     $piLocale = app()->getLocale();
     $piBase = '/' . $piLocale;
-    $piImg = '/assets/default/img/home-pi';
+    // خارج ‎/public/assets‎ لأن ‎.gitignore‎ يتجاهل الملفات الجديدة هناك فلا تصل للسيرفر
+    $piImg = '/home-pi';
     $piEnabledSections = $homeSections->pluck('name')->toArray();
 
     $piContactUrl = $piBase . '/contact';
@@ -33,8 +34,9 @@
     ];
 
     $piShowTrends = (in_array(\App\Models\HomeSection::$trend_categories, $piEnabledSections) and !empty($trendCategories) and count($trendCategories));
-    // تظهر مع فلتر التصنيفات حتى لو لم يُرجع التصنيف المختار أي برنامج
-    $piShowTracks = in_array(\App\Models\HomeSection::$latest_classes, $piEnabledSections);
+    // تظهر مع فلتر التصنيفات حتى لو لم يُرجع التصنيف المختار أي برنامج، وتختفي إن لم توجد برامج ولا تصنيفات
+    $piShowTracks = (in_array(\App\Models\HomeSection::$latest_classes, $piEnabledSections)
+        and ((!empty($latestWebinars) and count($latestWebinars)) or (!empty($trackCategories) and count($trackCategories))));
     $piShowPartners = (in_array(\App\Models\HomeSection::$instructors, $piEnabledSections) and !empty($showcasePartners) and count($showcasePartners));
     $piShowClients = (in_array(\App\Models\HomeSection::$testimonials, $piEnabledSections) and !empty($showcaseClients) and count($showcaseClients));
 
@@ -84,7 +86,7 @@
 
                         <article class="pi-slide {{ $index == 0 ? 'is-active is-first' : '' }} {{ $piSlideLong ? 'pi-slide--long' : '' }}" aria-roledescription="slide" aria-label="{{ $index + 1 }} / {{ count($sliders) }}" @if($index > 0) aria-hidden="true" @endif>
                             <div class="pi-slide-media">
-                                <img src="{{ asset($piSlideImage) }}" alt="" @if($index == 0) fetchpriority="high" @else loading="lazy" @endif>
+                                <img src="{{ asset($piSlideImage) }}" data-pi-fallback="{{ $piImg }}/hero-1.jpg" alt="" @if($index == 0) fetchpriority="high" @else loading="lazy" @endif>
                             </div>
 
                             <div class="pi-slide-content">
@@ -152,7 +154,7 @@
                 <div class="pi-acc-grid">
                     @foreach ($trendCategories as $trend)
                         @if(!empty($trend->category))
-                            <a href="{{ $piBase . $trend->category->getUrl() }}" class="pi-acc-card pi-reveal" style="--d:{{ $loop->index * .06 }}s">
+                            <a href="{{ $piBase . $trend->category->getUrl() }}" class="pi-acc-card pi-reveal pi-reveal--zoom" style="--d:{{ $loop->index * .06 }}s">
                                 <span class="pi-acc-icon"><img src="{{ $trend->getIcon() }}" alt="" loading="lazy"></span>
                                 <span class="pi-acc-label">{{ $trend->category->title }}</span>
                             </a>
@@ -160,7 +162,7 @@
                     @endforeach
                 </div>
 
-                <div class="pi-events-more" style="margin-top:46px">
+                <div class="pi-events-more pi-reveal" style="margin-top:46px">
                     <a href="{{ $piBase }}/classes" class="pi-btn pi-btn--blue">{{ __('all courses') }}</a>
                 </div>
             </div>
@@ -175,7 +177,7 @@
                 <p>{{ __('home.Choose_path') }}</p>
             </div>
 
-            <div class="pi-plan-banner pi-reveal">
+            <div class="pi-plan-banner pi-reveal pi-reveal--zoom">
                 <div class="pi-pb-img pi-pb-img--man"><img src="{{ $piImg }}/plan-man.jpg" alt="" loading="lazy"></div>
 
                 <div class="pi-pb-body">
@@ -262,7 +264,7 @@
                         <p class="pi-tracks-empty">{{ __('home.no_programs') }}</p>
                     @endif
 
-                    <div class="pi-events-more">
+                    <div class="pi-events-more pi-reveal">
                         <a href="{{ $piBase }}/cet-course/plan" class="pi-btn pi-btn--white">{{ __('home.Browse_programs') }}</a>
                     </div>
                 </div>
@@ -275,7 +277,7 @@
     {{-- ============ 5) حلول المنظمات ============ --}}
     <section class="pi-home pi-section" aria-labelledby="piOrgTitle">
         <div class="pi-container">
-            <div class="pi-org-card pi-reveal">
+            <div class="pi-org-card pi-reveal pi-reveal--start">
                 <div class="pi-org-text">
                     <span class="pi-chip">{{ __('home.Solutions_organizations') }}</span>
                     <h2 id="piOrgTitle">{{ __('home.Programs_organization') }}</h2>
@@ -285,7 +287,7 @@
 
                 <div class="pi-org-features">
                     @foreach ($piOrgFeatures as $piFeature)
-                        <div class="pi-org-feature pi-reveal" style="--d:{{ $loop->iteration * .1 }}s">
+                        <div class="pi-org-feature pi-reveal pi-reveal--zoom" style="--d:{{ .3 + $loop->iteration * .12 }}s">
                             <span class="pi-tag">{{ $piFeature['tag'] }}</span>
                             <svg aria-hidden="true"><use href="#{{ $piFeature['icon'] }}"/></svg>
                             <p>{{ $piFeature['text'] }}</p>
@@ -299,7 +301,7 @@
     {{-- ============ 6) خدمات تطوير المحتوى ============ --}}
     <section class="pi-home pi-section pi-content-dev" aria-labelledby="piCdTitle">
         <div class="pi-container">
-            <div class="pi-cd-card pi-reveal">
+            <div class="pi-cd-card pi-reveal pi-reveal--end">
                 <div class="pi-cd-text">
                     <h2 id="piCdTitle">{{ __('home.Content_development') }}</h2>
                     <p>{{ __('home.Integrated_solutions') }}</p>
@@ -319,7 +321,7 @@
     {{-- ============ 7) طلب برنامج خاص ============ --}}
     <section class="pi-home pi-cta-strip" aria-labelledby="piCtaTitle">
         <div class="pi-container">
-            <div class="pi-cta-box pi-reveal">
+            <div class="pi-cta-box pi-reveal pi-reveal--zoom">
                 <div>
                     <h2 id="piCtaTitle">{{ __('home.have_specific_training') }}</h2>
                     <p>{{ __('home.team_is_ready') }}</p>
@@ -337,9 +339,9 @@
     @if ($piShowPartners)
         <section class="pi-home pi-logos-section" aria-labelledby="piPartnersTitle">
             <div class="pi-container">
-                <div class="pi-logos-head"><h2 class="pi-kicker" id="piPartnersTitle">{{ trans('app.comapny') }}</h2></div>
+                <div class="pi-logos-head pi-reveal"><h2 class="pi-kicker" id="piPartnersTitle">{{ trans('app.comapny') }}</h2></div>
 
-                <div class="pi-logos-panel pi-reveal">
+                <div class="pi-logos-panel pi-reveal" style="--d:.12s">
                     <div class="pi-carousel" data-pi-carousel style="--per:{{ min(5, count($showcasePartners)) }};--per-m:{{ min(2, count($showcasePartners)) }}">
                         <ul class="pi-carousel-track">
                             @foreach ($showcasePartners as $showcaseItem)
@@ -363,9 +365,9 @@
     @if ($piShowClients)
         <section class="pi-home pi-logos-section" aria-labelledby="piClientsTitle">
             <div class="pi-container">
-                <div class="pi-logos-head"><h2 class="pi-kicker pi-kicker--orange" id="piClientsTitle">{{ trans('app.clients') }}</h2></div>
+                <div class="pi-logos-head pi-reveal"><h2 class="pi-kicker pi-kicker--orange" id="piClientsTitle">{{ trans('app.clients') }}</h2></div>
 
-                <div class="pi-logos-panel pi-logos-panel--gray pi-reveal">
+                <div class="pi-logos-panel pi-logos-panel--gray pi-reveal" style="--d:.12s">
                     <div class="pi-carousel" data-pi-carousel style="--per:{{ min(5, count($showcaseClients)) }};--per-m:{{ min(2, count($showcaseClients)) }}">
                         <ul class="pi-carousel-track">
                             @foreach ($showcaseClients as $showcaseItem)
@@ -427,7 +429,7 @@
                     @endforeach
                 </div>
 
-                <div class="pi-events-more">
+                <div class="pi-events-more pi-reveal">
                     <a href="{{ route($piLocale === 'en' ? 'web.events.en' : 'web.events.ar') }}" class="pi-btn pi-btn--white">{{ __('home.view_all_events') }}</a>
                 </div>
             </div>

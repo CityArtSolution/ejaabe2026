@@ -141,13 +141,31 @@
     render(false); restart();
   });
 
+  /* ---------- الصور التي يتعذّر تحميلها ---------- */
+  // صورة بديلة إن وُجدت (data-pi-fallback)، وإلا تُخفى حتى لا تظهر أيقونة الصورة المكسورة
+  var imgFailed = function (img) {
+    var fallback = img.getAttribute('data-pi-fallback');
+    if (fallback) { img.removeAttribute('data-pi-fallback'); img.src = fallback; return; }
+    img.classList.add('pi-img-failed');
+  };
+  // حدث error لا يصعد؛ نلتقطه في مرحلة capture ليشمل الصور المنسوخة في شرائط الشعارات
+  document.addEventListener('error', function (e) {
+    var el = e.target;
+    if (el && el.tagName === 'IMG' && el.closest && el.closest('.pi-home')) imgFailed(el);
+  }, true);
+  $$('.pi-home img').forEach(function (img) {
+    // صور فشلت قبل تشغيل السكربت (SVG قد يعطي naturalWidth = 0 وهو سليم)
+    var src = img.getAttribute('src') || '';
+    if (src && img.complete && img.naturalWidth === 0 && !/\.svg(\?|$)/i.test(src)) imgFailed(img);
+  });
+
   /* ---------- الظهور عند التمرير ---------- */
   if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          en.target.classList.add('pi-reveal-in');
           en.target.classList.remove('pi-reveal-pending');
+          en.target.classList.add('pi-reveal-in');
           io.unobserve(en.target);
         }
       });

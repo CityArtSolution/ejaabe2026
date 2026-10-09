@@ -245,7 +245,7 @@ body {
    ========================================================= */
 .pi-home.pi-plan { background: var(--pi-c-blue); position: relative; overflow: hidden; }
 .pi-home.pi-plan::before { /* نمط شبكي خفيف */
-  content: ""; position: absolute; inset: 0; opacity: .08; pointer-events: none;
+  content: ""; position: absolute; opacity: .08; pointer-events: none;
   background-image: radial-gradient(#fff 1px, transparent 1.2px); background-size: 22px 22px;
 }
 .pi-home.pi-plan .pi-container { position: relative; }
@@ -453,8 +453,74 @@ body:not(.rtl) .pi-home .pi-cd-media::after { background: linear-gradient(90deg,
    الحركة عند التمرير
    (العناصر تظهر طبيعيًا؛ لا تُخفى إلا إن كانت أسفل الشاشة لحظة التحميل)
    ========================================================= */
-.pi-home .pi-reveal-pending { opacity: 0; transform: translateY(28px); }
-.pi-home .pi-reveal-in { opacity: 1; transform: none; transition: opacity .8s var(--pi-ease), transform .8s var(--pi-ease); transition-delay: var(--d, 0s); }
+.pi-home .pi-reveal-pending { opacity: 0; }
+/* fill-mode: backwards — العنصر مخفي أثناء التأخير، وبعد انتهاء الحركة يعود لتنسيقه الطبيعي فتعمل حركات hover كما هي */
+.pi-home .pi-reveal-in { animation: pi-kf-up .85s var(--pi-ease) var(--d, 0s) backwards; }
+.pi-home .pi-reveal-in.pi-reveal--zoom { animation-name: pi-kf-zoom; }
+/* start/end: جهة بداية ونهاية السطر (تنعكس تلقائيًا بين العربية والإنجليزية) */
+.pi-home .pi-reveal-in.pi-reveal--start { animation-name: pi-kf-from-right; }
+.pi-home .pi-reveal-in.pi-reveal--end { animation-name: pi-kf-from-left; }
+body:not(.rtl) .pi-home .pi-reveal-in.pi-reveal--start { animation-name: pi-kf-from-left; }
+body:not(.rtl) .pi-home .pi-reveal-in.pi-reveal--end { animation-name: pi-kf-from-right; }
+
+@keyframes pi-kf-up { from { opacity: 0; transform: translateY(36px); } }
+@keyframes pi-kf-zoom { from { opacity: 0; transform: scale(.88); } }
+@keyframes pi-kf-from-right { from { opacity: 0; transform: translateX(56px); } }
+@keyframes pi-kf-from-left { from { opacity: 0; transform: translateX(-56px); } }
+@keyframes pi-kf-pop { 0% { opacity: 0; transform: scale(.5); } 70% { opacity: 1; transform: scale(1.08); } }
+@keyframes pi-kf-grow { from { transform: scaleX(0); } }
+@keyframes pi-kf-kenburns { from { transform: scale(1.16); } }
+@keyframes pi-kf-float { 50% { transform: translateY(-7px); } }
+@keyframes pi-kf-ring { 0% { transform: scale(1); opacity: .6; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes pi-kf-drift { to { transform: translate(22px, 22px); } }
+@keyframes pi-kf-glow { to { transform: translate(90px, 60px); } }
+@keyframes pi-kf-wiggle { 30% { transform: rotate(-12deg) scale(1.15); } 60% { transform: rotate(8deg) scale(1.1); } }
+
+/* ---------- عناوين الأقسام: خط برتقالي يتمدد تحت العنوان ---------- */
+.pi-home .pi-sec-head h2::after {
+  content: ""; display: block; width: 64px; height: 4px; border-radius: 4px; margin: 12px auto 0;
+  background: linear-gradient(90deg, var(--pi-c-orange), var(--pi-c-gold-soft));
+}
+.pi-home .pi-sec-head.pi-reveal-in h2::after { animation: pi-kf-grow .7s var(--pi-ease) .35s backwards; }
+
+/* ---------- الروابط السريعة والاعتمادات ---------- */
+.pi-home .pi-quick-link:hover svg { animation: pi-kf-wiggle .55s var(--pi-ease); }
+.pi-home .pi-acc-icon { animation: pi-kf-float 5s ease-in-out infinite; }
+.pi-home .pi-acc-card:nth-child(even) .pi-acc-icon { animation-delay: -2.5s; }
+
+/* ---------- خطة البرامج: الخلفية المنقطة تنساب، والمراحل تظهر بالتتابع مع نبضة حول كل أيقونة ---------- */
+.pi-home.pi-plan::before { inset: -22px; animation: pi-kf-drift 7s linear infinite; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-pb-img img { animation: pi-kf-kenburns 1.6s var(--pi-ease) backwards; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-step { animation: pi-kf-pop .7s var(--pi-ease) backwards; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-step:nth-child(1) { animation-delay: .3s; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-step:nth-child(2) { animation-delay: .5s; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-step:nth-child(3) { animation-delay: .7s; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-step:nth-child(4) { animation-delay: .9s; }
+.pi-home .pi-plan-banner.pi-reveal-in .pi-pb-actions { animation: pi-kf-up .7s var(--pi-ease) 1.1s backwards; }
+.pi-home .pi-step-ico::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--pi-c-sky); pointer-events: none;
+  animation: pi-kf-ring 3.2s ease-out infinite;
+}
+.pi-home .pi-step:nth-child(2) .pi-step-ico::before { animation-delay: .8s; }
+.pi-home .pi-step:nth-child(3) .pi-step-ico::before { animation-delay: 1.6s; }
+.pi-home .pi-step:nth-child(4) .pi-step-ico::before { animation-delay: 2.4s; }
+
+/* ---------- حلول المنظمات وتطوير المحتوى ---------- */
+.pi-home .pi-org-card::after { animation: pi-kf-glow 12s ease-in-out infinite alternate; }
+.pi-home .pi-org-card.pi-reveal-in .pi-org-text > * { animation: pi-kf-up .7s var(--pi-ease) backwards; }
+.pi-home .pi-org-card.pi-reveal-in .pi-org-text > :nth-child(1) { animation-delay: .25s; }
+.pi-home .pi-org-card.pi-reveal-in .pi-org-text > :nth-child(2) { animation-delay: .38s; }
+.pi-home .pi-org-card.pi-reveal-in .pi-org-text > :nth-child(3) { animation-delay: .51s; }
+.pi-home .pi-org-card.pi-reveal-in .pi-org-text > :nth-child(4) { animation-delay: .64s; }
+.pi-home .pi-cd-card.pi-reveal-in .pi-cd-media img { animation: pi-kf-kenburns 1.8s var(--pi-ease) backwards; }
+.pi-home .pi-cd-card.pi-reveal-in .pi-cd-text > * { animation: pi-kf-up .7s var(--pi-ease) backwards; }
+.pi-home .pi-cd-card.pi-reveal-in .pi-cd-text > :nth-child(1) { animation-delay: .3s; }
+.pi-home .pi-cd-card.pi-reveal-in .pi-cd-text > :nth-child(2) { animation-delay: .43s; }
+.pi-home .pi-cd-card.pi-reveal-in .pi-cd-text > :nth-child(3) { animation-delay: .56s; }
+.pi-home .pi-cd-card.pi-reveal-in .pi-cd-text > :nth-child(4) { animation-delay: .69s; }
+
+/* صورة تعذّر تحميلها: نخفي أيقونة «الصورة المكسورة» وتبقى خلفية الحاوية */
+.pi-home img.pi-img-failed { visibility: hidden; }
 
 /* =========================================================
    أقسام المنصة الاختيارية (دورات مميزة، باقات، اشتراكات…)
@@ -510,8 +576,8 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
 
 @media (prefers-reduced-motion: reduce) {
   .pi-home *, .pi-home *::before, .pi-home *::after, .pi-to-top {
-    animation-duration: .01ms !important; transition-duration: .01ms !important; transition-delay: 0s !important;
+    animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important;
   }
-  .pi-home .pi-reveal-pending { opacity: 1; transform: none; }
+  .pi-home .pi-reveal-pending { opacity: 1; }
 }
 </style>

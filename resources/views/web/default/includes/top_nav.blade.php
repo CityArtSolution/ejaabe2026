@@ -202,9 +202,11 @@
 
 <script>
   const dropdown = document.getElementById("branchDropdown");
-  dropdown.querySelector(".current-branch").addEventListener("click", () => {
-    dropdown.classList.toggle("active");
-  });
+  if (dropdown) {
+    dropdown.querySelector(".current-branch").addEventListener("click", () => {
+      dropdown.classList.toggle("active");
+    });
+  }
 </script>
                 @include(getTemplate().'.includes.shopping-cart-dropdwon')
 
