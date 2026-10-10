@@ -449,7 +449,7 @@ body:not(.rtl) .pi-home .pi-cd-media::after { background: linear-gradient(90deg,
 .pi-home .pi-event-meta:empty { display: none; }
 .pi-home .pi-event-meta span { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: var(--pi-c-bg); line-height: 1.6; }
 .pi-home .pi-event-meta svg { width: 14px; height: 14px; color: var(--pi-c-orange); flex: none; }
-.pi-home .pi-event-body .pi-btn { width: fit-content; margin-top: auto; }
+.pi-home .pi-event-body .pi-btn { width: fit-content; margin-top: auto; align-self: flex-end; }
 .pi-home .pi-events-more { display: flex; justify-content: center; margin-top: 30px; }
 
 /* =========================================================

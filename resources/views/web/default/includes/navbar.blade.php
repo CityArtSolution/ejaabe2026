@@ -135,12 +135,13 @@
         backdrop-filter: saturate(1.4) blur(10px);
         -webkit-backdrop-filter: saturate(1.4) blur(10px);
     }
-    .pi-header .pi-nav { height: var(--pi-header-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    /* القائمة بجوار الشعار مباشرة، وما بعدها (أيقونات اللوحة) يُدفع لنهاية السطر */
+    .pi-header .pi-nav { height: var(--pi-header-h); display: flex; align-items: center; justify-content: flex-start; gap: clamp(24px, 3.5vw, 48px); }
     .pi-header .pi-brand { display: flex; align-items: center; flex: none; }
     .pi-header .pi-brand img { height: 46px; width: auto; max-width: 220px; object-fit: contain; transition: height .3s var(--pi-ease); }
     .pi-header.is-scrolled .pi-brand img { height: 40px; }
 
-    .pi-header .pi-nav-main { align-self: stretch; }
+    .pi-header .pi-nav-main { align-self: stretch; margin-inline-end: auto; }
     .pi-header .pi-nav-links { height: 100%; display: flex; align-items: stretch; gap: clamp(10px, 2vw, 30px); }
     .pi-header .pi-nav-links > li { position: relative; display: flex; align-items: center; }
     .pi-header .pi-nav-links > li > a,
@@ -261,6 +262,7 @@
     @media (max-width: 760px) {
         .pi-header .pi-brand img { height: 38px; max-width: 170px; }
         .pi-header .pi-nav-cta { display: none; }
+        .pi-header .pi-menu-btn { margin-inline-start: auto; }
     }
 </style>
 
