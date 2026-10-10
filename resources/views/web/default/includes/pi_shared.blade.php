@@ -19,8 +19,8 @@
             --pi-c-orange-600: #e58c22;
             --pi-c-line: #d4e4ec;
 
-            --pi-f-display: "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
-            --pi-f-body: "IBM Plex Sans Arabic", "Tajawal", "Segoe UI", Tahoma, sans-serif;
+            --pi-f-display: "GE-Dinar-Two", "main-font-family", "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+            --pi-f-body: "GE-Dinar-Two", "main-font-family", "IBM Plex Sans Arabic", "Tajawal", "Segoe UI", Tahoma, sans-serif;
 
             --pi-fs-xs: .8125rem;
             --pi-fs-sm: .9375rem;

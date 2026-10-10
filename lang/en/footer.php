@@ -30,4 +30,5 @@ return [
     'rights_reserved' => 'All rights reserved © :year Positive Interaction',
     'countries' => 'Saudi Arabia · Canada · Egypt · UAE',
     'back_to_top' => 'Back to top',
+    'payment_methods' => 'Payment methods',
 ];

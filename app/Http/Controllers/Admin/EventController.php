@@ -72,7 +72,7 @@ class EventController extends Controller
         'event_content.*' => 'nullable|string|max:255',
         'details' => 'nullable',
         
-        'start_date' => 'required|date|after_or_equal:today',
+        'start_date' => 'required|date',
         'end_date' => 'nullable|date|after_or_equal:start_date',
         'time' => 'required|date_format:H:i',
         'price' => 'nullable|numeric|min:0',
@@ -94,7 +94,7 @@ class EventController extends Controller
         'event_content.*' => 'nullable|string|max:255',
         'details' => 'nullable',
         
-        'start_date' => 'required|date|after_or_equal:today',
+        'start_date' => 'required|date',
         'end_date' => 'nullable|date|after_or_equal:start_date',
         'time' => 'required|date_format:H:i',
         'price' => 'nullable|numeric|min:0',
@@ -163,7 +163,7 @@ $data['event_content']=json_encode($data['event_content']);
         'event_content.*' => 'nullable|string|max:255',
         'details' => 'nullable',
         
-        'start_date' => 'required|date|after_or_equal:today',
+        'start_date' => 'required|date',
         'end_date' => 'nullable|date|after_or_equal:start_date',
        
         'price' => 'nullable|numeric|min:0',

@@ -21,8 +21,8 @@
   --pi-c-line: #d4e4ec;
 
   /* الخطوط */
-  --pi-f-display: "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
-  --pi-f-body: "IBM Plex Sans Arabic", "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  --pi-f-display: "GE-Dinar-Two", "main-font-family", "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --pi-f-body: "GE-Dinar-Two", "main-font-family", "IBM Plex Sans Arabic", "Tajawal", "Segoe UI", Tahoma, sans-serif;
 
   /* سلّم المقاسات */
   --pi-fs-xs: .8125rem;
@@ -192,30 +192,9 @@ body {
 .pi-home .pi-slider.is-paused .pi-slider-progress { opacity: .4; }
 
 /* =========================================================
-   3) الروابط السريعة (تتحكم بشرائح البانر)
-   ========================================================= */
-.pi-home.pi-quick { padding-block: 28px 8px; }
-.pi-home .pi-quick-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 900px; margin-inline: auto; }
-.pi-home .pi-quick-link {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 52px; padding: 10px 16px; border-radius: 10px; border: 0; color: #fff;
-  font-family: var(--pi-f-display); font-weight: 700; font-size: var(--pi-fs-sm); line-height: 1.5;
-  box-shadow: var(--pi-shadow-sm); transition: transform .25s var(--pi-ease), box-shadow .25s var(--pi-ease), filter .25s;
-}
-.pi-home .pi-quick-link svg { width: 20px; height: 20px; flex: none; }
-.pi-home .pi-quick-link:hover { transform: translateY(-3px); box-shadow: var(--pi-shadow-md); filter: brightness(1.06); }
-.pi-home .pi-quick-link.is-active { box-shadow: 0 0 0 3px var(--pi-c-bg), 0 0 0 5px currentColor, var(--pi-shadow-md); }
-.pi-home .pi-quick-link--blue { background: var(--pi-c-blue); }
-.pi-home .pi-quick-link--orange { background: var(--pi-c-orange); }
-.pi-home .pi-quick-link--petrol { background: var(--pi-c-petrol); }
-.pi-home .pi-quick-link--blue.is-active { box-shadow: 0 0 0 3px var(--pi-c-bg), 0 0 0 5px var(--pi-c-blue), var(--pi-shadow-md); }
-.pi-home .pi-quick-link--orange.is-active { box-shadow: 0 0 0 3px var(--pi-c-bg), 0 0 0 5px var(--pi-c-orange), var(--pi-shadow-md); }
-.pi-home .pi-quick-link--petrol.is-active { box-shadow: 0 0 0 3px var(--pi-c-bg), 0 0 0 5px var(--pi-c-petrol), var(--pi-shadow-md); }
-
-/* =========================================================
    4) الاعتمادات (مجالات التدريب)
    ========================================================= */
-.pi-home.pi-acc-section { padding-bottom: clamp(70px, 8vw, 110px); }
+.pi-home.pi-acc-section { padding-top: clamp(36px, 5vw, 60px); padding-bottom: clamp(70px, 8vw, 110px); }
 .pi-home .pi-acc-grid { --gap: clamp(12px, 2vw, 22px); display: flex; flex-wrap: wrap; justify-content: center; gap: 34px var(--gap); }
 .pi-home .pi-acc-card {
   position: relative; display: flex; flex-direction: column; align-items: stretch;
@@ -382,7 +361,9 @@ body:not(.rtl) .pi-home .pi-step:not(:last-child)::after { transform: rotate(-13
   font-size: var(--pi-fs-xs); font-weight: 600; padding: 4px 12px; border-radius: 999px;
   background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
 }
-.pi-home .pi-cd-text .pi-btn { width: fit-content; justify-self: center; }
+.pi-home .pi-cd-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.pi-home .pi-cd-actions .pi-btn--ghost { --bg: transparent; --fg: #fff; --bd: rgba(255,255,255,.65); }
+.pi-home .pi-cd-actions .pi-btn--ghost:hover { --bg: rgba(255,255,255,.14); --bd: #fff; }
 .pi-home .pi-cd-media { position: relative; min-height: 300px; overflow: hidden; background: #0b1520; }
 .pi-home .pi-cd-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--pi-ease); }
 .pi-home .pi-cd-card:hover .pi-cd-media img { transform: scale(1.05); }
@@ -505,8 +486,7 @@ body:not(.rtl) .pi-home .pi-reveal-in.pi-reveal--end { animation-name: pi-kf-fro
 }
 .pi-home .pi-sec-head.pi-reveal-in h2::after { animation: pi-kf-grow .7s var(--pi-ease) .35s backwards; }
 
-/* ---------- الروابط السريعة والاعتمادات ---------- */
-.pi-home .pi-quick-link:hover svg { animation: pi-kf-wiggle .55s var(--pi-ease); }
+/* ---------- الاعتمادات ---------- */
 .pi-home .pi-acc-icon { animation: pi-kf-float 5s ease-in-out infinite; }
 .pi-home .pi-acc-card:nth-child(even) .pi-acc-icon { animation-delay: -2.5s; }
 
@@ -578,7 +558,6 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
   .pi-home .pi-slide-media::after { background: linear-gradient(0deg, #0d5aa0 0%, #0f5fa6 42%, rgba(18,98,170,.55) 60%, rgba(18,98,170,.05) 85%); }
   .pi-home .pi-slide-content { width: auto; margin: 0; padding: 0 22px 78px; gap: 14px; }
   .pi-home .pi-slider-ui { left: auto; inset-inline-start: 22px; bottom: 20px; }
-  .pi-home .pi-quick-list { grid-template-columns: 1fr; max-width: 420px; }
   .pi-home .pi-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; }
   .pi-home .pi-step:nth-child(2)::after { display: none; }
   .pi-home .pi-cd-card { grid-template-columns: 1fr; }

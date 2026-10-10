@@ -15,10 +15,7 @@
     $piEnabledSections = $homeSections->pluck('name')->toArray();
 
     $piContactUrl = $piBase . '/contact';
-    $piClassesUrl = $piBase . '/classes?sort=newest';
-
-    $piQuickIcons = ['pi-i-train', 'pi-i-cert', 'pi-i-book'];
-    $piQuickColors = ['blue', 'orange', 'petrol'];
+    $piPlanUrl = $piBase . '/cet-course/plan';
 
     $piSteps = [
         ['icon' => 'pi-i-target', 'title' => __('home.plan_step_1')],
@@ -130,29 +127,13 @@
                 </div>
             </div>
         </section>
-
-        {{-- ============ 2) الروابط السريعة (تتحكم بشرائح البانر) ============ --}}
-        @if (count($sliders) > 1)
-            <section class="pi-home pi-quick">
-                <div class="pi-container">
-                    <div class="pi-quick-list">
-                        @foreach ($sliders as $index => $slider)
-                            <button type="button" class="pi-quick-link pi-quick-link--{{ $piQuickColors[$index % 3] }} pi-reveal" data-pi-slide="{{ $index }}" aria-pressed="{{ $index == 0 ? 'true' : 'false' }}" style="--d:{{ $index * .08 }}s">
-                                <svg aria-hidden="true"><use href="#{{ $piQuickIcons[$index % 3] }}"/></svg>
-                                {{ $slider->title }}
-                            </button>
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-        @endif
     @endif
 
-    {{-- ============ 3) الاعتمادات (مجالات التدريب) ============ --}}
+    {{-- ============ 2) الاعتمادات (مجالات التدريب) ============ --}}
     @if ($piShowTrends)
         <section class="pi-home pi-section pi-acc-section" aria-labelledby="piAccTitle">
             <div class="pi-container">
-                <h2 id="piAccTitle" class="pi-sr-only">{{ trans('home.trending_categories') }}</h2>
+                <div class="pi-sec-head pi-reveal"><h2 id="piAccTitle">{{ trans('home.training_fields') }}</h2></div>
 
                 <div class="pi-acc-grid">
                     @foreach ($trendCategories as $trend)
@@ -166,7 +147,7 @@
                 </div>
 
                 <div class="pi-events-more pi-reveal" style="margin-top:46px">
-                    <a href="{{ $piBase }}/classes" class="pi-btn pi-btn--blue">{{ __('all courses') }}</a>
+                    <a href="{{ $piBase }}/classes" class="pi-btn pi-btn--blue">{{ __('home.browse_all') }}</a>
                 </div>
             </div>
         </section>
@@ -194,8 +175,8 @@
                     </ol>
 
                     <div class="pi-pb-actions">
-                        <a href="{{ $piClassesUrl }}" class="pi-btn pi-btn--orange">{{ __('home.all_programs') }}</a>
-                        <a href="{{ $piBase }}/cet-course/plan" class="pi-btn pi-btn--outline">{{ __('home.book_seat') }}</a>
+                        <a href="{{ $piPlanUrl }}" class="pi-btn pi-btn--orange">{{ __('home.browse_training_plan') }}</a>
+                        <a href="{{ $piPlanUrl }}" class="pi-btn pi-btn--outline">{{ __('home.book_seat') }}</a>
                     </div>
                 </div>
 
@@ -275,7 +256,7 @@
                     @endif
 
                     <div class="pi-events-more pi-reveal">
-                        <a href="{{ $piBase }}/cet-course/plan" class="pi-btn pi-btn--white">{{ __('home.Browse_programs') }}</a>
+                        <a href="{{ $piPlanUrl }}" class="pi-btn pi-btn--white">{{ __('home.Browse_programs') }}</a>
                     </div>
                 </div>
             @endif
@@ -320,7 +301,10 @@
                         <li>{{ __('home.elearning_content') }}</li>
                         <li>{{ __('home.review_accreditation') }}</li>
                     </ul>
-                    <a href="{{ $piBase }}/request-content-development" class="pi-btn pi-btn--white">{{ __('home.Request_now') }}</a>
+                    <div class="pi-cd-actions">
+                        <a href="{{ $piBase }}/request-content-development" class="pi-btn pi-btn--white">{{ __('home.Request_now') }}</a>
+                        <a href="{{ $piBase }}/content/content_development" class="pi-btn pi-btn--ghost">{{ __('home.view_service') }}</a>
+                    </div>
                 </div>
 
                 <div class="pi-cd-media"><img src="{{ $piImg }}/content-dev.jpg" alt="" loading="lazy"></div>

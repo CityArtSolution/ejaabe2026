@@ -76,6 +76,10 @@ return [
     'slider_play' => 'Start autoplay',
     'no_programs' => 'No programs in this category yet',
     'view_all_events' => 'View all events',
+    'training_fields' => 'Training Fields',
+    'browse_all' => 'Browse all',
+    'browse_training_plan' => 'Browse the training plan',
+    'view_service' => 'View the service',
 
     'home_title' => 'Home',
    'why_learn_title' => 'Why Learn With Our Courses?',

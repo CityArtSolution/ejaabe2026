@@ -33,6 +33,14 @@
         ['title' => __('home.join_trainer'), 'url' => '/become-instructor'],
         ['title' => __('home.blog'), 'url' => $piBase . '/blog'],
     ];
+
+    // خارج ‎/public/assets‎ لأن ‎.gitignore‎ يتجاهل الملفات الجديدة هناك
+    $piPayments = [
+        ['label' => 'Visa', 'image' => '/home-pi/payments/visa.svg'],
+        ['label' => 'Mastercard', 'image' => '/home-pi/payments/mastercard.svg'],
+        ['label' => 'mada', 'image' => '/home-pi/payments/mada.svg'],
+        ['label' => 'Tamara', 'image' => '/home-pi/payments/tamara.jpg', 'flush' => true],
+    ];
 @endphp
 
 @include('web.default.includes.pi_shared')
@@ -98,6 +106,14 @@
     .pi-footer .pi-nl-form input:focus { outline: 2px solid var(--pi-c-sky); outline-offset: 1px; }
     .pi-footer .pi-nl-form .pi-btn { width: 100%; }
 
+    /* شعارات وسائل الدفع */
+    .pi-footer .pi-footer-pay { display: grid; gap: 8px; margin-top: 4px; }
+    .pi-footer .pi-pay-label { font-size: var(--pi-fs-xs); font-weight: 600; color: #a9bfd3; }
+    .pi-footer .pi-pay-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pi-footer .pi-pay-list li { width: 56px; height: 36px; padding: 6px 8px; border-radius: 8px; background: #fff; overflow: hidden; }
+    .pi-footer .pi-pay-list li.is-flush { padding: 0; }
+    .pi-footer .pi-pay-list img { width: 100%; height: 100%; object-fit: contain; }
+
     .pi-footer .pi-footer-bottom {
         position: relative; background: var(--pi-c-navy-900); color: #6d8aa6; font-size: var(--pi-fs-xs);
         padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px));
@@ -139,6 +155,8 @@
         .pi-footer .pi-footer-brand { grid-column: 1 / -1; justify-items: center; text-align: center; padding-bottom: 26px; border-bottom: 1px solid rgba(255, 255, 255, .1); }
         .pi-footer .pi-footer-brand p { max-width: 44ch; }
         .pi-footer .pi-socials { justify-content: center; gap: 10px; }
+        .pi-footer .pi-footer-pay { justify-items: center; }
+        .pi-footer .pi-pay-list { justify-content: center; }
         .pi-footer .pi-socials a { width: 42px; height: 42px; border-radius: 12px; }
         /* قائمتا الروابط جنبًا إلى جنب ثم النشرة البريدية بعرض كامل */
         .pi-footer .pi-f-col { order: 1; }
@@ -173,6 +191,15 @@
                         <svg aria-hidden="true"><use href="#{{ $piSocial['icon'] }}"/></svg>
                     </a>
                 @endforeach
+            </div>
+
+            <div class="pi-footer-pay">
+                <span class="pi-pay-label">{{ __('footer.payment_methods') }}</span>
+                <ul class="pi-pay-list">
+                    @foreach($piPayments as $piPayment)
+                        <li class="{{ !empty($piPayment['flush']) ? 'is-flush' : '' }}"><img src="{{ $piPayment['image'] }}" alt="{{ $piPayment['label'] }}" loading="lazy"></li>
+                    @endforeach
+                </ul>
             </div>
         </div>
 

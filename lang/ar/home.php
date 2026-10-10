@@ -68,6 +68,10 @@
     'slider_play' => 'تشغيل الحركة التلقائية',
     'no_programs' => 'لا توجد برامج في هذا التصنيف حاليًا',
     'view_all_events' => 'عرض كل الفعاليات',
+    'training_fields' => 'مجالات التدريب',
+    'browse_all' => 'تصفح الكل',
+    'browse_training_plan' => 'تصفح الخطة التدريبية',
+    'view_service' => 'اطلع على الخدمة',
 
 
   'home_title' => 'الرئيسية',
