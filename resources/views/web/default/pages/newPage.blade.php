@@ -307,7 +307,7 @@
                     </div>
                 </div>
 
-                <div class="pi-cd-media"><img src="{{ $piImg }}/content-dev-team.jpg" alt="" loading="lazy"></div>
+                <div class="pi-cd-media"><img src="{{ $piImg }}/content-dev.svg" alt="" loading="lazy"></div>
             </div>
         </div>
     </section>

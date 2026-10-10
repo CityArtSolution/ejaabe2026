@@ -474,7 +474,6 @@ body:not(.rtl) .pi-home .pi-reveal-in.pi-reveal--end { animation-name: pi-kf-fro
 @keyframes pi-kf-grow { from { transform: scaleX(0); } }
 @keyframes pi-kf-kenburns { from { transform: scale(1.16); } }
 @keyframes pi-kf-float { 50% { transform: translateY(-7px); } }
-@keyframes pi-kf-ring { 0% { transform: scale(1); opacity: .6; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
 @keyframes pi-kf-drift { to { transform: translate(22px, 22px); } }
 @keyframes pi-kf-glow { to { transform: translate(90px, 60px); } }
 @keyframes pi-kf-wiggle { 30% { transform: rotate(-12deg) scale(1.15); } 60% { transform: rotate(8deg) scale(1.1); } }
@@ -490,7 +489,7 @@ body:not(.rtl) .pi-home .pi-reveal-in.pi-reveal--end { animation-name: pi-kf-fro
 .pi-home .pi-acc-icon { animation: pi-kf-float 5s ease-in-out infinite; }
 .pi-home .pi-acc-card:nth-child(even) .pi-acc-icon { animation-delay: -2.5s; }
 
-/* ---------- خطة البرامج: الخلفية المنقطة تنساب، والمراحل تظهر بالتتابع مع نبضة حول كل أيقونة ---------- */
+/* ---------- خطة البرامج: الخلفية المنقطة تنساب، والمراحل تظهر بالتتابع ---------- */
 .pi-home.pi-plan::before { inset: -22px; animation: pi-kf-drift 7s linear infinite; }
 .pi-home .pi-plan-banner.pi-reveal-in .pi-pb-img img { animation: pi-kf-kenburns 1.6s var(--pi-ease) backwards; }
 .pi-home .pi-plan-banner.pi-reveal-in .pi-step { animation: pi-kf-pop .7s var(--pi-ease) backwards; }
@@ -499,13 +498,6 @@ body:not(.rtl) .pi-home .pi-reveal-in.pi-reveal--end { animation-name: pi-kf-fro
 .pi-home .pi-plan-banner.pi-reveal-in .pi-step:nth-child(3) { animation-delay: .7s; }
 .pi-home .pi-plan-banner.pi-reveal-in .pi-step:nth-child(4) { animation-delay: .9s; }
 .pi-home .pi-plan-banner.pi-reveal-in .pi-pb-actions { animation: pi-kf-up .7s var(--pi-ease) 1.1s backwards; }
-.pi-home .pi-step-ico::before {
-  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--pi-c-sky); pointer-events: none;
-  animation: pi-kf-ring 3.2s ease-out infinite;
-}
-.pi-home .pi-step:nth-child(2) .pi-step-ico::before { animation-delay: .8s; }
-.pi-home .pi-step:nth-child(3) .pi-step-ico::before { animation-delay: 1.6s; }
-.pi-home .pi-step:nth-child(4) .pi-step-ico::before { animation-delay: 2.4s; }
 
 /* ---------- حلول المنظمات وتطوير المحتوى ---------- */
 .pi-home .pi-org-card::after { animation: pi-kf-glow 12s ease-in-out infinite alternate; }

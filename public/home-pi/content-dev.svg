@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4fafd"/>
+      <stop offset="1" stop-color="#d9ebf5"/>
+    </linearGradient>
+    <!-- نجمة ثمانية (زخرفة هندسية إسلامية) -->
+    <pattern id="stars" width="96" height="96" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#006ba3" stroke-width="1.4" opacity=".09">
+        <rect x="26" y="26" width="44" height="44"/>
+        <rect x="26" y="26" width="44" height="44" transform="rotate(45 48 48)"/>
+        <circle cx="48" cy="48" r="8"/>
+        <path d="M0 0l10 10M96 0L86 10M0 96l10-10M96 96L86 86"/>
+      </g>
+    </pattern>
+    <!-- شريط مستوحى من نقوش السدو -->
+    <pattern id="sadu" width="56" height="54" patternUnits="userSpaceOnUse">
+      <rect width="56" height="54" fill="#0c2b4a"/>
+      <rect width="56" height="5" fill="#1f8a4c"/>
+      <rect y="49" width="56" height="5" fill="#1f8a4c"/>
+      <path d="M0 44L28 10l28 34z" fill="#f4a340"/>
+      <path d="M12 44l16-20 16 20z" fill="#0c2b4a"/>
+      <path d="M28 30l6 7-6 7-6-7z" fill="#fff"/>
+      <path d="M0 10l6 7-6 7zM56 10l-6 7 6 7z" fill="#1a8fd0"/>
+    </pattern>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0c2b4a" flood-opacity=".16"/>
+    </filter>
+    <filter id="sh-sm" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0c2b4a" flood-opacity=".16"/>
+    </filter>
+  </defs>
+
+  <rect width="960" height="600" fill="url(#bg)"/>
+  <rect width="960" height="600" fill="url(#stars)"/>
+  <circle cx="170" cy="150" r="170" fill="#1a8fd0" opacity=".08"/>
+  <circle cx="820" cy="430" r="190" fill="#f4a340" opacity=".10"/>
+
+  <g transform="translate(0 40)">
+    <!-- مسار يربط مراحل تطوير المحتوى -->
+    <path d="M356 104Q480 14 604 104" fill="none" stroke="#1a8fd0" stroke-width="2.5" stroke-dasharray="3 9" stroke-linecap="round" opacity=".7"/>
+
+    <!-- تحليل الاحتياج -->
+    <g filter="url(#sh-sm)">
+      <circle cx="356" cy="104" r="30" fill="#fff"/>
+      <circle cx="353" cy="101" r="9.5" fill="none" stroke="#006ba3" stroke-width="3.5"/>
+      <path d="M360 108l8 8" stroke="#006ba3" stroke-width="3.5" stroke-linecap="round"/>
+    </g>
+    <!-- الفكرة والتصميم -->
+    <g filter="url(#sh-sm)">
+      <circle cx="480" cy="62" r="34" fill="#fff"/>
+      <path d="M480 40a15 15 0 0 0-9 27v6h18v-6a15 15 0 0 0-9-27z" fill="#f4a340"/>
+      <rect x="473" y="76" width="14" height="7" rx="2.5" fill="#2d4a5c"/>
+      <path d="M480 26v-7M455 37l-5-5M505 37l5-5" stroke="#f4a340" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <!-- قياس الجودة -->
+    <g filter="url(#sh-sm)">
+      <circle cx="604" cy="104" r="30" fill="#fff"/>
+      <rect x="590" y="106" width="7" height="12" rx="2" fill="#1f8a4c"/>
+      <rect x="600.5" y="98" width="7" height="20" rx="2" fill="#1f8a4c"/>
+      <rect x="611" y="90" width="7" height="28" rx="2" fill="#1f8a4c"/>
+    </g>
+
+    <!-- شهادة الاعتماد -->
+    <g filter="url(#sh)" transform="rotate(-7 180 222)">
+      <rect x="94" y="158" width="172" height="126" rx="9" fill="#fff"/>
+      <rect x="104" y="168" width="152" height="106" rx="5" fill="none" stroke="#f4a340" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <rect x="140" y="184" width="80" height="10" rx="5" fill="#0c2b4a"/>
+      <rect x="124" y="205" width="112" height="6" rx="3" fill="#c3d6e2"/>
+      <rect x="138" y="219" width="84" height="6" rx="3" fill="#c3d6e2"/>
+      <path d="M213 250l-5 22 11-8 11 8-5-22z" fill="#e58c22"/>
+      <circle cx="219" cy="246" r="14" fill="#f4a340"/>
+      <circle cx="219" cy="246" r="8" fill="none" stroke="#fff" stroke-width="2"/>
+      <rect x="124" y="248" width="56" height="5" rx="2.5" fill="#2d4a5c" opacity=".45"/>
+    </g>
+
+    <!-- الحقائب التدريبية (كتب) -->
+    <g filter="url(#sh)">
+      <rect x="84" y="384" width="180" height="34" rx="6" fill="#006ba3"/>
+      <rect x="236" y="384" width="12" height="34" fill="#f4a340"/>
+      <rect x="110" y="397" width="84" height="8" rx="4" fill="#fff" opacity=".75"/>
+      <rect x="100" y="350" width="152" height="34" rx="6" fill="#f4a340"/>
+      <rect x="116" y="350" width="12" height="34" fill="#e58c22"/>
+      <rect x="150" y="363" width="76" height="8" rx="4" fill="#fff" opacity=".8"/>
+      <rect x="92" y="316" width="166" height="34" rx="6" fill="#2d4a5c"/>
+      <rect x="230" y="316" width="12" height="34" fill="#1a8fd0"/>
+      <rect x="116" y="329" width="80" height="8" rx="4" fill="#fff" opacity=".7"/>
+    </g>
+
+    <!-- الحقيبة التدريبية المحكّمة (قائمة تحقق من اليمين لليسار) -->
+    <g filter="url(#sh)">
+      <rect x="684" y="162" width="166" height="216" rx="11" fill="#fff"/>
+      <path d="M684 173a11 11 0 0 1 11-11h144a11 11 0 0 1 11 11v25H684z" fill="#1a8fd0"/>
+      <rect x="762" y="175" width="74" height="10" rx="5" fill="#fff" opacity=".92"/>
+      <circle cx="704" cy="180" r="6" fill="#fff" opacity=".5"/>
+
+      <circle cx="826" cy="226" r="10" fill="#1f8a4c"/>
+      <path d="M821 226l3.6 4 6.4-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="718" y="222" width="90" height="8" rx="4" fill="#c3d6e2"/>
+
+      <circle cx="826" cy="260" r="10" fill="#1f8a4c"/>
+      <path d="M821 260l3.6 4 6.4-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="736" y="256" width="72" height="8" rx="4" fill="#c3d6e2"/>
+
+      <circle cx="826" cy="294" r="10" fill="#1f8a4c"/>
+      <path d="M821 294l3.6 4 6.4-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="724" y="290" width="84" height="8" rx="4" fill="#c3d6e2"/>
+
+      <circle cx="826" cy="328" r="9" fill="none" stroke="#c3d6e2" stroke-width="2.4"/>
+      <rect x="746" y="324" width="62" height="8" rx="4" fill="#dfe9ef"/>
+
+      <rect x="766" y="346" width="70" height="20" rx="10" fill="#f4a340"/>
+    </g>
+
+    <!-- قلم -->
+    <g filter="url(#sh-sm)" transform="rotate(35 836 380)">
+      <rect x="825" y="292" width="22" height="108" fill="#f4a340"/>
+      <rect x="832" y="292" width="8" height="108" fill="#f8b866"/>
+      <rect x="825" y="276" width="22" height="16" rx="4" fill="#2d4a5c"/>
+      <rect x="825" y="290" width="22" height="7" fill="#c3d6e2"/>
+      <path d="M825 400h22l-11 26z" fill="#ffe2bd"/>
+      <path d="M832 416.500h8l-4 9.500z" fill="#0c2b4a"/>
+    </g>
+
+    <!-- الحاسب المحمول: المحتوى الإلكتروني -->
+    <ellipse cx="480" cy="426" rx="262" ry="13" fill="#0c2b4a" opacity=".12"/>
+    <g filter="url(#sh)">
+      <rect x="298" y="150" width="364" height="242" rx="15" fill="#0c2b4a"/>
+      <rect x="311" y="163" width="338" height="210" rx="6" fill="#fff"/>
+      <rect x="246" y="390" width="468" height="20" rx="10" fill="#2d4a5c"/>
+      <rect x="438" y="390" width="84" height="7" rx="3.500" fill="#17324a"/>
+    </g>
+
+    <!-- شريط علوي -->
+    <path d="M311 169a6 6 0 0 1 6-6h326a6 6 0 0 1 6 6v20H311z" fill="#006ba3"/>
+    <circle cx="636" cy="176" r="3.500" fill="#fff"/>
+    <circle cx="624" cy="176" r="3.500" fill="#fff" opacity=".6"/>
+    <circle cx="612" cy="176" r="3.500" fill="#fff" opacity=".35"/>
+    <rect x="324" y="172" width="46" height="8" rx="4" fill="#fff" opacity=".45"/>
+
+    <!-- درس مرئي -->
+    <rect x="486" y="202" width="150" height="94" rx="9" fill="#dfeef5"/>
+    <circle cx="561" cy="249" r="21" fill="#f4a340"/>
+    <path d="M555 238.500v21l17-10.500z" fill="#fff"/>
+
+    <!-- نص الدرس (محاذاة لليمين) -->
+    <rect x="352" y="206" width="122" height="11" rx="5.500" fill="#0c2b4a"/>
+    <rect x="330" y="228" width="144" height="7" rx="3.500" fill="#c3d6e2"/>
+    <rect x="362" y="243" width="112" height="7" rx="3.500" fill="#c3d6e2"/>
+    <rect x="342" y="258" width="132" height="7" rx="3.500" fill="#c3d6e2"/>
+    <rect x="402" y="275" width="72" height="21" rx="10.500" fill="#006ba3"/>
+
+    <!-- شريط التقدّم -->
+    <rect x="324" y="313" width="312" height="8" rx="4" fill="#e3eef4"/>
+    <rect x="430" y="313" width="206" height="8" rx="4" fill="#1f8a4c"/>
+
+    <!-- وحدات المحتوى -->
+    <rect x="540" y="333" width="96" height="28" rx="7" fill="#eef6f9"/>
+    <circle cx="620" cy="347" r="6.500" fill="#f4a340"/>
+    <rect x="552" y="343.500" width="52" height="7" rx="3.500" fill="#c3d6e2"/>
+    <rect x="432" y="333" width="96" height="28" rx="7" fill="#eef6f9"/>
+    <circle cx="512" cy="347" r="6.500" fill="#006ba3"/>
+    <rect x="444" y="343.500" width="52" height="7" rx="3.500" fill="#c3d6e2"/>
+    <rect x="324" y="333" width="96" height="28" rx="7" fill="#eef6f9"/>
+    <circle cx="404" cy="347" r="6.500" fill="#1f8a4c"/>
+    <rect x="336" y="343.500" width="52" height="7" rx="3.500" fill="#c3d6e2"/>
+
+    <!-- لمسات -->
+    <circle cx="268" cy="118" r="6" fill="#f4a340"/>
+    <circle cx="712" cy="112" r="5" fill="#1a8fd0"/>
+    <path d="M744 92l5 6-5 6-5-6z" fill="#1f8a4c"/>
+    <path d="M226 96l5 6-5 6-5-6z" fill="#006ba3" opacity=".7"/>
+  </g>
+
+  <rect y="546" width="960" height="54" fill="url(#sadu)"/>
+</svg>
