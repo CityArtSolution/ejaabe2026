@@ -9,7 +9,7 @@ return [
     */
     'Arabic' => 'Arabic',
     'English' => 'English',
-    'Bilanguage' => 'All Lang',
+    'Bilanguage' => 'Bilingual',
     'title' => 'Title',
     'Title'=>'Course Name',
     'Date'=>'Date',

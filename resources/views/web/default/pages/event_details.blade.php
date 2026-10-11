@@ -349,7 +349,7 @@ input#phone {
                     </div>
                     
                    <div class="px-20 pb-30">
-    @if($event->start_date >= now())
+    @if($event->start_date >= now()->toDateString())
     @if(!empty($event->price) and $event->price > 0)
      <button type="button" class="btn btn-primary  btn-block mt-20" id="registerButton">
                                         

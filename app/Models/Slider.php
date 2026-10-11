@@ -78,6 +78,11 @@ class Slider extends Model
         return getTranslateAttributeValue($this, 'button2_link');
     }
 
+    public function getImageLocaleAttribute()
+    {
+        return getTranslateAttributeValue($this, 'image_locale');
+    }
+
    /* public function getContentAttribute()
     {
         return getTranslateAttributeValue($this, 'content');

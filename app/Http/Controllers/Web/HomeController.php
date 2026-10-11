@@ -229,14 +229,15 @@ class HomeController extends Controller
         }
         $currentDate = \Carbon\Carbon::now()->toDateString();
 
+        // الفعالية تُعد منتهية بعد تاريخ نهايتها لا بدايتها (الفعاليات متعددة الأيام)
         $events = \App\Models\Event::where('status', 1)
-            ->where('start_date', '>=', $currentDate)
+            ->whereRaw('GREATEST(start_date, COALESCE(end_date, start_date)) >= ?', [$currentDate])
             ->orderBy('updated_at', 'desc')
             ->limit(3)
             ->get();
 
         $oldEvents = \App\Models\Event::where('status', 1)
-            ->where('start_date', '<', $currentDate)
+            ->whereRaw('GREATEST(start_date, COALESCE(end_date, start_date)) < ?', [$currentDate])
             ->orderBy('updated_at', 'desc')
             ->limit(9)
             ->get();
@@ -683,14 +684,15 @@ $trackCategories = \App\Models\Category::whereNotIn(
         }
                         $currentDate = \Carbon\Carbon::now()->toDateString();
 
+         // الفعالية تُعد منتهية بعد تاريخ نهايتها لا بدايتها (الفعاليات متعددة الأيام)
          $events = \App\Models\Event::where('status', 1)
-    ->where('start_date', '>=', $currentDate)
+    ->whereRaw('GREATEST(start_date, COALESCE(end_date, start_date)) >= ?', [$currentDate])
     ->orderBy('updated_at', 'desc')
     ->limit(3)
     ->get();
 
        $oldEvents = \App\Models\Event::where('status', 1)
-    ->where('start_date', '<', $currentDate)
+    ->whereRaw('GREATEST(start_date, COALESCE(end_date, start_date)) < ?', [$currentDate])
     ->orderBy('updated_at', 'desc')
     ->limit(9)
     ->get();

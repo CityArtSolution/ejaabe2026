@@ -355,6 +355,8 @@ body:not(.rtl) .pi-home .pi-step:not(:last-child)::after { transform: rotate(-13
 }
 .pi-home .pi-cd-text { padding: clamp(28px, 4.5vw, 52px); display: grid; gap: 18px; align-content: center; }
 .pi-home .pi-cd-text h2 { font-size: var(--pi-fs-2xl); }
+/* العنوان الإنجليزي أطول من العربي؛ يُصغَّر قليلًا ليبقى على سطرين كحد أقصى */
+body:not(.rtl) .pi-home .pi-cd-text h2 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); }
 .pi-home .pi-cd-text p { color: var(--pi-c-gold-soft); font-weight: 600; max-width: 46ch; }
 .pi-home .pi-cd-points { display: flex; flex-wrap: wrap; gap: 8px; }
 .pi-home .pi-cd-points li {
@@ -542,6 +544,9 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
   .pi-home .pi-pb-img--man::after,
   body:not(.rtl) .pi-home .pi-pb-img--man::after { background: linear-gradient(0deg, rgba(222,237,249,1) 0%, rgba(222,237,249,0) 45%); }
   .pi-home .pi-org-card { grid-template-columns: 1fr; }
+  /* عمود واحد من اللوحي فأصغر: عمود النص يضيق على العناوين الإنجليزية الطويلة */
+  .pi-home .pi-cd-card { grid-template-columns: 1fr; }
+  .pi-home .pi-cd-media { order: -1; min-height: 0; height: clamp(190px, 60vw, 340px); }
   .pi-home .pi-events-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
@@ -552,8 +557,6 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
   .pi-home .pi-slider-ui { left: auto; inset-inline-start: 22px; bottom: 20px; }
   .pi-home .pi-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; }
   .pi-home .pi-step:nth-child(2)::after { display: none; }
-  .pi-home .pi-cd-card { grid-template-columns: 1fr; }
-  .pi-home .pi-cd-media { min-height: 220px; order: -1; }
   .pi-home .pi-cta-box { flex-direction: column; align-items: flex-start; }
   .pi-home .pi-carousel-item { flex-basis: calc(100% / var(--per-m, 2)); }
   .pi-home .pi-events-grid { grid-template-columns: 1fr; }
@@ -566,7 +569,11 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
   .pi-home .pi-org-feature .pi-tag { grid-column: 2; grid-row: 1; width: fit-content; }
   .pi-home .pi-org-feature svg { grid-column: 1; grid-row: 1 / span 2; width: 48px; height: 48px; padding: 11px; margin: 0; border-radius: 12px; background: rgba(255, 255, 255, .08); }
   .pi-home .pi-org-feature p { grid-column: 2; grid-row: 2; }
-  .pi-home .pi-slide-actions .pi-btn { flex: 1; }
+  .pi-home .pi-slide h1, .pi-home .pi-slide h2 { font-size: 1.6rem; }
+  .pi-home .pi-slide--long h1, .pi-home .pi-slide--long h2 { font-size: 1.35rem; }
+  /* الأزرار تلتف وتنزل لسطر مستقل بدل أن يُقصّ نصها (العناوين الإنجليزية أطول) */
+  .pi-home .pi-btn { white-space: normal; text-align: center; }
+  .pi-home .pi-slide-actions .pi-btn, .pi-home .pi-cd-actions .pi-btn { flex: 1 1 auto; }
 }
 
 /* ---------- الجوال: بطاقات البرامج والفعاليات شريط أفقي يُسحب بالإصبع بدل قائمة طويلة ---------- */
@@ -584,8 +591,8 @@ section.home-sections, div.home-sections { margin-top: 0 !important; padding-blo
   .pi-home .pi-tracks-filter::-webkit-scrollbar { display: none; }
   .pi-home .pi-filter-btn { flex: none; }
   .pi-home .pi-cta-actions { width: 100%; }
-  .pi-home .pi-cta-actions .pi-btn { flex: 1; }
-  .pi-home .pi-pb-actions .pi-btn { flex: 1; }
+  .pi-home .pi-cta-actions .pi-btn { flex: 1 1 auto; }
+  .pi-home .pi-pb-actions .pi-btn { flex: 1 1 auto; }
   .pi-home .pi-logo-card { height: 84px; }
 }
 

@@ -392,7 +392,9 @@
                         @php
                             $piEventDate = \Carbon\Carbon::parse($event->start_date);
                             $piEventDay = $piEventDate->format('Y-m-d');
-                            $piEventStatus = $piEventDay == $piToday ? 'current' : ($piEventDay > $piToday ? 'upcoming' : 'ended');
+                            // الفعالية متعددة الأيام تبقى «حالية» حتى تاريخ نهايتها
+                            $piEventEndDay = !empty($event->end_date) ? max($piEventDay, \Carbon\Carbon::parse($event->end_date)->format('Y-m-d')) : $piEventDay;
+                            $piEventStatus = $piEventDay > $piToday ? 'upcoming' : ($piEventEndDay >= $piToday ? 'current' : 'ended');
                             $piEventUrl = $piBase . '/event/' . $event->slug;
                         @endphp
 

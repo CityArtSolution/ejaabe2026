@@ -122,17 +122,12 @@ class SliderController extends Controller
     try {
        // \DB::beginTransaction();
 
+       // الحقول المترجمة تُحفظ بالأسفل في لغة النموذج المختارة فقط، لا في لغة لوحة التحكم
        $slider = Slider::create([
-        'title' => $data['title'],
-        'description' => $data['description'],
         //'image' => $data['image'],
          'image_1' => $data['image_1'],
           'image_2' => $data['image_2'],
            'image_3' => $data['image_3'],
-        'button1_title' => $data['button1_title'],
-        'button1_link' => $data['button1_link'],
-        'button2_title' => $data['button2_title'],
-        'button2_link' => $data['button2_link'],
         'status' => $request->status ? 1 : 0,
         'branch_id'=>$request->branch_id
     ]);
