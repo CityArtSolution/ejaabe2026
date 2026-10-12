@@ -55,13 +55,7 @@
         <br>
         <hr>
         <div class="row y-gap-50 justify-between items-center">
-            <div class="col-lg-6 pr-50 sm:pr-15">
-                <div class="composition -type-8">
-                    <div class="-el-1"><img src="https://ejaabi.com/public/uploads/main/images/09-12-2023/65740261a4699.png" alt="image" style="max-height:300px"></div>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
+            <div class="col-12">
 
                 <br>
                 <h2 class="text-30 lh-16"> نبذة عن التفاعل الإيجابي</h2>
@@ -168,7 +162,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            {{--<div class="col-lg-4">
     <div class="-el-1" style="position: relative;">
         @if(!empty($generalSettings['about_image']))
                     <img src="{{ $generalSettings['about_image'] }}" class="about_image"  alt="site logo" style="max-height: 300px;">
@@ -179,18 +173,12 @@
             Dr./Mohammed Bin Omar Sheikh
         </div>
     </div>
-</div>
+</div>--}}
         </div>
         <br>
         <hr>
         <div class="row y-gap-50 justify-between items-center">
-            <div class="col-lg-6 pr-50 sm:pr-15">
-                <div class="composition -type-8">
-                    <div class="-el-1"><img src="https://ejaabi.com/public/uploads/main/images/09-12-2023/65740261a4699.png" alt="image" style="max-height:300px"></div>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
+            <div class="col-12">
 
                 <br>
                 <h2 class="text-30 lh-16"> About Us</h2>
