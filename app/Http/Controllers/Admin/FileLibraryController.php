@@ -41,6 +41,11 @@ public function index()
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'details' => 'nullable|string',
+        ]);
+
         $file = FileLibrary::findOrFail($id);
 
         $file->update([

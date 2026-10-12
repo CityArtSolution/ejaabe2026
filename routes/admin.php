@@ -9,11 +9,6 @@ use App\Http\Controllers\Admin\FileLibraryController;
 Route::group(['prefix' => $prefix, 'namespace' => 'Admin', 'middleware' => ['web', 'admin_locale']], function () use ($prefix) {
 Route::post('/webinars/{id}/toggle-homepage','WebinarController@toggleHomepage');
 
-Route::get('/file-library', [FileLibraryController::class, 'index'])->name('file-library.index');
-Route::post('/file-library/add', [FileLibraryController::class, 'store'])->name('file-library.store');
-Route::post('/file-library/update/{id}', [FileLibraryController::class, 'update'])->name('file-library.update');
-Route::delete('/file-library/delete/{id}', [FileLibraryController::class, 'destroy'])->name('file-library.destroy');
-
     // Admin Auth Routes
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
@@ -39,7 +34,12 @@ Route::delete('/file-library/delete/{id}', [FileLibraryController::class, 'destr
 
 
     Route::group(['middleware' => 'admin'], function () {
-        
+
+        Route::get('/file-library', [FileLibraryController::class, 'index'])->name('file-library.index');
+        Route::post('/file-library/add', [FileLibraryController::class, 'store'])->name('file-library.store');
+        Route::post('/file-library/update/{id}', [FileLibraryController::class, 'update'])->name('file-library.update');
+        Route::delete('/file-library/delete/{id}', [FileLibraryController::class, 'destroy'])->name('file-library.destroy');
+
         Route::get('/content-development-requests', 'ReportsController@contentDevelopmentRequests');
 
 Route::get('/quotation-requests', 'ReportsController@quotationRequests');

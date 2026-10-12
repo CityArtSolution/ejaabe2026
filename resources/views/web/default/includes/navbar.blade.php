@@ -40,10 +40,16 @@
     // روابط القائمة تُدار من لوحة التحكم (الأقسام الرئيسية) وتُعرض في الهيدر وقائمة الجوال
     $piMenu = [];
     $piHiddenSlugs = ['/lang-training/training'];
+    // إخفاء رابط خطة البرامج التدريبية من الهيدر
+    $piHiddenContains = ['cet-course/plan'];
+
+    $piIsHidden = function ($slug) use ($piHiddenSlugs, $piHiddenContains) {
+        return in_array($slug, $piHiddenSlugs) or Illuminate\Support\Str::contains((string) $slug, $piHiddenContains);
+    };
 
     if (!empty($categories) and count($categories)) {
         foreach ($categories as $category) {
-            if (in_array($category->slug, $piHiddenSlugs)) {
+            if ($piIsHidden($category->slug)) {
                 continue;
             }
 
@@ -51,7 +57,7 @@
 
             if (count($category->subCategories)) {
                 foreach ($category->subCategories as $subCategory) {
-                    if (in_array($subCategory->slug, $piHiddenSlugs)) {
+                    if ($piIsHidden($subCategory->slug)) {
                         continue;
                     }
 

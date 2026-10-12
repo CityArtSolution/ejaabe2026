@@ -1,152 +1,170 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="container mx-auto px-6 py-8">
-
-    {{-- ===== HEADER ===== --}}
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="text-2xl font-bold text-gray-800">📁 مكتبة الملفات</h1>
-<span class="text-sm text-gray-500">
-    عدد الملفات: {{ $files->count() }}
-</span>
-    </div>
-
-    {{-- ===== SUCCESS MESSAGE ===== --}}
-    @if(session('success'))
-        <div class="mb-6 p-4 rounded-lg bg-green-100 text-green-800">
-            {{ session('success') }}
+    <section class="section">
+        <div class="section-header">
+            <h1>مكتبة الملفات</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active"><a href="{{ getAdminPanelUrl() }}">{{ trans('admin/main.dashboard') }}</a></div>
+                <div class="breadcrumb-item">مكتبة الملفات</div>
+            </div>
         </div>
-    @endif
 
-    {{-- ===== UPLOAD FORM ===== --}}
-    <div class="bg-white rounded-xl shadow p-6 mb-10">
-        <h2 class="text-lg font-semibold mb-4">رفع ملف جديد</h2>
+        <div class="section-body">
 
-        <form action="{{ route('file-library.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @csrf
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
 
-            <input type="text" name="name" required
-                   class="border rounded-lg px-4 py-2"
-                   placeholder="اسم الملف">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
 
-            <input type="file" name="file" required
-                   class="border rounded-lg px-4 py-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>رفع ملف جديد</h4>
+                        </div>
 
-            <input type="text" name="details"
-                   class="border rounded-lg px-4 py-2"
-                   placeholder="تفاصيل (اختياري)">
+                        <div class="card-body">
+                            <form action="{{ route('file-library.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
 
-            <div class="md:col-span-3 text-right">
-                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                    رفع الملف
-                </button>
+                                <div class="row">
+                                    <div class="col-12 col-md-4 form-group">
+                                        <label>اسم الملف</label>
+                                        <input type="text" name="name" required class="form-control" value="{{ old('name') }}">
+                                    </div>
+
+                                    <div class="col-12 col-md-4 form-group">
+                                        <label>الملف</label>
+                                        <input type="file" name="file" required class="form-control">
+                                    </div>
+
+                                    <div class="col-12 col-md-4 form-group">
+                                        <label>تفاصيل (اختياري)</label>
+                                        <input type="text" name="details" class="form-control" value="{{ old('details') }}">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">رفع الملف</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>عدد الملفات: {{ $files->count() }}</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped font-14">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>الاسم</th>
+                                        <th>التفاصيل</th>
+                                        <th class="text-center">التاريخ</th>
+                                        <th>{{ trans('admin/main.actions') }}</th>
+                                    </tr>
+
+                                    @forelse($files as $i => $file)
+                                        <tr>
+                                            <td>{{ $i + 1 }}</td>
+                                            <td>{{ $file->name }}</td>
+                                            <td>{{ $file->details ?? '-' }}</td>
+                                            <td class="text-center">{{ $file->created_at->toDateString() }}</td>
+                                            <td>
+                                                <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" class="btn-sm btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="عرض">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+
+                                                <button type="button" class="btn-transparent text-primary js-edit-file"
+                                                        data-action="{{ route('file-library.update', $file->id) }}"
+                                                        data-name="{{ $file->name }}"
+                                                        data-details="{{ $file->details }}"
+                                                        title="{{ trans('admin/main.edit') }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+
+                                                <form action="{{ route('file-library.destroy', $file->id) }}" method="POST" class="d-inline"
+                                                      onsubmit="return confirm('هل أنت متأكد من حذف هذا الملف؟');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn-transparent text-danger" title="{{ trans('admin/main.delete') }}">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">لا يوجد ملفات</td>
+                                        </tr>
+                                    @endforelse
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
 
-    {{-- ===== FILES TABLE ===== --}}
-    <div class="bg-white rounded-xl shadow overflow-hidden">
-        <table class="w-full text-sm text-right">
-            <thead class="bg-gray-100 text-gray-700">
-                <tr>
-                    <th class="p-4">#</th>
-                    <th>الاسم</th>
-                    <th>التفاصيل</th>
-                    <th>التاريخ</th>
-                    <th class="p-4">إجراءات</th>
-                </tr>
-            </thead>
-            <tbody>
-           @forelse($files as $i => $file)
-<tr class="border-t hover:bg-gray-50">
-    <td class="p-4">{{ $i + 1 }}</td>
-    <td>{{ $file->name }}</td>
-    <td>{{ $file->details ?? '-' }}</td>
-    <td>{{ $file->created_at->toDateString() }}</td>
-    <td class="p-4">
-        <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank">عرض</a>
-    </td>
-</tr>
-@empty
-<tr>
-    <td colspan="5" class="text-center p-6 text-gray-500">
-        لا يوجد ملفات
-    </td>
-</tr>
-@endforelse
+    <div class="modal fade" id="editFileModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="editFileForm" method="POST">
+                    @csrf
 
-            </tbody>
-        </table>
-    </div>
-</div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">تعديل الملف</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
-{{-- ===== EDIT MODAL ===== --}}
-<div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white w-full max-w-md rounded-xl p-6">
-        <h3 class="text-lg font-semibold mb-4">تعديل الملف</h3>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>اسم الملف</label>
+                            <input type="text" id="editFileName" name="name" required class="form-control">
+                        </div>
 
-        <form id="editForm" method="POST">
-            @csrf
-            @method('PUT')
+                        <div class="form-group">
+                            <label>تفاصيل (اختياري)</label>
+                            <textarea id="editFileDetails" name="details" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
 
-            <input id="editName" name="name" class="w-full border rounded-lg px-4 py-2 mb-3">
-            <textarea id="editDetails" name="details" class="w-full border rounded-lg px-4 py-2 mb-4"></textarea>
-
-            <div class="flex justify-end gap-2">
-                <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-200 rounded">
-                    إلغاء
-                </button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded">
-                    حفظ
-                </button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">حفظ</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 
-{{-- ===== DELETE MODAL ===== --}}
-<div id="deleteModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white w-full max-w-sm rounded-xl p-6 text-center">
-        <h3 class="text-lg font-semibold mb-3">حذف ملف</h3>
-        <p class="mb-5">هل أنت متأكد من حذف <span id="deleteFileName" class="font-bold"></span> ؟</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('editFileModal');
+            // خارج المحتوى الرئيسي حتى لا تظهر النافذة خلف الخلفية المعتمة
+            document.body.appendChild(modal);
 
-        <form id="deleteForm" method="POST">
-            @csrf
-            @method('DELETE')
-
-            <div class="flex justify-center gap-3">
-                <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-200 rounded">
-                    إلغاء
-                </button>
-                <button class="px-4 py-2 bg-red-600 text-white rounded">
-                    حذف
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
-{{-- ===== JS ===== --}}
-<script>
-function openEditModal(id, name, details) {
-    document.getElementById('editModal').classList.remove('hidden');
-    document.getElementById('editName').value = name;
-    document.getElementById('editDetails').value = details;
-    document.getElementById('editForm').action = `/admin/file-library/${id}`;
-}
-
-function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
-}
-
-function openDeleteModal(id, name) {
-    document.getElementById('deleteModal').classList.remove('hidden');
-    document.getElementById('deleteFileName').innerText = name;
-    document.getElementById('deleteForm').action = `/admin/file-library/${id}`;
-}
-
-function closeDeleteModal() {
-    document.getElementById('deleteModal').classList.add('hidden');
-}
-</script>
+            document.querySelectorAll('.js-edit-file').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    document.getElementById('editFileForm').action = button.dataset.action;
+                    document.getElementById('editFileName').value = button.dataset.name;
+                    document.getElementById('editFileDetails').value = button.dataset.details;
+                    $(modal).modal('show');
+                });
+            });
+        });
+    </script>
 @endsection

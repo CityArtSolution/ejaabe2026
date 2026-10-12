@@ -1345,6 +1345,14 @@
                     </ul>
                 </li>
              @endif
+
+            <li class="nav-item {{ (request()->is(getAdminPanelUrl('/file-library*', false))) ? 'active' : '' }}">
+                <a href="{{ getAdminPanelUrl() }}/file-library" class="nav-link">
+                    <i class="fas fa-folder-open"></i>
+                    <span>مكتبة الملفات</span>
+                </a>
+            </li>
+
             @if($authUser->can('admin_settings'))
                 <li class="menu-header">{{ trans('admin/main.settings') }}</li>
             @endif
