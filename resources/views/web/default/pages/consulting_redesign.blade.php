@@ -34,19 +34,13 @@
 @push('styles_top')
 <style>
     .consult-page {
-        --consult-accent: #136ba5;
-        --consult-dark: #103957;
+        --consult-accent: #1363a1;
+        --consult-dark: #0f3456;
         --consult-soft: #edf5fb;
         color: #263b4b;
         background: #f5f7fa;
         padding-bottom: 64px;
         text-align: start;
-    }
-
-    .consult-page.is-educational {
-        --consult-accent: #087d79;
-        --consult-dark: #124944;
-        --consult-soft: #eaf7f3;
     }
 
     .consult-page *,
@@ -110,7 +104,7 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: #8eddd5;
+        background: #3d9bd8;
     }
 
     .consult-page .consult-title {
