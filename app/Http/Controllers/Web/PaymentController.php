@@ -248,10 +248,10 @@ if ($gateway === 'Tamara') {
             ]
         ],
         "merchant_url" => [
-            "success" => "https://demo.ejaabi.com/payment/success",
-            "failure" => "https://demo.ejaabi.com/payment/fail",
-            "cancel" => "https://demo.ejaabi.com/payment/cancel",
-            "notification" => "https://demo.ejaabi.com/payment/webhook"
+            "success" => "https://ejaabi.com/payment/success",
+            "failure" => "https://ejaabi.com/payment/fail",
+            "cancel" => "https://ejaabi.com/payment/cancel",
+            "notification" => "https://ejaabi.com/payment/webhook"
         ],
         "platform" => "Laravel",
         "is_mobile" => false,

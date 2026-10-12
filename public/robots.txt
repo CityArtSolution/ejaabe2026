@@ -19,4 +19,4 @@ Disallow: /cgi-bin/
 Disallow: /vendor/
 
 # Sitemap location (Change to your actual domain)
-Sitemap: https://demo.ejaabi.com/sitemap.xml
+Sitemap: https://ejaabi.com/sitemap.xml

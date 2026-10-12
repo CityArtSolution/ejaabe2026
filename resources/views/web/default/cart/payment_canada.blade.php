@@ -93,7 +93,7 @@
 <div class="col-6 col-lg-4 mb-40 charge-account-radio">
     <input type="radio" name="gateway" id="Tamara" data-class="Tamara" value="Tamara">
     <label for="Tamara" class="rounded-sm p-20 p-lg-45 d-flex flex-column align-items-center justify-content-center">
-        <img src="https://demo.ejaabi.com/image/tamara.png" width="100" alt="Tamara">
+        <img src="https://ejaabi.com/image/tamara.png" width="100" alt="Tamara">
 
         <p class="mt-30 mt-lg-50 font-weight-500 text-dark-blue">
             {{ trans('financial.pay_via') }}
