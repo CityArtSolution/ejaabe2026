@@ -51,6 +51,14 @@ $layout = request()->is('canada/*')
             margin-right: auto;
         }
 
+        .login-container .wizard-custom-radio .wizard-custom-radio-item label {
+            border: 1px solid #1363a1 !important;
+        }
+
+        .login-container .wizard-custom-radio .wizard-custom-radio-item + .wizard-custom-radio-item label {
+            margin-inline-start: -1px;
+        }
+
         .login-container .select2-container {
             width: 100% !important;
         }
