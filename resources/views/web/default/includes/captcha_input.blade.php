@@ -9,8 +9,8 @@
             </div>
             @enderror
         </div>
-        <div class="col d-flex align-items-center">
-            <img id="captchaImageComment" class="captcha-image" src="">
+        <div class="col d-flex align-items-center" style="min-width: 0;">
+            <img id="captchaImageComment" class="captcha-image" src="" style="min-width: 0; max-width: calc(100% - 40px); height: auto;">
 
             <button type="button" id="refreshCaptcha" class="btn-transparent ml-15">
                 <i data-feather="refresh-ccw" width="24" height="24" class=""></i>

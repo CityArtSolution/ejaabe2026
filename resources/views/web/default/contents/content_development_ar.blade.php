@@ -656,6 +656,157 @@
             font-family: "GE-Dinar-Two", sans-serif !important
         }
     </style>
+    <style>
+        /* Responsive adjustments */
+        .card-3 .card-title,
+        .card-4 .card-title,
+        .card-5 .card-title {
+            color: #fff;
+        }
+
+        .main .arrow-heading {
+            max-width: 100%;
+        }
+
+        @media (max-width: 991px) {
+            .header-two-area {
+                height: auto;
+                padding-top: 0;
+            }
+
+            .header-two-area .header__main {
+                gap: 6px 15px;
+                padding: 10px 0;
+            }
+
+            .header-two-area .header__main br {
+                display: none;
+            }
+
+            .header-two-area .header__main .logo img {
+                max-height: 60px;
+                width: auto;
+            }
+
+            .header-two-area .header__main span {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .banner-three-area {
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+
+            .banner-three-area .banner-three__container {
+                padding: 15px 20px;
+            }
+
+            .banner-three-area .image {
+                max-width: 380px;
+                margin: -40px auto;
+            }
+
+            .banner-three-area .banner-three__content {
+                margin-top: 20px;
+            }
+
+            .main .pt-120 {
+                padding-top: 60px;
+            }
+
+            .main .pb-120 {
+                padding-bottom: 60px;
+            }
+
+            .main .pb-200 {
+                padding-bottom: 80px;
+            }
+
+            .main .mb-95 {
+                margin-bottom: 20px;
+            }
+
+            .offer-area .offer__item {
+                margin-top: 50px;
+            }
+
+            .about-two-area {
+                padding-top: 30px;
+                padding-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .header-two-area .header__main {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .header-two-area .header__main .logo img {
+                max-height: 50px;
+            }
+
+            .header-two-area .header__main span {
+                font-size: 12px;
+            }
+
+            .banner-three-area .image {
+                max-width: 280px;
+            }
+
+            .banner-three-area .banner-three__content h2 {
+                font-size: 26px;
+            }
+
+            .banner-three-area .banner-three__content p {
+                font-size: 15px;
+                line-height: 1.9;
+            }
+
+            .main .pt-120 {
+                padding-top: 40px;
+            }
+
+            .main .pb-120 {
+                padding-bottom: 40px;
+            }
+
+            .main .arrow-heading {
+                width: 100%;
+                min-width: 0;
+                padding: 12px 16px;
+                font-size: 19px;
+                line-height: 1.5;
+            }
+
+            .main .card.p-4 {
+                padding: 16px !important;
+            }
+
+            .main .timeline-container {
+                padding: 20px 0;
+            }
+
+            .main .stage {
+                max-width: 100%;
+            }
+
+            .main .section-header h2 {
+                font-size: 24px;
+            }
+
+            .main .section-header h4 {
+                font-size: 20px;
+                line-height: 1.6;
+            }
+
+            .offer-area .offer__item h4 {
+                font-size: 18px;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')

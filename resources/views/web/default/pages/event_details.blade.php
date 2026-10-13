@@ -134,6 +134,28 @@ input#phone {
         z-index: 999;
     }
     </style>
+    <style>
+        @media (max-width: 575px) {
+            .event-countdown {
+                margin: 2px 0 !important;
+                padding: 12px 8px !important;
+                justify-content: center;
+            }
+
+            .event-countdown > * {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .event-countdown .text-50 {
+                font-size: 32px !important;
+            }
+
+            .event-countdown .text-16 {
+                font-size: 13px !important;
+            }
+        }
+    </style>
 @endpush
 @php
     use Carbon\Carbon;
@@ -193,7 +215,7 @@ input#phone {
                            
                                           
     <div data-anim="slide-up delay-2">
-    <div class="d-flex x-gap-50 pt-12 pb-12 px-20" 
+    <div class="d-flex x-gap-50 pt-12 pb-12 px-20 event-countdown" 
          style="background-color: rgba(0, 0, 0, 0.7); 
                 border-radius: 10px; 
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); 

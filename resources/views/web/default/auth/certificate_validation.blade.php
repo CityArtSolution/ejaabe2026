@@ -1,5 +1,28 @@
 @extends(getTemplate().'.layouts.app')
 
+@push('styles_top')
+    <style>
+        .login-container {
+            width: 100%;
+            max-width: 40em;
+        }
+
+        @media (max-width: 767px) {
+            .login-container {
+                margin: 30px auto 40px;
+            }
+
+            .login-container > .pl-0 {
+                padding-right: 0;
+            }
+
+            .login-container .login-card {
+                padding: 30px 15px 35px;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container">
         <div class="row login-container">
@@ -31,8 +54,8 @@
                                     <input type="text" name="captcha" class="form-control">
                                     <div class="invalid-feedback"></div>
                                 </div>
-                                <div class="col d-flex align-items-center">
-                                    <img id="captchaImageComment" class="captcha-image" src="">
+                                <div class="col d-flex align-items-center" style="min-width: 0;">
+                                    <img id="captchaImageComment" class="captcha-image" src="" style="min-width: 0; max-width: calc(100% - 40px); height: auto;">
 
                                     <button type="button" id="refreshCaptcha" class="btn-transparent ml-15">
                                         <i data-feather="refresh-ccw" width="24" height="24" class=""></i>

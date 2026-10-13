@@ -133,6 +133,18 @@
                 gap: 10px; /* مسافة بين الزرارين */
                 align-items: center;
             }
+
+            @media (min-width: 992px) and (max-width: 1199px) {
+                .auth-buttons {
+                    gap: 6px;
+                }
+
+                .auth-buttons .btn-custom-link {
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    white-space: nowrap;
+                }
+            }
         </style>
         
         <div class="auth-buttons">

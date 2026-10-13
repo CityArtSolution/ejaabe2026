@@ -18,7 +18,6 @@
   .login-container {
   border-radius: 15px;
   background: #ececec;
-    width: 40em;
     margin: 2em auto;
 }
 .login-card {
@@ -27,6 +26,51 @@
 .rtl .wizard-custom-radio .wizard-custom-radio-item:last-child label {
         border-color: #1363a1;
 }
+        .login-container {
+            width: 100%;
+            max-width: 40em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .login-container .select2-container {
+            width: 100% !important;
+        }
+
+        @media (max-width: 767px) {
+            .login-container {
+                margin-top: 1.5em;
+                margin-bottom: 2em;
+            }
+
+            div.heading {
+                padding: 1.1em 1em;
+                font-size: 1em;
+            }
+
+            .login-card {
+                padding: 0 20px 35px;
+            }
+
+            .login-card form {
+                margin-top: 25px !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .login-card {
+                padding: 0 6px 28px;
+            }
+
+            .login-card .wizard-custom-radio {
+                flex-wrap: wrap;
+            }
+
+            .login-card .wizard-custom-radio label {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+            }
+        }
     </style>
 @endpush
 

@@ -1,5 +1,28 @@
 @extends(getTemplate().'.layouts.app')
 
+@push('styles_top')
+    <style>
+        .login-container {
+            width: 100%;
+            max-width: 40em;
+        }
+
+        @media (max-width: 767px) {
+            .login-container {
+                margin: 30px auto 40px;
+            }
+
+            .login-container > .pl-0 {
+                padding-right: 0;
+            }
+
+            .login-container .login-card {
+                padding: 30px 15px 35px;
+            }
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container">
         <div class="row login-container">

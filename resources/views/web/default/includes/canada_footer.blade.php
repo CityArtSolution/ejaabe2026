@@ -63,7 +63,15 @@
     @endphp
 
     <div class="container">
-        <div class="row" style="margin-right: -4%;margin-left: -4%;">
+        <style>
+            @media (max-width: 1399px) {
+                .branch-footer-row {
+                    margin-right: -15px !important;
+                    margin-left: -15px !important;
+                }
+            }
+        </style>
+        <div class="row branch-footer-row" style="margin-right: -4%;margin-left: -4%;">
 
             @foreach($columns as $column)
                 @if(!empty($footerColumns[$column]))
