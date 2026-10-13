@@ -17,6 +17,28 @@
     $piContactUrl = $piBase . '/contact';
     $piPlanUrl = $piBase . '/cet-course/plan';
 
+    // يضيف اللغة لروابط أزرار السلايدر الداخلية، ويترك الروابط الخارجية والتي تحمل اللغة مسبقًا كما هي
+    $piSlideLink = function ($link) use ($piBase, $piContactUrl) {
+        $link = trim((string) $link);
+        if ($link === '') {
+            return $piContactUrl;
+        }
+
+        $host = parse_url($link, PHP_URL_HOST);
+        if (!empty($host)) {
+            if (strcasecmp(preg_replace('/^www\./i', '', $host), preg_replace('/^www\./i', '', request()->getHost())) !== 0) {
+                return $link;
+            }
+            $link = preg_replace('#^(https?:)?//[^/?\#]+#i', '', $link);
+        } elseif (preg_match('/^(#|[a-z][a-z0-9+.-]*:)/i', $link)) {
+            return $link;
+        }
+
+        $link = '/' . ltrim($link, '/');
+
+        return preg_match('#^/[a-z]{2}(/|\?|\#|$)#i', $link) ? $link : $piBase . ($link === '/' ? '' : $link);
+    };
+
     $piSteps = [
         ['icon' => 'pi-i-target', 'title' => __('home.plan_step_1')],
         ['icon' => 'pi-i-doc', 'title' => __('home.plan_step_2')],
@@ -105,11 +127,11 @@
                                 @if(!empty($slider->button1_title) or !empty($slider->button2_title))
                                     <div class="pi-slide-actions pi-anim">
                                         @if(!empty($slider->button1_title))
-                                            <a href="{{ !empty($slider->button1_link) ? $slider->button1_link : $piContactUrl }}" class="pi-btn pi-btn--orange">{{ $slider->button1_title }}</a>
+                                            <a href="{{ $piSlideLink($slider->button1_link) }}" class="pi-btn pi-btn--orange">{{ $slider->button1_title }}</a>
                                         @endif
 
                                         @if(!empty($slider->button2_title))
-                                            <a href="{{ !empty($slider->button2_link) ? $slider->button2_link : $piContactUrl }}" class="pi-btn pi-btn--white">{{ $slider->button2_title }}</a>
+                                            <a href="{{ $piSlideLink($slider->button2_link) }}" class="pi-btn pi-btn--white">{{ $slider->button2_title }}</a>
                                         @endif
                                     </div>
                                 @endif
