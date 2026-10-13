@@ -78,11 +78,6 @@ public function handle($request, Closure $next)
     }
 
     // locale config
-    $urlLocale = mb_strtolower((string)$request->segment(1));
-    if (array_key_exists($urlLocale, config('app.locales', []))) {
-        Session::put('locale', $urlLocale);
-    }
-
     if (!Session::has('locale')) {
         Session::put('locale', mb_strtolower(getDefaultLocale()));
     }

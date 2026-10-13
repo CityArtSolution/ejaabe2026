@@ -35,6 +35,17 @@ class UserLocale
 
         $userLanguages = $generalSettings['user_languages'] ?? [];
 
+        // a language prefix in the url (/en/..., /ar/...) wins, and is remembered for pages without a prefix
+        $urlLocale = mb_strtoupper((string)$request->segment(1));
+
+        if (in_array($urlLocale, ['AR', 'EN']) and in_array($urlLocale, $userLanguages)) {
+            if ($locale != $urlLocale and !auth()->check()) {
+                Cookie::queue('user_locale', $urlLocale, 30 * 24 * 60);
+            }
+
+            $locale = $urlLocale;
+        }
+
         if (!in_array($locale, $userLanguages)) {
             $locale = $defaultLocale;
         }
