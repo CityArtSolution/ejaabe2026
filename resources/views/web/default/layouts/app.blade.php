@@ -13,7 +13,7 @@
     @include('web.default.includes.metas')
         <meta name="robots" content="noindex, nofollow">
 
-    <title>{{ $pageTitle ?? '' }}{{ !empty($generalSettings['site_name']) ? (' - '.$generalSettings['site_name']) : '' }}</title>
+    <title>{{ $pageTitle ?? '' }}{{ !empty($generalSettings['site_name']) ? (' - '.(app()->getLocale() == 'ar' ? $generalSettings['site_name'] : trans('app.title_page'))) : '' }}</title>
 
     <!-- General CSS File -->
     <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">

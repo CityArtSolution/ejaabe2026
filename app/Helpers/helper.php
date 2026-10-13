@@ -1437,7 +1437,35 @@ function truncate($text, $length, $withTail = true)
  */
 function getSeoMetas($page = null)
 {
-    return App\Models\Setting::getSeoMetas($page);
+    $metas = App\Models\Setting::getSeoMetas($page);
+
+    // seo metas are saved in one language, so on other languages drop Arabic texts and use the translated defaults
+    if (app()->getLocale() != 'ar' and is_array($metas)) {
+        array_walk_recursive($metas, function (&$value, $key) {
+            if (in_array($key, ['title', 'description'], true) and is_string($value) and preg_match('/\p{Arabic}/u', $value)) {
+                $value = '';
+            }
+        });
+
+        $defaultTitles = [
+            'classes' => 'home.courses',
+            'courses' => 'home.courses',
+            'products_lists' => 'update.products',
+            'forum' => 'update.forum',
+            'upcoming_courses_lists' => 'update.upcoming_courses',
+            'instructors' => 'home.instructors',
+            'organizations' => 'home.organizations',
+            'certificate_validation' => 'site.certificate_validation',
+            'blog' => 'home.blog',
+            'tags' => 'public.tags',
+        ];
+
+        if (!empty($page) and empty($metas['title']) and !empty($defaultTitles[$page])) {
+            $metas['title'] = trans($defaultTitles[$page]);
+        }
+    }
+
+    return $metas;
 }
 
 /**

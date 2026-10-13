@@ -40,6 +40,5 @@
     'commitment'     => 'Commitment',
     'mission_title' => 'Our Mission',
     'mission_text'  => "We are working with exceptional experienced professionals to provide an intellectual capital that keeps pace with local and international changes, adopting the best professional practices in providing our services in both fields:\n\n• Training.\n\n• Administrative and educational consulting.",
-
-
+    'title_page' => 'Positive Interaction',
 );

@@ -58,6 +58,7 @@ class ContentsController extends Controller
                 ->first();
             $data = [
                    
+                    'pageTitle' => !empty($page) ? $page->title : '',
                     'page' => $page
                 ];
             return view('web.default.pages.consulting_redesign', $data);
@@ -68,6 +69,7 @@ class ContentsController extends Controller
                 ->first();
             $data = [
                    
+                    'pageTitle' => !empty($page) ? $page->title : '',
                     'page' => $page
                 ];
             return view('web.default.pages.consulting_redesign', $data);
