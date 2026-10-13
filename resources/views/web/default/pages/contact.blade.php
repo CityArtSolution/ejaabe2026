@@ -2,6 +2,92 @@
 
 @push('styles_top')
     <link rel="stylesheet" href="/assets/vendors/leaflet/leaflet.css">
+    <style>
+        .contact-page-map {
+            position: relative;
+            width: 80%;
+            margin: -352px auto 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
+        }
+
+        .contact-page-map iframe {
+            display: block;
+            width: 100%;
+            height: 550px;
+            border: 0;
+        }
+
+        .contact-page .contact-items {
+            height: calc(100% - 30px);
+        }
+
+        .contact-page .contact-items p {
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 991px) {
+            .contact-page-banner.site-top-banner {
+                height: 420px;
+            }
+
+            .contact-page-map {
+                width: 100%;
+                margin-top: -250px;
+            }
+
+            .contact-page-map iframe {
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .contact-page-banner.site-top-banner {
+                height: 300px;
+            }
+
+            .contact-page-banner .contact-us-head {
+                padding-top: 40px;
+            }
+
+            .contact-page-banner h1 {
+                font-size: 24px;
+            }
+
+            .contact-page-map {
+                margin-top: -180px;
+                border-radius: 12px;
+            }
+
+            .contact-page-map iframe {
+                height: 320px;
+            }
+
+            .contact-page .contact-icon-box {
+                width: 64px;
+                height: 64px;
+                border-radius: 18px;
+            }
+
+            .contact-page .contact-icon-box svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .contact-page .contact-items h3 {
+                margin-top: 15px !important;
+            }
+
+            .contact-page textarea.form-control {
+                height: 180px;
+            }
+
+            .contact-page .contact-submit {
+                width: 100%;
+            }
+        }
+    </style>
 @endpush
 
 
@@ -21,7 +107,7 @@
         </div>
     </section>--}}
     
-    <section class="site-top-banner search-top-banner opacity-04 position-relative">
+    <section class="site-top-banner search-top-banner contact-page-banner opacity-04 position-relative">
         {{--<img src="{{ asset('store/1/default_images/contact_cover.png') }}" class="img-cover" alt="{{ $pageTitle ?? '' }}"/>--}}
 
         <div class="container h-100">
@@ -35,7 +121,7 @@
         </div>
     </section>
 
-    <div class="container">
+    <div class="container contact-page">
         <section class="">
             @if(!empty($contactSettings['latitude']) and !empty($contactSettings['longitude']))
                 {{--<div class="contact-map" id="contactMap"
@@ -43,10 +129,8 @@
                      data-longitude="{{ $contactSettings['longitude'] }}"
                      data-zoom="{{ $contactSettings['map_zoom'] ?? 12 }}"
                 ></div>--}}
-                <div class="google-maps shadow-lg rounded-4 overflow-hidden" style="width: 100%;margin-top: -352px;position: relative;" >
-                    <div style="width: 80%;margin:auto;overflow: hidden;border-radius: 2%;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7249.1553820032!2d46.687976!3d24.70704!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03c2430c4337%3A0x8cbbc39b0fd9e0ac!2z2KfZhNiq2YHYp9i52YQg2KfZhNin2YrYrNin2KjZiiDZhNmE2KrYr9ix2YrYqCAtINin2YTZhdix2YPYsiDYp9mE2LHYptmK2LPZig!5e0!3m2!1sar!2ssa!4v1762873860742!5m2!1sar!2ssa" height="550" style="border:0;width: 100%;"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                <div class="google-maps contact-page-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7249.1553820032!2d46.687976!3d24.70704!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03c2430c4337%3A0x8cbbc39b0fd9e0ac!2z2KfZhNiq2YHYp9i52YQg2KfZhNin2YrYrNin2KjZiiDZhNmE2KrYr9ix2YrYqCAtINin2YTZhdix2YPYsiDYp9mE2LHYptmK2LPZig!5e0!3m2!1sar!2ssa!4v1762873860742!5m2!1sar!2ssa" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             @endif
 
@@ -182,7 +266,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-20">{{ trans('site.send_message') }}</button>
+                <button type="submit" class="btn btn-primary mt-20 contact-submit">{{ trans('site.send_message') }}</button>
             </form>
         </section>
 
