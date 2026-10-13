@@ -142,8 +142,11 @@
                         </div>
 
                         <h3 class="mt-30 font-16 font-weight-bold text-dark-blue">{{ trans('site.our_address') }}</h3>
-                        @if(!empty($contactSettings['address']))
-                            <p class="font-weight-500 font-14 text-gray mt-10">{!! nl2br($contactSettings['address']) !!}</p>
+                        @php
+                            $contactAddress = (app()->getLocale() != 'ar' and !empty($contactSettings['address_en'])) ? $contactSettings['address_en'] : ($contactSettings['address'] ?? null);
+                        @endphp
+                        @if(!empty($contactAddress))
+                            <p class="font-weight-500 font-14 text-gray mt-10">{!! nl2br($contactAddress) !!}</p>
                         @else
                             <p class="font-weight-500 text-gray font-14 mt-10">{{ trans('site.not_defined') }}</p>
                         @endif

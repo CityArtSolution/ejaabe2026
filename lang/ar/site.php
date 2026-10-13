@@ -66,6 +66,7 @@ return [
     'subject' => 'الموضوع',
     'message' => 'الرسالة',
     'captcha' => 'التحقق',
+    'not_defined' => 'غير معرف',
     'contact_store_success' => 'تم ارسال رسالتك سيتم الرد عليك في اقرب وقت.',
 
     // instructors

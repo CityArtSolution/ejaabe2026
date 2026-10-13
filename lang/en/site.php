@@ -67,7 +67,7 @@ return [
     'message' => 'Message',
     'captcha' => 'Captcha',
     'not_defined' => 'Not Defined',
-    'contact_store_success' => 'Your message received we will review it an get back to you.',
+    'contact_store_success' => 'Your message has been sent and you will be replied to as soon as possible.',
 
     // instructors
     'load_more_instructors' => 'More instructors',

@@ -70,6 +70,6 @@ try {
 }
        // dd(sendNotification('contact_message_submission_for_admin', $notifyOptions, 1));
 
-        return back()->with(['msg' => 'Your message has been sent and you will be replied to as soon as possible.']);
+        return back()->with(['msg' => trans('site.contact_store_success')]);
     }
 }

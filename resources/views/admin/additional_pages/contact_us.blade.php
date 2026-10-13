@@ -67,6 +67,11 @@
                                             <label class="input-label">{{ trans('admin/main.contact_us_address') }}</label>
                                             <textarea name="value[address]" rows="5" class="form-control" placeholder="{{ trans('admin/main.contact_us_address') }}">{{ (!empty($value) and !empty($value['address'])) ? $value['address'] : '' }}</textarea>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="input-label">{{ trans('admin/main.contact_us_address') }} (English)</label>
+                                            <textarea name="value[address_en]" rows="5" class="form-control" placeholder="{{ trans('admin/main.contact_us_address') }} (English)" dir="ltr">{{ (!empty($value) and !empty($value['address_en'])) ? $value['address_en'] : '' }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
 
