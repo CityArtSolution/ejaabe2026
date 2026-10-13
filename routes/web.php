@@ -177,6 +177,7 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
     });*/
     Route::group(['middleware' => ['language'],'prefix' => 'en'], function() {
         Route::get('/', 'HomeController@index');
+        Route::get('/become-instructor', 'BecomeInstructorController@index')->middleware('web.auth');
         Route::get('/canada', 'HomeController@canada');
         Route::get('/uae', 'HomeController@uae');
         Route::get('/egy', 'HomeController@egy');
@@ -290,6 +291,7 @@ Route::get('/request-quotation', 'ServiceRequestController@create')
 
     Route::group(['middleware' => ['language'],'prefix' => 'ar'], function() {
         Route::get('/', 'HomeController@index');
+        Route::get('/become-instructor', 'BecomeInstructorController@index')->middleware('web.auth');
 
         Route::get('/canada', function () {
             return redirect('/en/canada');

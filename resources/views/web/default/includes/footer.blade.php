@@ -30,7 +30,7 @@
         ['title' => __('home.courses'), 'url' => $piBase . '/classes'],
         ['title' => __('home.about_us'), 'url' => $piBase . '/about'],
         ['title' => __('home.contact_us'), 'url' => $piBase . '/contact'],
-        ['title' => __('home.join_trainer'), 'url' => '/become-instructor'],
+        ['title' => __('home.join_trainer'), 'url' => $piBase . '/become-instructor'],
         ['title' => __('home.blog'), 'url' => $piBase . '/blog'],
     ];
 
