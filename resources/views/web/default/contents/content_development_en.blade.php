@@ -1999,7 +1999,7 @@
                             <div class="offer__icon">
                                 <img src="/contents/en/files/d1ZH2JKTVSJwEzbierK7.svg" alt="icon">
                             </div>
-                            <a href="https://www.ejaabi.com/ar/pages/model2" target=_blank>
+                            <a href="https://www.ejaabi.com/en/pages/model2" target=_blank>
                                 <h4 class="text-white mt-20"> Video and Animation Presenter
                                 </h4>
                             </a>
@@ -2018,7 +2018,7 @@
                             <div class="offer__icon">
                                 <img src="/contents/en/files/d1ZH2JKTVSJwEzbierK7.svg" alt="icon">
                             </div>
-                            <a href="https://www.ejaabi.com/ar/pages/model1" target=_blank>
+                            <a href="https://www.ejaabi.com/en/pages/model1" target=_blank>
                                 <h4 class="text-white mt-20">Video and Animation Presenter
                                 </h4>
                             </a>
@@ -2037,7 +2037,7 @@
                             <div class="offer__icon">
                                 <img src="/contents/en/files/d1ZH2JKTVSJwEzbierK7.svg" alt="icon">
                             </div>
-                            <a href="https://www.ejaabi.com/ar/pages/model4" target=_blank>
+                            <a href="https://www.ejaabi.com/en/pages/model4" target=_blank>
                                 <h4 class="text-white mt-20"> Interactive E-Learning
                                 </h4>
                             </a>
