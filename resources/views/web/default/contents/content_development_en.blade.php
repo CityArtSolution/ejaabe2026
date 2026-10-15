@@ -1647,24 +1647,24 @@
                         <div class="stage">
                             <div class="stage-content">
                                 <div class="stage-number" style="background-color:#1ba7da">3</div>
-                                <h3 class="stage-title">المرحلة الثالثة</h3>
-                                <p class="stage-description">التطوير</p>
+                                <h3 class="stage-title">Phase Three</h3>
+                                <p class="stage-description">Development</p>
                             </div>
                         </div>
 
                         <div class="stage">
                             <div class="stage-content">
                                 <div class="stage-number" style="background-color:#d9a407">4</div>
-                                <h3 class="stage-title">المرحلة الرابعة</h3>
-                                <p class="stage-description">التنفيذ</p>
+                                <h3 class="stage-title">Phase Four</h3>
+                                <p class="stage-description">Implementation</p>
                             </div>
                         </div>
 
                         <div class="stage">
                             <div class="stage-content">
                                 <div class="stage-number" style="background-color:#9f105c">5</div>
-                                <h3 class="stage-title">المرحلة الخامسة</h3>
-                                <p class="stage-description">التقييم</p>
+                                <h3 class="stage-title">Phase Five</h3>
+                                <p class="stage-description">Evaluation</p>
                             </div>
                         </div>
                     </div>
