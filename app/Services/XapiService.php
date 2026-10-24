@@ -343,7 +343,10 @@ public function createRateStatement($params, $rating, $response = '')
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
+            // Never let the LRS block the user's request: without these limits a slow LRS
+            // keeps every Apache worker waiting and takes the whole site down.
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 10,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
@@ -360,10 +363,9 @@ public function createRateStatement($params, $rating, $response = '')
         curl_close($ch);
 
         if ($error) {
-            throw new \Exception('cURL Error: ' . $error);
-            
-                   \Log::error('Failed to send xAPI statement: ' . $error);
+            \Log::error('Failed to send xAPI statement: ' . $error);
 
+            return null;
         }
 
         return json_decode($response, true);
@@ -378,7 +380,8 @@ public function createRateStatement($params, $rating, $response = '')
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 10,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
